@@ -25,15 +25,16 @@ const User = ({ id, firstName, lastName, gender, onClick }) => {
         <div className="card-main">
           <span className="card-alias">{firstName[0] + lastName[0]}</span>
           <div>
-            <NavLink to="/posts-feed/user">
-              <div className="card-name">{firstName + " " + lastName}</div>
-            </NavLink>
+            <div className="card-name">{firstName + " " + lastName}</div>
             <div className="card-name">{gender}</div>
           </div>
         </div>
       </div>
       <div>
         <button onClick={deleteUser}>Delete User</button>
+        <NavLink to="/posts-feed/user">
+          <button>View User Posts</button>
+        </NavLink>
       </div>
     </div>
   );

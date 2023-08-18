@@ -22,6 +22,7 @@ const Post = ({
     dispatch(deleteUserPost(id));
     console.log("again");
   };
+  const editPost = () => {};
   return (
     <div className="card-container">
       <div className="card-header">
@@ -33,6 +34,7 @@ const Post = ({
         </div>
       </div>
       <button onClick={deletePost}>Delete Post</button>
+      {/* <button onClick={editPost}>Edit Post</button> */}
       {console.log("IN CHILD I got:", finalComments)}
       <div className="card-title">{title}</div>
       <div style={{ textAlign: "center" }}>
