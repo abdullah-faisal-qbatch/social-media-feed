@@ -1,5 +1,5 @@
 .card-container {
-  width: 45%;
+  width: 100%;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -31,13 +31,14 @@
 }
 
 .card-alias {
-  font-size: 20px;
+  font-size: 1px;
   font-weight: bold;
 }
 
 .card-title {
   font-size: 24px;
   margin: 10px 0;
+  text-align: center;
 }
 
 .card-body {
@@ -54,7 +55,7 @@
   margin-top: 10px;
   font-size: 14px;
   color: #333;
-  margin-left: 600px;
+  margin-left: 550px;
 }
 
 .card-likes {
@@ -71,6 +72,6 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1px;
   margin: 4px 2px;
 }

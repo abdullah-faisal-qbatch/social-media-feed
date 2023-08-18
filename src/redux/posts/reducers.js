@@ -1,5 +1,4 @@
 import actions from "./actions";
-
 const initialState = {
   posts: [],
   loading: false,
@@ -13,6 +12,8 @@ const {
   ADD_POST_SUCCESS,
   DELETE_POST_BEGIN,
   DELETE_POST_SUCCESS,
+  FETCH_USER_POSTS_BEGIN,
+  FETCH_USER_POSTS_SUCCESS,
 } = actions;
 
 const Posts = (state = initialState, action) => {
@@ -22,6 +23,10 @@ const Posts = (state = initialState, action) => {
       return { ...state, loading: true };
     case FETCH_POSTS_SUCCESS:
       return { ...state, loading: false, posts: data };
+    case FETCH_USER_POSTS_BEGIN:
+      return { ...state, loading: true };
+    case FETCH_USER_POSTS_SUCCESS:
+      return { ...state, loading: false, posts: [...state.posts, data.post] };
     case ADD_POST_BEGIN:
       return { ...state, loading: true };
     case ADD_POST_SUCCESS:
@@ -32,6 +37,7 @@ const Posts = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        // posts: [...state.posts, data.post],
         posts: state.posts.filter((post) => {
           return post.id !== data.postId;
         }),

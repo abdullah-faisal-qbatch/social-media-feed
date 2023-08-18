@@ -12,11 +12,22 @@ const fetchAllComments = () => {
       const response = await axios.get("https://dummyjson.com/comments");
       if (isSuccess(response)) {
         dispatch(actions.fetchCommentsSuccess(response.data));
-        // console.log(response);
       }
     } catch (err) {
       dispatch(err);
     }
   };
 };
-export { fetchAllComments };
+
+const updateUserComments = (comments) => {
+  return async (dispatch) => {
+    try {
+      await dispatch(actions.updateUserCommentsBegin());
+      dispatch(actions.updateUserCommentsSuccess(comments));
+    } catch (err) {
+      dispatch(err);
+    }
+  };
+};
+
+export { fetchAllComments, updateUserComments };

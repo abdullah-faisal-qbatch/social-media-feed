@@ -68,7 +68,12 @@ const initialState = {
   success: null,
 };
 
-const { FETCH_USERS_BEGIN, FETCH_USERS_SUCCESS } = actions;
+const {
+  FETCH_USERS_BEGIN,
+  FETCH_USERS_SUCCESS,
+  DELETE_USER_BEGIN,
+  DELETE_USER_SUCCESS,
+} = actions;
 
 const Users = (state = initialState, action) => {
   const { type, data } = action;
@@ -77,6 +82,18 @@ const Users = (state = initialState, action) => {
       return { ...state, loading: true };
     case FETCH_USERS_SUCCESS:
       return { ...state, loading: false, users: data };
+    case DELETE_USER_BEGIN:
+      return { ...state, loading: true };
+    case DELETE_USER_SUCCESS:
+      console.log("State of user: ", state);
+      return {
+        ...state,
+        loading: false,
+        users: state.users.filter((user) => {
+          return user.id !== data.userId;
+        }),
+      };
+
     default:
       return state;
   }

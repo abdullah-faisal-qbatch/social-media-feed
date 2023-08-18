@@ -2,7 +2,8 @@
   border: 1px solid #ccc;
   padding: 16px;
   margin: 16px;
-  width: 30%;
+  width: 80%;
+  margin-left: 100px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: white;
@@ -33,7 +34,7 @@
 }
 
 .card-alias {
-  font-size: 24px; /* Slightly larger font size */
+  font-size: 20px; /* Slightly larger font size */
   font-weight: bold;
   margin-right: 10px; /* Added margin-right */
 }

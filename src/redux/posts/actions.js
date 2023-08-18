@@ -5,6 +5,10 @@ const actions = {
   ADD_POST_SUCCESS: "ADD_POST_SUCCESS",
   DELETE_POST_BEGIN: "DELETE_POST_BEGIN",
   DELETE_POST_SUCCESS: "DELETE_POST_SUCCESS",
+  FETCH_POST_COMMENTS_BEGIN: "FETCH_POST_COMMENTS_BEGIN",
+  FETCH_POST_COMMENTS_SUCCESS: "FETCH_POST_COMMENTS_SUCCESS",
+  FETCH_USER_POSTS_BEGIN: "FETCH_USER_POSTS_BEGIN",
+  FETCH_USER_POSTS_SUCCESS: "FETCH_USER_POSTS_SUCCESS",
 
   API_ERROR: "API_ERROR",
 
@@ -21,9 +25,34 @@ const actions = {
     };
   },
 
+  fetchPostCommentsBegin: () => {
+    return {
+      type: actions.FETCH_POST_COMMENTS_BEGIN,
+    };
+  },
+  fetchPostCommentsSuccess: (postId) => {
+    return {
+      type: actions.FETCH_POST_COMMENTS_SUCCESS,
+      data: postId,
+    };
+  },
+
   addPostBegin: () => {
     return {
       type: actions.ADD_POST_BEGIN,
+    };
+  },
+
+  fetchUserPostBegin: () => {
+    return {
+      type: actions.FETCH_USER_POSTS_BEGIN,
+    };
+  },
+
+  fetchUserPostSuccess: (userId) => {
+    return {
+      type: actions.FETCH_USER_POSTS_SUCCESS,
+      data: { userId },
     };
   },
 

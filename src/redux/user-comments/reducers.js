@@ -13,6 +13,10 @@ const {
   ADD_COMMENT_SUCCESS,
   DELETE_COMMENT_BEGIN,
   DELETE_COMMENT_SUCCESS,
+  FETCH_USER_COMMENTS_BEGIN,
+  FETCH_USER_COMMENTS_SUCCESS,
+  UPDATE_USER_COMMENTS_BEGIN,
+  UPDATE_USER_COMMENTS_SUCCESS,
 } = actions;
 
 const Comments = (state = initialState, action) => {
@@ -29,6 +33,30 @@ const Comments = (state = initialState, action) => {
         ...state,
         loading: false,
         comments: [...state.comments, data.comment],
+      };
+    case FETCH_USER_COMMENTS_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FETCH_USER_COMMENTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        comments: state.comments.filter((post) => {
+          return post.id === data.commentId;
+        }),
+      };
+    case UPDATE_USER_COMMENTS_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+    case UPDATE_USER_COMMENTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        comments: [...data],
       };
     case DELETE_COMMENT_BEGIN:
       return { ...state, loading: true };
