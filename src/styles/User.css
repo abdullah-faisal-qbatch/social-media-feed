@@ -1,0 +1,44 @@
+.card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px;
+  width: 30%;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 2px 4px rgba(227, 212, 212, 0.1);
+  background-color: rgb(94, 90, 90);
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column; /* Changed to column direction */
+  align-items: flex-start; /* Align items to the start */
+}
+
+.card-name {
+  margin-top: 10px; /* Adjusted margin */
+  margin-bottom: 5px; /* Added margin-bottom */
+  font-size: 1.2rem; /* Slightly larger font size */
+}
+
+.card-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Align items to the center */
+}
+
+.card-alias {
+  font-size: 24px; /* Slightly larger font size */
+  font-weight: bold;
+  margin-right: 10px; /* Added margin-right */
+}
+
+.card-gender {
+  font-size: 14px; /* Adjusted font size */
+  color: #555;
+}

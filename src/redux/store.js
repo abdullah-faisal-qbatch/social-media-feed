@@ -3,11 +3,11 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import { devToolsEnhancer } from "redux-devtools-extension";
 // import rootReducer from "./rootReducers";
-import Post from "./posts/reducers";
-import Comment from "./user-comments/reducers";
-import User from "./users/reducers";
+import Posts from "./posts/reducers";
+import Comments from "./user-comments/reducers";
+import Users from "./users/reducers";
 
-const rootReducers = combineReducers({ Post, User, Comment });
+const rootReducers = combineReducers({ Posts, Users, Comments });
 const store = createStore(
   rootReducers,
   compose(applyMiddleware(thunk), devToolsEnhancer({ trace: true }))

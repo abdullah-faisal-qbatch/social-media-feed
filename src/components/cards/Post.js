@@ -1,7 +1,16 @@
 import React from "react";
-// import "./../styles/Card.css";
+import "./../../styles/Post.css";
 
-const Card = ({ alias, name, title, body, reactions, comments, email }) => {
+const Post = ({
+  alias,
+  name,
+  title,
+  body,
+  reactions,
+  comments,
+  email,
+  imageURL,
+}) => {
   return (
     <div className="card-container">
       <div className="card-header">
@@ -13,13 +22,18 @@ const Card = ({ alias, name, title, body, reactions, comments, email }) => {
         </div>
       </div>
       <div className="card-title">{title}</div>
+      <div>
+        {" "}
+        <img src={imageURL} alt="Fetched from API" />
+      </div>
       <div className="card-body">{body}</div>
       <div className="card-info">
         <div className="card-likes">{reactions} Likes</div>
         <span className="card-comments">{comments} Comments</span>
+        {/* <span className="card-comments">{comments} Comments</span> */}
       </div>
     </div>
   );
 };
 
-export default Card;
+export default Post;

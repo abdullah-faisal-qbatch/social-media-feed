@@ -3,12 +3,14 @@ import React from "react";
 import "./App.css";
 import NewsFeed from "./components/NewsFeed";
 import { Provider } from "react-redux";
-import store from './redux/store'
+import store from "./redux/store";
+import UsersFeed from "./components/UsersFeed";
 
 function App() {
   return (
-  <>
-    <NewsFeed></NewsFeed>
+    <>
+      {/* <NewsFeed></NewsFeed> */}
+      <UsersFeed></UsersFeed>
     </>
   );
 }
