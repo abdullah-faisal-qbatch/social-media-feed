@@ -8,10 +8,19 @@ import UsersFeed from "./components/UsersFeed";
 
 function App() {
   return (
-    <>
-      {/* <NewsFeed></NewsFeed> */}
-      <UsersFeed></UsersFeed>
-    </>
+    <div
+    // style={{
+    //   display: "flex",
+    //   flexDirection: "row",
+    // }}
+    >
+      <div>
+        <NewsFeed></NewsFeed>
+      </div>
+      <div>
+        <UsersFeed></UsersFeed>
+      </div>{" "}
+    </div>
   );
 }
 

@@ -34,6 +34,8 @@ const fetchAllPosts = () => {
 
             const finalData = postsData.data.posts.reduce((acc, post) => {
               const currentUser = currentUsers[post.userId];
+              if (postIdsComments[post.id])
+                console.log("Comments: ", postIdsComments[post.id]);
               acc.push({
                 id: post.id,
                 title: post.title,
