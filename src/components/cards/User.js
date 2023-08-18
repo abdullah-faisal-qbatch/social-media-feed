@@ -9,7 +9,7 @@ const User = ({ firstName, lastName, gender }) => {
           <span className="card-alias">{firstName[0] + lastName[0]}</span>
           <div>
             <div className="card-name">{firstName + " " + lastName}</div>
-            <div className="card-name">Gender: {gender}</div>
+            <div className="card-name">{gender}</div>
           </div>
         </div>
       </div>
