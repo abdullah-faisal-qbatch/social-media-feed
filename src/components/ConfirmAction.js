@@ -2,7 +2,6 @@ import React from "react";
 
 const ConfirmAction = ({ onClickDelete, onClickCancel }) => {
   return (
-    // <main class="antialiased bg-gray-200 text-gray-900 font-sans overflow-x-hidden">
     <div class="relative px-4 min-h-screen md:flex md:items-center md:justify-center">
       <div class="bg-black opacity-25 w-full h-full absolute z-10 inset-0"></div>
       <div class="bg-white rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">
@@ -32,7 +31,6 @@ const ConfirmAction = ({ onClickDelete, onClickCancel }) => {
         </div>
       </div>
     </div>
-    // </main>
   );
 };
 

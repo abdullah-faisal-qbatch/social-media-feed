@@ -41,4 +41,4 @@ const Comment = ({ body, user, onClick }) => {
   );
 };
 
-export default Comment;
+export default React.memo(Comment);

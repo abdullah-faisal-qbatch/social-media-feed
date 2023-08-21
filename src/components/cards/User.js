@@ -6,12 +6,11 @@ import { deleteAUser } from "../../redux/users/actionCreator";
 import { useState } from "react";
 import ConfirmAction from "../ConfirmAction";
 
-const User = ({ id, firstName, lastName, gender, onClick }) => {
+const User = ({ id, firstName, lastName, gender }) => {
   const [alert, setAlert] = useState(false);
   const dispatch = useDispatch();
   const deleteUser = () => {
     setAlert(true);
-    // dispatch(deleteAUser(id));
   };
   const handleOnClickDelete = () => {
     dispatch(deleteAUser(id));
@@ -56,4 +55,4 @@ const User = ({ id, firstName, lastName, gender, onClick }) => {
   );
 };
 
-export default User;
+export default React.memo(User);

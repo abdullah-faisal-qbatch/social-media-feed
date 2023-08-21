@@ -22,39 +22,29 @@ const Post = (post) => {
   // const posts = useSelector((state) => state.Posts);
   const dispatch = useDispatch();
   const handlePostLike = () => {
-    //here update the like
-    // post.reactions = post.reactions + 1;
     const newPost = { ...post };
-    console.log("Old reactions: ", post.reactions);
     newPost.reactions = newPost.reactions + 1;
-    console.log("New POST: ", newPost);
     dispatch(updateUserPost(newPost));
     setLike(false);
   };
   const handlePostDislike = () => {
-    //here update the dislike
     const newPost = { ...post };
     newPost.reactions = newPost.reactions - 1;
     dispatch(updateUserPost(newPost));
     setLike(true);
   };
 
-  const handleEditPost = () => {
-    const newPost = { ...post };
-    delete newPost.onClick;
-    console.log("clicked on edit post");
-    // console.log(post);
-    navigate("/edit-post", { state: newPost });
-  };
+  // const handleEditPost = () => {
+  //   const newPost = { ...post };
+  //   delete newPost.onClick;
+  //   console.log("clicked on edit post");
+  //   // console.log(post);
+  //   navigate("/edit-post", { state: newPost });
+  // };
 
   const handleUserComment = () => {
     const newPost = { ...post };
-    console.log("current user: ");
-    console.log(currentUser);
-    console.log("new post: ");
-    console.log(newPost);
     // console.log("You commented!");
-    console.log(userCommentInput.current.value);
     let comment = {
       body: userCommentInput.current.value,
       postId: newPost.id,
@@ -66,7 +56,7 @@ const Post = (post) => {
         username: currentUser.username,
       },
     };
-    console.log("Your new comment: ", comment);
+    // console.log("Your new comment: ", comment);
     const existingCommentsJSON = localStorage.getItem("comments");
     const existingComments = existingCommentsJSON
       ? JSON.parse(existingCommentsJSON)
@@ -77,13 +67,11 @@ const Post = (post) => {
     dispatch(fetchAllPosts());
   };
   const deletePost = () => {
-    // dispatch(deleteUserPost(post.id));
-    // console.log("again");
     setAlert(true);
   };
   const handleOnClickDelete = () => {
     dispatch(deleteUserPost(post.id));
-    console.log("again");
+    // console.log("again");
   };
   const handleOnClickCancel = () => {
     setAlert(false);
@@ -165,4 +153,4 @@ const Post = (post) => {
   );
 };
 
-export default Post;
+export default React.memo(Post);
