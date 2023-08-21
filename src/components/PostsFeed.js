@@ -1,6 +1,6 @@
 import React from "react";
-import axios from "axios";
-import { useState, useEffect } from "react";
+// import axios from "axios";
+import { useEffect } from "react";
 import Spinner from "./Spinner";
 import _ from "lodash";
 import { useSelector, useDispatch } from "react-redux";
@@ -45,17 +45,14 @@ const PostsFeed = (props) => {
     dispatch(updateUserComments(finalComments));
   };
 
-  const handleAddPost = () => {
-    console.log("handle add post");
-  };
+  // const handleAddPost = () => {
+  //   console.log("handle add post");
+  // };
 
   return (
-    <>
-      {props.value === "my-posts" ? <h1>MY POSTS</h1> : <h1>POSTS FEED</h1>}
+    <div className="flex flex-col w-2/4 m-auto">
       {posts.loading ? (
-        <div>
-          <Spinner />
-        </div>
+        <Spinner />
       ) : (
         posts.posts
           .slice(1, 5)
@@ -68,7 +65,7 @@ const PostsFeed = (props) => {
             />
           ))
       )}
-    </>
+    </div>
   );
 };
 

@@ -25,7 +25,6 @@ const UsersFeed = () => {
   };
   return (
     <>
-      <h1>USERS FEED</h1>
       {users &&
         users
           .slice(0, 10)

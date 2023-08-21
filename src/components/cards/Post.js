@@ -7,7 +7,8 @@ import { useState } from "react";
 import { updateUserPost } from "../../redux/posts/actionCreator";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ConfirmAction from "../ConfirmAction";
 let commentId = 1;
 
 const Post = (post) => {
@@ -16,8 +17,8 @@ const Post = (post) => {
   const userCommentInput = useRef();
   const usersData = useSelector((state) => state.Users);
   const { currentUser } = usersData;
-  const { users } = usersData.users;
-  const posts = useSelector((state) => state.Posts);
+  // const { users } = usersData.users;
+  // const posts = useSelector((state) => state.Posts);
   const dispatch = useDispatch();
   const deletePost = () => {
     dispatch(deleteUserPost(post.id));
@@ -88,30 +89,55 @@ const Post = (post) => {
           </div>
         </div>
       </div>
-      <button onClick={deletePost}>Delete Post</button>
+      <button
+        class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        onClick={deletePost}
+      >
+        Delete Post{" "}
+      </button>
+      {/* <ConfirmAction></ConfirmAction> */}
+
       {console.log("IN CHILD I got:", post.finalComments)}
       <div className="card-title">{post.title}</div>
-      <div style={{ textAlign: "center" }}>
-        {" "}
-        <img src={post.imageURL} alt="Fetched from API" />
+      <div className="text-center">
+        <img src={post.imageURL} alt="Fetched from API" className="mx-auto" />
       </div>
       <div className="card-body">{post.body}</div>
       <div className="card-info">
         {like ? (
-          <button onClick={handlePostLike}>Like</button>
+          <button
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={handlePostLike}
+          >
+            Like
+          </button>
         ) : (
-          <button onClick={handlePostDislike}>Dislike</button>
+          <button
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={handlePostDislike}
+          >
+            Dislike
+          </button>
         )}
         <div className="card-likes">{post.reactions} Likes</div>
-        <span className="card-comments" onClick={post.onClick}>
-          {post.comments.length} Comments
-        </span>
-        <input
-          type="text"
-          placeholder="Enter your comment"
-          ref={userCommentInput}
-        ></input>
-        <button onClick={handleUserComment}>Add Comment</button>
+        <div className="text-center">
+          <input
+            class="shadow appearance-none border mr-4 rounded w-2/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="text"
+            ref={userCommentInput}
+            required
+            placeholder="Enter your comment"
+          />
+          <button
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={handleUserComment}
+          >
+            Add Comment{" "}
+          </button>
+          <p className="card-comments" onClick={post.onClick}>
+            {post.comments.length} Comments
+          </p>
+        </div>
         <div>
           {console.log("Final Comments: ", post.finalComments)}
           {post.finalComments &&

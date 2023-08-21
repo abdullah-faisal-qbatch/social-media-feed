@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../../redux/users/actionCreator";
 
 const Comment = ({ body, user, onClick }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const usersData = useSelector((state) => state.Users);
-  const { currentUser } = usersData;
-  const { users } = usersData.users;
+  // const { currentUser } = usersData;
+  // const { users } = usersData.users;
   console.log("end user: ", usersData);
 
   useEffect(() => {
