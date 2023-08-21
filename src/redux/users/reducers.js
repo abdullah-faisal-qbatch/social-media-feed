@@ -85,7 +85,6 @@ const Users = (state = initialState, action) => {
     case DELETE_USER_BEGIN:
       return { ...state, loading: true };
     case DELETE_USER_SUCCESS:
-      // console.log("State of user: ", state);
       return {
         ...state,
         loading: false,
@@ -93,7 +92,6 @@ const Users = (state = initialState, action) => {
           return user.id !== data.userId;
         }),
       };
-
     default:
       return state;
   }

@@ -46,7 +46,7 @@ const PostsFeed = (props) => {
         <Spinner />
       ) : (
         posts.posts
-          .slice(1, 5)
+          // .slice(1, 5)
           .map((post) => (
             <Post
               key={post.id}

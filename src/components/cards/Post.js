@@ -1,6 +1,7 @@
 import React from "react";
 import "./../../styles/Post.css";
 import Comment from "./Comment";
+import _ from "lodash";
 import { useDispatch } from "react-redux";
 import { deleteUserPost, fetchAllPosts } from "../../redux/posts/actionCreator";
 import { useState } from "react";
@@ -69,10 +70,10 @@ const Post = (post) => {
             {post.name}
           </div>
           <button
-            className="inline-flex ml-4 items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="ml-80 inline-flex ml-4 items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             onClick={deletePost}
           >
-            Delete Post{" "}
+            Delete
           </button>
         </div>
       </div>
@@ -82,8 +83,6 @@ const Post = (post) => {
           onClickCancel={handleOnClickCancel}
         ></DeleteMessage>
       )}
-
-      {console.log("IN CHILD I got:", post.finalComments)}
       <div className="card-title">{post.title}</div>
       <div className="text-center">
         <img src={post.imageURL} alt="Fetched from API" className="mx-auto" />
@@ -105,7 +104,9 @@ const Post = (post) => {
             Dislike
           </button>
         )}
-        <div className="card-likes">{post.reactions} Likes</div>
+        <span className="text-base text-gray-700 ml-2">
+          {post.reactions} Likes
+        </span>
         <div className="text-center">
           <input
             className="shadow appearance-none border mr-4 rounded w-2/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

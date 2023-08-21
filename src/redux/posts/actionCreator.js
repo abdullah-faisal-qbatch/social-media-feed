@@ -1,7 +1,6 @@
 import actions from "./actions";
 import axios from "axios";
-import _, { cloneWith } from "lodash";
-import { fetchAllUsers } from "../users/actionCreator";
+import _ from "lodash";
 import slackError from "../../utils/SlackError";
 
 const fetchAllPosts = (userId = null) => {

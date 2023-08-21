@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUsers } from "../redux/users/actionCreator";
 import { fetchAllPosts } from "../redux/posts/actionCreator";
@@ -14,16 +14,16 @@ const UsersFeed = () => {
   }, []);
 
   const handleOnClick = (userId) => {
+    //update posts according to user Id
     console.log(`Clicked on userID :${userId}`);
     console.log("User id: ", userId);
     dispatch(fetchAllPosts(userId));
-    //update posts according to user Id
   };
   return (
     <>
       {users &&
         users
-          .slice(0, 10)
+          // .slice(0, 10)
           .map((user) => (
             <User
               key={user.id}
