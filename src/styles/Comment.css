@@ -25,6 +25,7 @@
     margin-top: 10px; /* Adjusted margin */
     margin-bottom: 5px; /* Added margin-bottom */
     font-size: 1.2rem; /* Slightly larger font size */
+    font-weight: bold;
   }
   
   .card-main {

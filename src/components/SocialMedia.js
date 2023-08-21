@@ -2,10 +2,6 @@ import React, { Suspense, lazy } from "react";
 import { Provider } from "react-redux";
 import store from "./../redux/store";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-// import PostsFeed from "./PostsFeed";
-// import UsersFeed from "./UsersFeed";
-// import Header from "./Header";
-// import AddPost from "./AddPost";
 import Spinner from "./Spinner";
 
 const Header = lazy(() => import("./Navbar"));

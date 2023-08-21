@@ -1,25 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./../../styles/Comment.css";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchUser } from "../../redux/users/actionCreator";
 
 const Comment = ({ body, user, onClick }) => {
-  // const dispatch = useDispatch();
-  const usersData = useSelector((state) => state.Users);
-  // const { currentUser } = usersData;
-  // const { users } = usersData.users;
-  console.log("end user: ", usersData);
-
-  useEffect(() => {
-    // dispatch(fetchUser(user.id));
-  }, []);
-  console.log(user);
   return (
     <div
-      className="card"
-      style={{
-        marginLeft: "45px",
-      }}
+      className="rounded-lg border ml-10 border-gray-300 p-4 m-4 w-80 mx-auto md:w-4/5 rounded-lg shadow-sm bg-white transition duration-300 transform hover:bg-gray-100"
       onClick={onClick}
     >
       <div className="card-header">
@@ -33,7 +18,7 @@ const Comment = ({ body, user, onClick }) => {
             <div className="card-name">
               {user.firstname + " " + user.lastname}
             </div>
-            <div className="card-name">{body}</div>
+            <div className="ml-3">{body}</div>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import actions from "./actions";
 import axios from "axios";
+import slackError from "../../utils/SlackError";
 
 const isSuccess = (response) => {
   return response.status >= 200 && response.status < 300;
@@ -15,6 +16,8 @@ const fetchAllUsers = () => {
       }
     } catch (err) {
       dispatch(err);
+      var raw = `{"text": "There\'s error during fetching users data"}`;
+      slackError(raw);
     }
   };
 };
@@ -29,6 +32,8 @@ const fetchUser = (userId) => {
       }
     } catch (err) {
       dispatch(err);
+      var raw = `{"text": "There\'s error during fetching users data"}`;
+      slackError(raw);
     }
   };
 };
@@ -37,14 +42,11 @@ const deleteAUser = (userId) => {
   return async (dispatch) => {
     try {
       dispatch(actions.deleteUserBegin());
-      // const response = await axios.get(`https://dummyjson.com/users/${userId}`);
-      // if (isSuccess(response)) {
-      console.log("Id of user: ", userId);
       dispatch(actions.deleteUserSuccess(userId));
-      // }
     } catch (err) {
-      console.log("Error during deleting user: ", err);
       dispatch(err);
+      var raw = `{"text": "There\'s error during deleting users data"}`;
+      slackError(raw);
     }
   };
 };

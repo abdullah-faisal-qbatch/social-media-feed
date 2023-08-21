@@ -64,8 +64,6 @@ const actions = {
     };
   },
   updatePostSuccess: (post) => {
-    // console.log("In update post success: ");
-    // console.log(post);
     return {
       type: actions.UPDATE_POST_SUCCESS,
       data: post,

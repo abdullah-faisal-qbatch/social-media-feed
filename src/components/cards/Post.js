@@ -7,19 +7,14 @@ import { useState } from "react";
 import { updateUserPost } from "../../redux/posts/actionCreator";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import ConfirmAction from "../ConfirmAction";
-let commentId = 1;
+import DeleteMessage from "../DeleteMessage";
 
 const Post = (post) => {
   const [like, setLike] = useState(true);
-  const navigate = useNavigate();
   const userCommentInput = useRef();
   const usersData = useSelector((state) => state.Users);
   const { currentUser } = usersData;
   const [alert, setAlert] = useState(false);
-  // const { users } = usersData.users;
-  // const posts = useSelector((state) => state.Posts);
   const dispatch = useDispatch();
   const handlePostLike = () => {
     const newPost = { ...post };
@@ -34,21 +29,11 @@ const Post = (post) => {
     setLike(true);
   };
 
-  // const handleEditPost = () => {
-  //   const newPost = { ...post };
-  //   delete newPost.onClick;
-  //   console.log("clicked on edit post");
-  //   // console.log(post);
-  //   navigate("/edit-post", { state: newPost });
-  // };
-
   const handleUserComment = () => {
     const newPost = { ...post };
-    // console.log("You commented!");
     let comment = {
       body: userCommentInput.current.value,
       postId: newPost.id,
-      id: commentId++,
       user: {
         firstname: currentUser.firstName,
         lastname: currentUser.lastName,
@@ -56,7 +41,6 @@ const Post = (post) => {
         username: currentUser.username,
       },
     };
-    // console.log("Your new comment: ", comment);
     const existingCommentsJSON = localStorage.getItem("comments");
     const existingComments = existingCommentsJSON
       ? JSON.parse(existingCommentsJSON)
@@ -77,7 +61,7 @@ const Post = (post) => {
   };
 
   return (
-    <div className="card-container">
+    <div className=" rounded-lg card-container">
       <div className="card-header">
         <div className="card-main">
           <span className="card-alias">{post.alias}</span>
@@ -85,7 +69,7 @@ const Post = (post) => {
             {post.name}
           </div>
           <button
-            class="inline-flex ml-4 items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="inline-flex ml-4 items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             onClick={deletePost}
           >
             Delete Post{" "}
@@ -93,10 +77,10 @@ const Post = (post) => {
         </div>
       </div>
       {alert && (
-        <ConfirmAction
+        <DeleteMessage
           onClickDelete={handleOnClickDelete}
           onClickCancel={handleOnClickCancel}
-        ></ConfirmAction>
+        ></DeleteMessage>
       )}
 
       {console.log("IN CHILD I got:", post.finalComments)}
@@ -108,14 +92,14 @@ const Post = (post) => {
       <div className="card-info">
         {like ? (
           <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             onClick={handlePostLike}
           >
             Like
           </button>
         ) : (
           <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             onClick={handlePostDislike}
           >
             Dislike
@@ -124,14 +108,14 @@ const Post = (post) => {
         <div className="card-likes">{post.reactions} Likes</div>
         <div className="text-center">
           <input
-            class="shadow appearance-none border mr-4 rounded w-2/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border mr-4 rounded w-2/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
             ref={userCommentInput}
             required
             placeholder="Enter your comment"
           />
           <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             onClick={handleUserComment}
           >
             Add Comment{" "}
