@@ -13,7 +13,6 @@ const UsersFeed = () => {
   // console.log("Users array: ", users);
   // console.log("Current User: ", currentUser);
   console.log("Posts rendered: ", posts);
-
   useEffect(() => {
     dispatch(fetchAllUsers());
   }, []);

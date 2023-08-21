@@ -3,7 +3,7 @@ import { TailSpin } from "react-loader-spinner";
 
 const Spinner = () => {
   return (
-    <div className="spinner-center">
+    <div className="flex flex-col text-center">
       <TailSpin
         height="80"
         width="80"
