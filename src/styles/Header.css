@@ -1,0 +1,32 @@
+/* Header.css */
+
+nav {
+  background-color: #333;
+  padding: 10px 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  margin: 0 20px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #ff8c00; /* Change color on hover */
+}
+
+.active {
+  color: #ff8c00; /* Highlight active link */
+}

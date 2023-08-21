@@ -14,6 +14,8 @@ const {
   DELETE_POST_SUCCESS,
   FETCH_USER_POSTS_BEGIN,
   FETCH_USER_POSTS_SUCCESS,
+  UPDATE_POST_BEGIN,
+  UPDATE_POST_SUCCESS,
 } = actions;
 
 const Posts = (state = initialState, action) => {
@@ -31,6 +33,16 @@ const Posts = (state = initialState, action) => {
       return { ...state, loading: true };
     case ADD_POST_SUCCESS:
       return { ...state, loading: false, posts: [...state.posts, data.post] };
+    case UPDATE_POST_BEGIN:
+      return { ...state, loading: true };
+    case UPDATE_POST_SUCCESS:
+      console.log("update post success: ");
+      console.log(data);
+      return {
+        ...state,
+        loading: false,
+        posts: state.posts.map((post) => (post.id === data.id ? data : post)),
+      };
     case DELETE_POST_BEGIN:
       return { ...state, loading: true };
     case DELETE_POST_SUCCESS:

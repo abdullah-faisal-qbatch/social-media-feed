@@ -13,6 +13,7 @@ const Comment = ({ body, user, onClick }) => {
   useEffect(() => {
     // dispatch(fetchUser(user.id));
   }, []);
+  console.log(user);
   return (
     <div
       className="card"
@@ -25,11 +26,13 @@ const Comment = ({ body, user, onClick }) => {
         <div className="card-main">
           <span className="card-alias">
             {" "}
-            {user.username[0].toUpperCase() +
-              user.username[user.username.length - 1].toUpperCase()}
+            {user.firstname?.[0].toUpperCase() +
+              user.lastname?.[0].toUpperCase()}
           </span>
           <div>
-            <div className="card-name">{user.username}</div>
+            <div className="card-name">
+              {user.firstname + " " + user.lastname}
+            </div>
             <div className="card-name">{body}</div>
           </div>
         </div>

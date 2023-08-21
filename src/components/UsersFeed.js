@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUsers } from "../redux/users/actionCreator";
 import { fetchUserPost } from "../redux/posts/actionCreator";
 import User from "./cards/User";
-import { NavLink } from "react-router-dom";
 const UsersFeed = () => {
   const dispatch = useDispatch();
   const usersData = useSelector((state) => state.Users);
@@ -26,6 +25,7 @@ const UsersFeed = () => {
   };
   return (
     <>
+      <h1>USERS FEED</h1>
       {users &&
         users
           .slice(0, 10)
