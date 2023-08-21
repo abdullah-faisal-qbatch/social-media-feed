@@ -1,10 +1,12 @@
 import React, { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import Alert from "./Alert";
+import { fetchAllPosts } from "../redux/posts/actionCreator";
 
 const AddPost = (props) => {
   const titleRef = useRef(null);
+  const dispatch = useDispatch();
   const bodyRef = useRef(null);
   const usersData = useSelector((state) => state.Users);
   const posts = useSelector((state) => state.Posts);
@@ -12,6 +14,7 @@ const AddPost = (props) => {
   const { currentUser } = usersData;
 
   const handleSubmit = (e) => {
+    dispatch(fetchAllPosts());
     e.preventDefault();
     const newPost = {
       id: posts.posts.length + 1,
