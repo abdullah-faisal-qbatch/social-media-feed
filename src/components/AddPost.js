@@ -122,4 +122,4 @@ const AddPost = (props) => {
   );
 };
 
-export default AddPost;
+export default React.memo(AddPost);

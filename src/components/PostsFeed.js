@@ -39,15 +39,10 @@ const PostsFeed = (props) => {
     const post = posts.posts.find((post) => {
       return post.id === postId;
     });
-    // post.comments.map((comment) => comment.user.id===);
-    console.log("Post Data: ", post);
+    // console.log("Post Data: ", post);
     const finalComments = [...post.comments];
     dispatch(updateUserComments(finalComments));
   };
-
-  // const handleAddPost = () => {
-  //   console.log("handle add post");
-  // };
 
   return (
     <div className="flex flex-col w-2/4 m-auto">
