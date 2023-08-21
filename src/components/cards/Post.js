@@ -17,13 +17,10 @@ const Post = (post) => {
   const userCommentInput = useRef();
   const usersData = useSelector((state) => state.Users);
   const { currentUser } = usersData;
+  const [alert, setAlert] = useState(false);
   // const { users } = usersData.users;
   // const posts = useSelector((state) => state.Posts);
   const dispatch = useDispatch();
-  const deletePost = () => {
-    dispatch(deleteUserPost(post.id));
-    console.log("again");
-  };
   const handlePostLike = () => {
     //here update the like
     // post.reactions = post.reactions + 1;
@@ -79,6 +76,19 @@ const Post = (post) => {
     localStorage.setItem("comments", updatedCommentsJSON);
     dispatch(fetchAllPosts());
   };
+  const deletePost = () => {
+    // dispatch(deleteUserPost(post.id));
+    // console.log("again");
+    setAlert(true);
+  };
+  const handleOnClickDelete = () => {
+    dispatch(deleteUserPost(post.id));
+    console.log("again");
+  };
+  const handleOnClickCancel = () => {
+    setAlert(false);
+  };
+
   return (
     <div className="card-container">
       <div className="card-header">
@@ -95,7 +105,12 @@ const Post = (post) => {
       >
         Delete Post{" "}
       </button>
-      {/* <ConfirmAction></ConfirmAction> */}
+      {alert && (
+        <ConfirmAction
+          onClickDelete={handleOnClickDelete}
+          onClickCancel={handleOnClickCancel}
+        ></ConfirmAction>
+      )}
 
       {console.log("IN CHILD I got:", post.finalComments)}
       <div className="card-title">{post.title}</div>
