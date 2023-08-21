@@ -71,7 +71,6 @@ const Post = (post) => {
   };
   const handleOnClickDelete = () => {
     dispatch(deleteUserPost(post.id));
-    // console.log("again");
   };
   const handleOnClickCancel = () => {
     setAlert(false);
@@ -85,14 +84,14 @@ const Post = (post) => {
           <div className="card-name" title={post.email}>
             {post.name}
           </div>
+          <button
+            class="inline-flex ml-4 items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={deletePost}
+          >
+            Delete Post{" "}
+          </button>
         </div>
       </div>
-      <button
-        class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        onClick={deletePost}
-      >
-        Delete Post{" "}
-      </button>
       {alert && (
         <ConfirmAction
           onClickDelete={handleOnClickDelete}
