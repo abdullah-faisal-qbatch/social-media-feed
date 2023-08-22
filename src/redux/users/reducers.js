@@ -73,6 +73,8 @@ const {
   FETCH_USERS_SUCCESS,
   DELETE_USER_BEGIN,
   DELETE_USER_SUCCESS,
+  SEARCH_USER_BEGIN,
+  SEARCH_USER_SUCCESS,
 } = actions;
 
 const Users = (state = initialState, action) => {
@@ -82,6 +84,18 @@ const Users = (state = initialState, action) => {
       return { ...state, loading: true };
     case FETCH_USERS_SUCCESS:
       return { ...state, loading: false, users: data };
+    case SEARCH_USER_BEGIN:
+      return { ...state, loading: true };
+    case SEARCH_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        users: state.users.filter(
+          (user) =>
+            user.firstName.toUpperCase().includes(data.toUpperCase()) ||
+            user.lastName.toUpperCase().includes(data.toUpperCase())
+        ),
+      };
     case DELETE_USER_BEGIN:
       return { ...state, loading: true };
     case DELETE_USER_SUCCESS:

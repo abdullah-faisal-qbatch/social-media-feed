@@ -22,6 +22,19 @@ const fetchAllUsers = () => {
   };
 };
 
+const searchAllUsers = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.searchUserBegin());
+      dispatch(actions.searchUserSuccess(data));
+    } catch (err) {
+      dispatch(err);
+      var raw = `{"text": "There\'s error during fetching users data"}`;
+      slackError(raw);
+    }
+  };
+};
+
 const fetchUser = (userId) => {
   return async (dispatch) => {
     try {
@@ -51,4 +64,4 @@ const deleteAUser = (userId) => {
   };
 };
 
-export { fetchAllUsers, fetchUser, deleteAUser };
+export { fetchAllUsers, fetchUser, deleteAUser, searchAllUsers };
