@@ -1,12 +1,13 @@
 import React from "react";
 import { useEffect } from "react";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllPosts } from "../redux/posts/actionCreator";
-import { fetchAllUsers } from "../redux/users/actionCreator";
-import { updateUserComments } from "../redux/user-comments/actionCreator";
-import Post from "./cards/Post";
+import { fetchAllPosts } from "../../redux/posts/actionCreator";
+import { fetchAllUsers } from "../../redux/users/actionCreator";
+import { updateUserComments } from "../../redux/user-comments/actionCreator";
+import Post from "../cards/Post";
 import { useLocation } from "react-router-dom";
+import ProfilePost from "../ProfilePost";
 
 const PostsFeed = (props) => {
   const dispatch = useDispatch();
@@ -41,14 +42,14 @@ const PostsFeed = (props) => {
   };
 
   return (
-    <div className="flex flex-col w-2/4 m-auto">
+    <div className="flex flex-col m-auto">
       {posts.loading ? (
         <Spinner />
       ) : (
         posts.posts
           // .slice(1, 5)
           .map((post) => (
-            <Post
+            <ProfilePost
               key={post.id}
               {...post}
               onClick={() => handlePostClick(post.id)}

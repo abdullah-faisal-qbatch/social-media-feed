@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllUsers, searchAllUsers } from "../redux/users/actionCreator";
-import { fetchAllPosts } from "../redux/posts/actionCreator";
-import User from "./cards/User";
+import { fetchAllUsers, searchAllUsers } from "../../redux/users/actionCreator";
+import { fetchAllPosts } from "../../redux/posts/actionCreator";
+import User from "../cards/User";
 import { useRef } from "react";
 const debounce = (cb, delay = 1000) => {
   let timeout;

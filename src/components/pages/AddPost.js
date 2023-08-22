@@ -1,22 +1,31 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import Alert from "./Alert";
-import { fetchAllPosts } from "../redux/posts/actionCreator";
+import { useEffect } from "react";
+import Alert from "../Alert";
+import { fetchAllPosts } from "../../redux/posts/actionCreator";
 
 const AddPost = (props) => {
-  const titleRef = useRef(null);
   const dispatch = useDispatch();
+  const titleRef = useRef(null);
   const bodyRef = useRef(null);
   const usersData = useSelector((state) => state.Users);
   const posts = useSelector((state) => state.Posts);
   const [postAdded, setPostAdded] = useState(false);
   const { currentUser } = usersData;
 
+  useEffect(() => {
+    dispatch(fetchAllPosts());
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const existingPostsJSON = localStorage.getItem("posts");
+    const existingPosts = existingPostsJSON
+      ? JSON.parse(existingPostsJSON)
+      : [];
     const newPost = {
-      id: posts.posts.length + 1,
+      id: posts.posts.length + existingPosts.length + 4,
       title: titleRef.current.value,
       body: bodyRef.current.value,
       userId: currentUser.id,
@@ -26,10 +35,6 @@ const AddPost = (props) => {
       tags: [],
     };
     console.log("Your new post: ", newPost);
-    const existingPostsJSON = localStorage.getItem("posts");
-    const existingPosts = existingPostsJSON
-      ? JSON.parse(existingPostsJSON)
-      : [];
     existingPosts.push(newPost);
     const updatedPostsJSON = JSON.stringify(existingPosts);
     localStorage.setItem("posts", updatedPostsJSON);
@@ -46,7 +51,7 @@ const AddPost = (props) => {
           onClickTitle={() => setPostAdded(!alert)}
         ></Alert>
       )}
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center mt-28">
         <div className="w-full max-w-xs">
           <form
             onSubmit={handleSubmit}
@@ -60,7 +65,7 @@ const AddPost = (props) => {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="username"
+                htmlFor="username"
               >
                 Title
               </label>
@@ -76,7 +81,7 @@ const AddPost = (props) => {
             <div className="mb-6">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="password"
+                htmlFor="password"
               >
                 Body
               </label>

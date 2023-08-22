@@ -4,6 +4,7 @@ const slackError = (raw) => {
     body: raw,
     redirect: "follow",
   };
+  //use axios
   fetch(
     "https://hooks.slack.com/services/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",
     requestOptions

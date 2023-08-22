@@ -5,9 +5,9 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Spinner from "./Spinner";
 
 const Header = lazy(() => import("./Navbar"));
-const UsersFeed = lazy(() => import("./UsersFeed"));
-const AddPost = lazy(() => import("./AddPost"));
-const PostsFeed = lazy(() => import("./PostsFeed"));
+const UsersFeed = lazy(() => import("./pages/UsersFeed"));
+const AddPost = lazy(() => import("./pages/AddPost"));
+const PostsFeed = lazy(() => import("./pages/PostsFeed"));
 
 const SocialMedia = () => {
   return (

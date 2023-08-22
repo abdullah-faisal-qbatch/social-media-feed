@@ -17,82 +17,97 @@ const fetchAllPosts = (userId = null) => {
           ),
         ])
         .then(
-          axios.spread((postsData, commentsData, usersData, pictureData) => {
-            const existingCommentsJSON = localStorage.getItem("comments");
-            const existingComments = existingCommentsJSON
-              ? JSON.parse(existingCommentsJSON)
-              : [];
-            console.log("I got exisiting comments: ", existingComments);
-            commentsData.data.comments.push(...existingComments);
+          axios.spread(
+            async (postsData, commentsData, usersData, pictureData) => {
+              // console.log("image URL: ", imageURL);
+              // console.log("pictures DATA URL : ", pictureData);
 
-            console.log("comments", commentsData);
+              const existingCommentsJSON = localStorage.getItem("comments");
+              const existingComments = existingCommentsJSON
+                ? JSON.parse(existingCommentsJSON)
+                : [];
+              console.log("I got exisiting comments: ", existingComments);
+              commentsData.data.comments.push(...existingComments);
 
-            const postIdsComments = _.groupBy(
-              commentsData.data.comments,
-              "postId"
-            );
-            const currentUsers = usersData.data.users.reduce((acc, user) => {
-              acc[user.id] = user;
-              return acc;
-            }, {});
+              console.log("comments", commentsData);
 
-            const existingPostsJSON = localStorage.getItem("posts");
-            const existingPosts = existingPostsJSON
-              ? JSON.parse(existingPostsJSON)
-              : [];
-            console.log("I got existing posts: ", existingPosts);
-            postsData.data.posts.push(...existingPosts);
+              const postIdsComments = _.groupBy(
+                commentsData.data.comments,
+                "postId"
+              );
+              const currentUsers = usersData.data.users.reduce((acc, user) => {
+                acc[user.id] = user;
+                return acc;
+              }, {});
 
-            const finalData = postsData.data.posts.reduce((acc, post) => {
-              const currentUser = currentUsers[post.userId];
-              let finalComments = [];
-              if (postIdsComments[post.id]) {
-                finalComments = postIdsComments[post.id].map((comment) => {
-                  comment.user["firstname"] =
-                    currentUsers[comment.user.id].firstName;
-                  comment.user["lastname"] =
-                    currentUsers[comment.user.id].lastName;
-                  return comment;
-                });
-              }
-              if (!userId) {
-                if (postIdsComments[post.id])
-                  acc.push({
-                    id: post.id,
-                    title: post.title,
-                    body: post.body,
-                    reactions: post.reactions,
-                    imageURL: pictureData.request.responseURL,
-                    comments: finalComments,
-                    email: currentUser.email,
-                    alias:
-                      currentUser.firstName[0].toUpperCase() +
-                      currentUser.lastName[0].toUpperCase(),
-                    name: currentUser.firstName + " " + currentUser?.lastName,
-                  });
-              } else {
-                if (post.userId == userId) {
-                  acc.push({
-                    id: post.id,
-                    title: post.title,
-                    body: post.body,
-                    reactions: post.reactions,
-                    imageURL: pictureData.request.responseURL,
-                    comments: finalComments,
-                    email: currentUser.email,
-                    alias:
-                      currentUser.firstName[0].toUpperCase() +
-                      currentUser.lastName[0].toUpperCase(),
-                    name: currentUser.firstName + " " + currentUser?.lastName,
+              const existingPostsJSON = localStorage.getItem("posts");
+              const existingPosts = existingPostsJSON
+                ? JSON.parse(existingPostsJSON)
+                : [];
+              console.log("I got existing posts: ", existingPosts);
+              postsData.data.posts.push(...existingPosts);
+
+              const finalData = postsData.data.posts.reduce((acc, post) => {
+                const currentUser = currentUsers[post.userId];
+                let finalComments = [];
+                if (postIdsComments[post.id]) {
+                  finalComments = postIdsComments[post.id].map((comment) => {
+                    comment.user["firstname"] =
+                      currentUsers[comment.user.id].firstName;
+                    comment.user["lastname"] =
+                      currentUsers[comment.user.id].lastName;
+                    return comment;
                   });
                 }
-              }
+                const imageURL = async () => {
+                  const imageData = await axios.get(
+                    "https://image.dummyjson.com/750x200/008080/ffffff?text=Random+Post!&fontSize=20"
+                  );
+                  return imageData;
+                };
+                // const imageURL = async () =>
+                console.log("image URL: ");
+                console.log("Picture Data : ", pictureData);
 
-              return acc;
-            }, []);
-            console.log("Final data: ", finalData);
-            dispatch(actions.fetchPostsSuccess(finalData));
-          })
+                if (!userId) {
+                  if (postIdsComments[post.id])
+                    acc.push({
+                      id: post.id,
+                      title: post.title,
+                      body: post.body,
+                      reactions: post.reactions,
+                      imageURL: pictureData.request.responseURL,
+                      comments: finalComments,
+                      email: currentUser.email,
+                      alias:
+                        currentUser.firstName[0].toUpperCase() +
+                        currentUser.lastName[0].toUpperCase(),
+                      name: currentUser.firstName + " " + currentUser?.lastName,
+                    });
+                } else {
+                  if (post.userId == userId) {
+                    acc.push({
+                      id: post.id,
+                      title: post.title,
+                      body: post.body,
+                      reactions: post.reactions,
+                      imageURL: pictureData.request.responseURL,
+                      comments: finalComments,
+                      email: currentUser.email,
+                      alias:
+                        currentUser.firstName[0].toUpperCase() +
+                        currentUser.lastName[0].toUpperCase(),
+                      name: currentUser.firstName + " " + currentUser?.lastName,
+                    });
+                  }
+                }
+
+                return acc;
+              }, []);
+              console.log("Final data: ", finalData);
+              dispatch(actions.fetchPostsSuccess(finalData));
+            }
+          )
         );
     } catch (err) {
       dispatch(err);

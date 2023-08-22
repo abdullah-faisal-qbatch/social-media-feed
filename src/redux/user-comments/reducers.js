@@ -43,8 +43,8 @@ const Comments = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        comments: state.comments.filter((post) => {
-          return post.id === data.commentId;
+        comments: state.comments.filter((comment) => {
+          return comment.id === data.commentId;
         }),
       };
     case UPDATE_USER_COMMENTS_BEGIN:
