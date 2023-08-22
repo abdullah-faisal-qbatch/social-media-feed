@@ -62,19 +62,19 @@ const Post = (post) => {
   };
 
   return (
-    <div className=" rounded-lg card-container">
+    <div className="rounded-lg card-container">
+      <button
+        className="inline-flex margin-class ml-4 items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        onClick={deletePost}
+      >
+        Delete
+      </button>
       <div className="card-header">
         <div className="card-main">
           <span className="card-alias">{post.alias}</span>
           <div className="card-name" title={post.email}>
             {post.name}
           </div>
-          <button
-            className="ml-80 inline-flex ml-4 items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={deletePost}
-          >
-            Delete
-          </button>
         </div>
       </div>
       {alert && (

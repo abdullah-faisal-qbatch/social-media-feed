@@ -13,7 +13,7 @@ const fetchAllPosts = (userId = null) => {
           axios.get("https://dummyjson.com/comments", { params: { limit: 0 } }),
           axios.get("https://dummyjson.com/users", { params: { limit: 0 } }),
           axios.get(
-            "https://image.dummyjson.com/250x200/008080/ffffff?text=Random+Post!&fontSize=20"
+            "https://image.dummyjson.com/750x200/008080/ffffff?text=Random+Post!&fontSize=20"
           ),
         ])
         .then(

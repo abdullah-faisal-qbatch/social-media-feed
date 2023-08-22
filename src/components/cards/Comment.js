@@ -18,7 +18,7 @@ const Comment = ({ body, user, onClick }) => {
             <div className="card-name">
               {user.firstname + " " + user.lastname}
             </div>
-            <div className="ml-3">{body}</div>
+            <div>{body}</div>
           </div>
         </div>
       </div>
