@@ -14,7 +14,6 @@ const AddPost = (props) => {
   const { currentUser } = usersData;
 
   const handleSubmit = (e) => {
-    dispatch(fetchAllPosts());
     e.preventDefault();
     const newPost = {
       id: posts.posts.length + 1,
