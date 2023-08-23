@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import Post from "../cards/Post";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Alert from "../Alert";
 
 const PostsFeed = (props) => {
   const dispatch = useDispatch();
@@ -33,7 +34,6 @@ const PostsFeed = (props) => {
   }, [location]);
 
   const handlePostClick = (postId) => {
-    console.log(`Clicked on post with ID: ${postId}`);
     //getAllComments
     const post = posts.posts.find((post) => {
       return post.id === postId;
@@ -52,18 +52,19 @@ const PostsFeed = (props) => {
           <Spinner />
         </div>
       ) : (
-        posts.posts
-          // .slice(1, 5)
-          .map((post) => (
-            <Post
-              key={post.id}
-              {...post}
-              onClick={() => handlePostClick(post.id)}
-              finalComments={comments}
-            />
-          ))
+        posts.posts.map((post) => (
+          <Post
+            key={post.id}
+            {...post}
+            onClick={() => handlePostClick(post.id)}
+            finalComments={comments}
+          />
+        ))
       )}
       <ToastContainer />
+      {!posts.posts.length && (
+        <Alert title="Alert: " message="No posts found" />
+      )}
     </div>
   );
 };

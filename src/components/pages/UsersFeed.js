@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllUsers, searchAllUsers } from "../../redux/users/actionCreator";
 import { fetchAllPosts } from "../../redux/posts/actionCreator";
 import User from "../cards/User";
+import Alert from "../Alert";
 import { useRef } from "react";
 const debounce = (cb, delay = 1000) => {
   let timeout;
@@ -19,16 +20,12 @@ const UsersFeed = () => {
   const usersData = useSelector((state) => state.Users);
   const searchRef = useRef();
   const { users } = usersData;
-  const posts = useSelector((state) => state.Posts);
-  console.log("Posts rendered: ", posts);
   useEffect(() => {
     dispatch(fetchAllUsers());
   }, []);
 
   const handleOnClick = (userId) => {
     //update posts according to user Id
-    console.log(`Clicked on userID :${userId}`);
-    console.log("User id: ", userId);
     dispatch(fetchAllPosts(userId));
   };
   const updateDebounceText = debounce((text) => {
@@ -61,6 +58,7 @@ const UsersFeed = () => {
                 onClick={() => handleOnClick(user.id)}
               />
             ))}
+        {!users.length && <Alert title="Alert: " message="No users exist" />}
       </div>
     </>
   );

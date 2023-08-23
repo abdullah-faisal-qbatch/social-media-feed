@@ -1,6 +1,5 @@
 import actions from "./actions";
 import axios from "axios";
-import slackError from "../../utils/SlackError";
 
 const isSuccess = (response) => {
   return response.status >= 200 && response.status < 300;
@@ -16,8 +15,6 @@ const fetchAllUsers = () => {
       }
     } catch (err) {
       dispatch(err);
-      var raw = `{"text": "There\'s error during fetching users data"}`;
-      slackError(raw);
     }
   };
 };
@@ -29,8 +26,6 @@ const searchAllUsers = (data) => {
       dispatch(actions.searchUserSuccess(data));
     } catch (err) {
       dispatch(err);
-      var raw = `{"text": "There\'s error during fetching users data"}`;
-      slackError(raw);
     }
   };
 };
@@ -45,8 +40,6 @@ const fetchUser = (userId) => {
       }
     } catch (err) {
       dispatch(err);
-      var raw = `{"text": "There\'s error during fetching users data"}`;
-      slackError(raw);
     }
   };
 };
@@ -58,8 +51,6 @@ const deleteAUser = (userId) => {
       dispatch(actions.deleteUserSuccess(userId));
     } catch (err) {
       dispatch(err);
-      var raw = `{"text": "There\'s error during deleting users data"}`;
-      slackError(raw);
     }
   };
 };

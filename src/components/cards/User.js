@@ -29,16 +29,15 @@ const User = ({ id, firstName, lastName, gender }) => {
   return (
     <div>
       <ToastContainer></ToastContainer>
-
       <div className="flex justify-center">
-        <div className="w-full max-w-sm my-1 text-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <div className="flex flex-col items-center pb-10 pt-10">
+        <div className="w-full bg-white-400 max-w-sm my-1 text-center border-[1px] shadow-lg border-gray-200 rounded-lg ">
+          <div className="flex flex-col items-center py-10 ">
             <Avatar
               initials={firstName[0] + lastName[0]}
               type="user-feed"
               size="sm"
             />
-            <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+            <h5 className="my-2 text-xl font-medium text-gray-900 dark:text-black">
               {firstName + " " + lastName}
             </h5>
             <span className="text-sm text-gray-500 dark:text-gray-400">
@@ -46,16 +45,51 @@ const User = ({ id, firstName, lastName, gender }) => {
             </span>
             <div className="flex mt-4 space-x-3 md:mt-6">
               <button
-                className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-20"
+                type="button"
                 onClick={deleteUser}
               >
-                Delete User
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
+                </svg>
+                Delete
               </button>
-              <button
+
+              {/* <button
                 onClick={handleNavigate}
                 className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
               >
                 View User Posts
+              </button> */}
+              <button
+                className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
+                onClick={handleNavigate}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                View Posts{" "}
               </button>
             </div>
           </div>

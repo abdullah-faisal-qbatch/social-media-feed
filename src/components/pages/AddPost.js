@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPosts } from "../../redux/posts/actionCreator";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import slackError from "../../utils/SlackError";
 
 const AddPost = (props) => {
   const dispatch = useDispatch();
@@ -16,9 +17,7 @@ const AddPost = (props) => {
     dispatch(fetchAllPosts());
   }, []);
 
-  console.log("once");
-
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     if (titleRef.current.value !== "" && bodyRef.current.value !== "") {
       const existingPostsJSON = localStorage.getItem("posts");
       const existingPosts = existingPostsJSON
@@ -30,15 +29,15 @@ const AddPost = (props) => {
         body: bodyRef.current.value,
         userId: currentUser.id,
         comments: [],
-        finalComments: [],
         reactions: 0,
         tags: [],
       };
-      console.log("Your new post: ", newPost);
       existingPosts.push(newPost);
       const updatedPostsJSON = JSON.stringify(existingPosts);
       localStorage.setItem("posts", updatedPostsJSON);
       toast("Success: Post Added Successfully");
+      var raw = `{"text": "New Post have been added"}`;
+      slackError(raw);
       titleRef.current.value = "";
       bodyRef.current.value = "";
     } else {
@@ -56,7 +55,7 @@ const AddPost = (props) => {
             {props.value === "edit" ? (
               <h1 className="text-2xl font-bold mb-4">Edit Post:</h1>
             ) : (
-              <h1 className="text-2xl font-bold mb-4">Add Post:</h1>
+              <h1 className="text-2xl font-bold mb-4">Create Post:</h1>
             )}
             <div className="mb-4">
               <label
@@ -86,6 +85,7 @@ const AddPost = (props) => {
                 ref={bodyRef}
                 required
                 className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200"
+                placeholder="Enter new Post"
               />
             </div>
             <div className="flex items-center justify-between text-center">

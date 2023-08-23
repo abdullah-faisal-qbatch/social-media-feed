@@ -3,10 +3,7 @@ import Avatar from "../Avatar";
 
 const Comment = ({ body, user, onClick }) => {
   return (
-    <div
-      className="mt-4 rounded-xl sm:p-5 dark:bg-gray-900 dark:text-gray-100"
-      onClick={onClick}
-    >
+    <div className="mt-4 rounded-xl sm:p-5 bg-grayColour" onClick={onClick}>
       <div className="flex flex-col space-y-2 md:space-y-0 md:space-x-4 md:flex-row">
         <Avatar
           initials={
@@ -15,7 +12,7 @@ const Comment = ({ body, user, onClick }) => {
           type="user"
           size="sm"
         />
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
           <h4 className="text-base mt-6 font-semibold md:text-left">
             {user.firstname + " " + user.lastname}
           </h4>

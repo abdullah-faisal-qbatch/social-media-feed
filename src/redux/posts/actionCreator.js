@@ -1,7 +1,6 @@
 import actions from "./actions";
 import axios from "axios";
 import _ from "lodash";
-import slackError from "../../utils/SlackError";
 
 const fetchAllPosts = (userId = null) => {
   return async (dispatch) => {
@@ -19,15 +18,12 @@ const fetchAllPosts = (userId = null) => {
         .then(
           axios.spread(
             async (postsData, commentsData, usersData, pictureData) => {
+              //getting data from browser
               const existingCommentsJSON = localStorage.getItem("comments");
               const existingComments = existingCommentsJSON
                 ? JSON.parse(existingCommentsJSON)
                 : [];
-              console.log("I got exisiting comments: ", existingComments);
               commentsData.data.comments.push(...existingComments);
-
-              console.log("comments", commentsData);
-
               const postIdsComments = _.groupBy(
                 commentsData.data.comments,
                 "postId"
@@ -41,14 +37,11 @@ const fetchAllPosts = (userId = null) => {
               const existingPosts = existingPostsJSON
                 ? JSON.parse(existingPostsJSON)
                 : [];
-              console.log("I got existing posts: ", existingPosts);
               postsData.data.posts.push(...existingPosts);
-
               const finalData = postsData.data.posts.reduce((acc, post) => {
-                const currentUser = currentUsers[post.userId];
                 let finalComments = [];
                 if (postIdsComments[post.id]) {
-                  finalComments = postIdsComments[post.id].map((comment) => {
+                  finalComments = postIdsComments[post.id]?.map((comment) => {
                     comment.user["firstname"] =
                       currentUsers[comment.user.id].firstName;
                     comment.user["lastname"] =
@@ -56,15 +49,6 @@ const fetchAllPosts = (userId = null) => {
                     return comment;
                   });
                 }
-                // const imageURL = async () => {
-                //   const imageData = await axios.get(
-                //     "https://image.dummyjson.com/750x200/008080/ffffff?text=Random+Post!&fontSize=20"
-                //   );
-                //   return imageData;
-                // };
-                // // const imageURL = async () =>
-                // console.log("image URL: ");
-                // console.log("Picture Data : ", pictureData);
                 if (
                   (!userId && postIdsComments[post.id]) ||
                   post.userId == userId
@@ -76,34 +60,28 @@ const fetchAllPosts = (userId = null) => {
                     reactions: post.reactions,
                     imageURL: pictureData.request.responseURL,
                     comments: finalComments,
-                    email: currentUser.email,
+                    email: currentUsers[post.userId].email,
                     alias:
-                      currentUser.firstName[0].toUpperCase() +
-                      currentUser.lastName[0].toUpperCase(),
+                      currentUsers[post.userId].firstName[0].toUpperCase() +
+                      currentUsers[post.userId].lastName[0].toUpperCase(),
                     name:
-                      currentUser.firstName +
+                      currentUsers[post.userId].firstName +
                       " " +
-                      (currentUser.lastName || ""),
+                      (currentUsers[post.userId].lastName || ""),
                   };
-
                   acc.push(postInfo);
                 }
                 return acc;
               }, []);
-              console.log("Final data: ", finalData);
               dispatch(actions.fetchPostsSuccess(finalData));
             }
           )
         )
         .catch((err) => {
           dispatch(err);
-          var raw = `{"text": "There\'s error during fetching data"}`;
-          slackError(raw);
         });
     } catch (err) {
       dispatch(err);
-      var raw = `{"text": "There\'s error during updating data"}`;
-      slackError(raw);
     }
   };
 };
@@ -122,8 +100,6 @@ const deleteUserPost = (postId) => {
       dispatch(actions.deletePostSuccess(postId));
     } catch (err) {
       dispatch(err);
-      var raw = `{"text": "There\'s error during updating data"}`;
-      slackError(raw);
     }
   };
 };
@@ -135,8 +111,6 @@ const updateUserPost = (post) => {
       dispatch(actions.updatePostSuccess(post));
     } catch (err) {
       dispatch(err);
-      var raw = `{"text": "There\'s error during updating data"}`;
-      slackError(raw);
     }
   };
 };

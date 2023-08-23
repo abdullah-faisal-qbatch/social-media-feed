@@ -18,6 +18,8 @@ module.exports = {
         veryDarkBlue: "hsl(233, 12%, 13%)",
         veryPaleRed: "hsl(13, 100%, 96%)",
         veryLightGray: "hsl(0, 0%, 98%)",
+        grayColour: "hsl(214, 24%, 89%)",
+        mintGreen: "hsl(240, 11%, 93%)",
       },
       gridTemplateRows: {
         // Simple 8 row grid

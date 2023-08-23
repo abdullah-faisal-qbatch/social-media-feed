@@ -10,30 +10,29 @@ import DeleteMessage from "../DeleteMessage";
 import Avatar from "../Avatar";
 import Comment from "./Comment";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Heart from "react-animated-heart";
+import FontAwesomeIcon from "react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Post = (post) => {
-  const [like, setLike] = useState(true);
+  const [like, setLike] = useState(false);
   const userCommentInput = useRef();
   const usersData = useSelector((state) => state.Users);
   const { currentUser } = usersData;
   const [alert, setAlert] = useState(false);
   const dispatch = useDispatch();
   const handlePostLike = () => {
+    setLike(!like);
     const newPost = { ...post };
-    newPost.reactions = newPost.reactions + 1;
+    if (like) {
+      newPost.reactions = newPost.reactions - 1;
+    } else {
+      newPost.reactions = newPost.reactions + 1;
+    }
     dispatch(updateUserPost(newPost));
-    setLike(false);
-  };
-  const handlePostDislike = () => {
-    const newPost = { ...post };
-    newPost.reactions = newPost.reactions - 1;
-    dispatch(updateUserPost(newPost));
-    setLike(true);
   };
 
   const handleUserComment = () => {
-    console.log("handle user comment: ");
     if (userCommentInput.current.value !== "") {
       let comment = {
         body: userCommentInput.current.value,
@@ -45,7 +44,7 @@ const Post = (post) => {
           username: currentUser.username,
         },
       };
-      const newComments = [...post.comments, comment];
+      const newComments = [comment, ...post.comments];
       const newPost = { ...post, comments: newComments };
       const existingCommentsJSON = localStorage.getItem("comments");
       const existingComments = existingCommentsJSON
@@ -68,6 +67,7 @@ const Post = (post) => {
     dispatch(deleteUserPost(post.id));
     toast("Success: Post Deleted Successfully");
   };
+
   const handleOnClickCancel = () => {
     setAlert(false);
   };
@@ -119,29 +119,37 @@ const Post = (post) => {
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-                    <div className="py-6 px-3 mt-32 sm:mt-0">
+                    <div
+                      className="flex flex-row py-6 px-3 sm:mt-0 ml-10"
+                      style={{
+                        marginTop: "-30px",
+                      }}
+                    >
                       <button
-                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-20"
                         type="button"
                         onClick={deletePost}
                       >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 mr-2"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          />
+                        </svg>
                         Delete
                       </button>
-                      {like ? (
-                        <button
-                          className="inline-flex ml-2 items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                          onClick={handlePostLike}
-                        >
-                          Like
-                        </button>
-                      ) : (
-                        <button
-                          className="inline-flex ml-2 items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                          onClick={handlePostDislike}
-                        >
-                          Dislike
-                        </button>
-                      )}
+                      <div>
+                        <Heart isClick={like} onClick={handlePostLike} />
+                      </div>
+                      <FontAwesomeIcon icon={faTrash} />
                     </div>
                   </div>
                   {alert && (
@@ -199,22 +207,51 @@ const Post = (post) => {
                           placeholder="Enter your comment"
                         />
                         <button
-                          className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
                           onClick={handleUserComment}
                         >
-                          Add Comment{" "}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 mr-2"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            {" "}
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />{" "}
+                          </svg>
+                          Add Comment
                         </button>
                         <button
-                          className="ml-2 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
                           onClick={post.onClick}
                         >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 mr-2"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                            />
+                          </svg>
                           View Comments{" "}
                         </button>
                         <div>
                           {post.finalComments &&
-                            post.finalComments.map((comment) => {
+                            post.finalComments.map((comment, id) => {
                               if (comment.postId === post.id) {
-                                return <Comment {...comment}></Comment>;
+                                return (
+                                  <Comment {...comment} key={id}></Comment>
+                                );
                               }
                             })}
                         </div>
