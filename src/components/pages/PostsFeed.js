@@ -44,7 +44,9 @@ const PostsFeed = (props) => {
   return (
     <div className="flex flex-col m-auto">
       {posts.loading ? (
-        <Spinner />
+        <div className="">
+          <Spinner />
+        </div>
       ) : (
         posts.posts
           // .slice(1, 5)

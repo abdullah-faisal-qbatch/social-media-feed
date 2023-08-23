@@ -68,40 +68,29 @@ const fetchAllPosts = (userId = null) => {
                 // const imageURL = async () =>
                 console.log("image URL: ");
                 console.log("Picture Data : ", pictureData);
+                if (
+                  (!userId && postIdsComments[post.id]) ||
+                  post.userId == userId
+                ) {
+                  const postInfo = {
+                    id: post.id,
+                    title: post.title,
+                    body: post.body,
+                    reactions: post.reactions,
+                    imageURL: pictureData.request.responseURL,
+                    comments: finalComments,
+                    email: currentUser.email,
+                    alias:
+                      currentUser.firstName[0].toUpperCase() +
+                      currentUser.lastName[0].toUpperCase(),
+                    name:
+                      currentUser.firstName +
+                      " " +
+                      (currentUser.lastName || ""),
+                  };
 
-                if (!userId) {
-                  if (postIdsComments[post.id])
-                    acc.push({
-                      id: post.id,
-                      title: post.title,
-                      body: post.body,
-                      reactions: post.reactions,
-                      imageURL: pictureData.request.responseURL,
-                      comments: finalComments,
-                      email: currentUser.email,
-                      alias:
-                        currentUser.firstName[0].toUpperCase() +
-                        currentUser.lastName[0].toUpperCase(),
-                      name: currentUser.firstName + " " + currentUser?.lastName,
-                    });
-                } else {
-                  if (post.userId == userId) {
-                    acc.push({
-                      id: post.id,
-                      title: post.title,
-                      body: post.body,
-                      reactions: post.reactions,
-                      imageURL: pictureData.request.responseURL,
-                      comments: finalComments,
-                      email: currentUser.email,
-                      alias:
-                        currentUser.firstName[0].toUpperCase() +
-                        currentUser.lastName[0].toUpperCase(),
-                      name: currentUser.firstName + " " + currentUser?.lastName,
-                    });
-                  }
+                  acc.push(postInfo);
                 }
-
                 return acc;
               }, []);
               console.log("Final data: ", finalData);

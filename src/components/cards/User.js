@@ -5,6 +5,7 @@ import { deleteAUser } from "../../redux/users/actionCreator";
 import { useState } from "react";
 import DeleteMessage from "../DeleteMessage";
 import { useNavigate } from "react-router-dom";
+import Avatar from "../Avatar";
 
 const User = ({ id, firstName, lastName, gender }) => {
   const navigate = useNavigate();
@@ -26,10 +27,15 @@ const User = ({ id, firstName, lastName, gender }) => {
 
   return (
     <div>
-      <div className="flex justify-center w-full">
+      <div className="flex justify-center">
         <div className="w-full max-w-sm my-1 text-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <div className="flex flex-col items-center pb-10 pt-10">
-            <span className="card-alias">{firstName[0] + lastName[0]}</span>
+            <Avatar
+              initials={firstName[0] + lastName[0]}
+              type="user-feed"
+              size="sm" // You can add a size prop to Avatar component if needed
+            />
+            {/* <span className="card-alias">{firstName[0] + lastName[0]}</span> */}
             <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
               {firstName + " " + lastName}
             </h5>

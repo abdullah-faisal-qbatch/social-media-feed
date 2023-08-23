@@ -40,7 +40,7 @@ const UsersFeed = () => {
   });
   return (
     <>
-      <div className="flex justify-center w-full mt-1">
+      <div className="flex justify-center w-full mt-4">
         <input
           type="search"
           id="default-search"
@@ -50,16 +50,18 @@ const UsersFeed = () => {
           onChange={(event) => updateDebounceText(event.target.value)}
         ></input>
       </div>
-      {users &&
-        users
-          // .slice(0, 10)
-          .map((user) => (
-            <User
-              key={user.id}
-              {...user}
-              onClick={() => handleOnClick(user.id)}
-            />
-          ))}
+      <div className="grid grid-cols-4 gap-4 ml-4 mr-4 mt-4">
+        {users &&
+          users
+            // .slice(0, 10)
+            .map((user) => (
+              <User
+                key={user.id}
+                {...user}
+                onClick={() => handleOnClick(user.id)}
+              />
+            ))}
+      </div>
     </>
   );
 };
