@@ -49,7 +49,6 @@ const Posts = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        // posts: [...state.posts, data.post],
         posts: state.posts.filter((post) => {
           return post.id !== data.postId;
         }),

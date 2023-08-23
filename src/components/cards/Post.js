@@ -1,14 +1,14 @@
 import React from "react";
-import "./../../styles/Post.css";
-import Comment from "./Comment";
-import _ from "lodash";
-import { useDispatch } from "react-redux";
-import { deleteUserPost, fetchAllPosts } from "../../redux/posts/actionCreator";
-import { useState } from "react";
-import { updateUserPost } from "../../redux/posts/actionCreator";
-import { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateUserPost,
+  fetchAllPosts,
+  deleteUserPost,
+} from "../../redux/posts/actionCreator";
 import DeleteMessage from "../DeleteMessage";
+import Avatar from "../Avatar";
+import Comment from "./Comment";
 
 const Post = (post) => {
   const [like, setLike] = useState(true);
@@ -62,83 +62,161 @@ const Post = (post) => {
   };
 
   return (
-    <div className="rounded-lg card-container">
-      <button
-        className="inline-flex margin-class ml-4 mr-4 items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        onClick={deletePost}
-      >
-        Delete
-      </button>
-      <hr className="mb-2 mt-4" />
-      <div className="card-header">
-        <div className="card-main">
-          <span className="card-alias">{post.alias}</span>
-          <div className="card-name" title={post.email}>
-            {post.name}
+    <div>
+      <main className="profile-page">
+        <section className="relative block h-500-px">
+          <div
+            className="absolute top-0 w-full h-full bg-center bg-cover"
+            style={{
+              backgroundImage: `url('${post.imageURL}')`,
+            }}
+          >
+            <span
+              id="blackOverlay"
+              className="w-full h-full absolute opacity-50 bg-black"
+            ></span>
           </div>
-        </div>
-      </div>
-      <hr className="mt-2" />
-      {alert && (
-        <DeleteMessage
-          onClickDelete={handleOnClickDelete}
-          onClickCancel={handleOnClickCancel}
-        ></DeleteMessage>
-      )}
-      <div className="card-title">{post.title}</div>
-      <div className="text-center">
-        <img src={post.imageURL} alt="Fetched from API" className="mx-auto" />
-      </div>
-      <div className="card-body">{post.body}</div>
-      <hr className="mb-2" />
-
-      <div className="card-info">
-        {like ? (
-          <button
-            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={handlePostLike}
+          <div
+            className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
+            style={{ transform: "translateZ(0px)" }}
           >
-            Like
-          </button>
-        ) : (
-          <button
-            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={handlePostDislike}
-          >
-            Dislike
-          </button>
-        )}
-        <span className="text-base text-gray-700 ml-2">
-          {post.reactions} Likes
-        </span>
-        <div className="text-center">
-          <input
-            className="shadow appearance-none border mr-4 rounded w-2/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="text"
-            ref={userCommentInput}
-            required
-            placeholder="Enter your comment"
-          />
-          <button
-            className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={handleUserComment}
-          >
-            Add Comment{" "}
-          </button>
-          <p className="card-comments" onClick={post.onClick}>
-            {post.comments.length} Comments
-          </p>
-        </div>
-        <div>
-          {console.log("Final Comments: ", post.finalComments)}
-          {post.finalComments &&
-            post.finalComments
-              .filter((comment) => comment.postId === post.id)
-              .map((comment) => <Comment {...comment}></Comment>)}
-        </div>
-      </div>
+            <svg
+              className="absolute bottom-0 overflow-hidden"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+              version="1.1"
+              viewBox="0 0 2560 100"
+              x="0"
+              y="0"
+            >
+              <polygon
+                className="text-blueGray-200 fill-current"
+                points="2560 0 2560 100 0 100"
+              ></polygon>
+            </svg>
+          </div>
+        </section>
+        <section className="relative py-16 bg-blueGray-200">
+          <div className="container mx-auto px-4">
+            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+              <div className="px-6">
+                <div className="flex flex-wrap justify-center">
+                  <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
+                    <div className="relative" style={{ marginTop: "-80px" }}>
+                      <Avatar initials={post.alias} type="profile"></Avatar>
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
+                    <div className="py-6 px-3 mt-32 sm:mt-0">
+                      <button
+                        className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        type="button"
+                        onClick={deletePost}
+                      >
+                        Delete
+                      </button>
+                      {like ? (
+                        <button
+                          className="inline-flex ml-2 items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          onClick={handlePostLike}
+                        >
+                          Like
+                        </button>
+                      ) : (
+                        <button
+                          className="inline-flex ml-2 items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          onClick={handlePostDislike}
+                        >
+                          Dislike
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  {alert && (
+                    <DeleteMessage
+                      onClickDelete={handleOnClickDelete}
+                      onClickCancel={handleOnClickCancel}
+                    ></DeleteMessage>
+                  )}
+                  <div className="w-full lg:w-4/12 px-4 lg:order-1">
+                    <div className="flex justify-center py-4 lg:pt-4 pt-8">
+                      <div className="mr-4 p-3 text-center">
+                        <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                          {post.reactions}
+                        </span>
+                        <span className="text-sm text-blueGray-400">Likes</span>
+                      </div>
+                      <div className="lg:mr-4 p-3 text-center">
+                        <span
+                          onClick={post.onClick}
+                          className="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
+                        >
+                          {post.comments.length}
+                        </span>
+                        <span
+                          className="text-sm text-blueGray-400"
+                          onClick={post.onClick}
+                        >
+                          Comments
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-center mt-12">
+                  <h3 className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+                    {post.name}
+                  </h3>
+                  <div className="mb-2 text-blueGray-600 mt-10">
+                    <i className="fas fa-envelope-open mr-2 text-lg text-blueGray-400"></i>
+                    {post.title}
+                  </div>
+                </div>
+                <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
+                  <div className="flex flex-wrap justify-center">
+                    <div className="w-full lg:w-9/12 px-4">
+                      <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
+                        {post.body}
+                      </p>
+                      <div className="text-center">
+                        <input
+                          className="shadow appearance-none border mr-4 rounded w-2/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                          type="text"
+                          ref={userCommentInput}
+                          required
+                          placeholder="Enter your comment"
+                        />
+                        <button
+                          className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          onClick={handleUserComment}
+                        >
+                          Add Comment{" "}
+                        </button>
+                        <button
+                          className="ml-2 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          onClick={post.onClick}
+                        >
+                          View Comments{" "}
+                        </button>
+                        <div>
+                          {post.finalComments &&
+                            post.finalComments
+                              .filter((comment) => comment.postId === post.id)
+                              .map((comment) => (
+                                <Comment {...comment}></Comment>
+                              ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 };
 
-export default React.memo(Post);
+export default Post;

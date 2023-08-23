@@ -1,7 +1,5 @@
-import React, { useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { useEffect } from "react";
 import Alert from "../Alert";
 import { fetchAllPosts } from "../../redux/posts/actionCreator";
 

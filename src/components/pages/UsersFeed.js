@@ -50,7 +50,7 @@ const UsersFeed = () => {
           onChange={(event) => updateDebounceText(event.target.value)}
         ></input>
       </div>
-      <div className="grid grid-cols-4 gap-4 ml-4 mr-4 mt-4">
+      <div className="grid grid-cols-4 gap-4 ml-4 mr-4 mt-3">
         {users &&
           users
             // .slice(0, 10)

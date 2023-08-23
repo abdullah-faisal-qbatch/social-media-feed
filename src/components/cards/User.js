@@ -1,5 +1,4 @@
 import React from "react";
-import "./../../styles/User.css";
 import { useDispatch } from "react-redux";
 import { deleteAUser } from "../../redux/users/actionCreator";
 import { useState } from "react";
@@ -33,9 +32,8 @@ const User = ({ id, firstName, lastName, gender }) => {
             <Avatar
               initials={firstName[0] + lastName[0]}
               type="user-feed"
-              size="sm" // You can add a size prop to Avatar component if needed
+              size="sm"
             />
-            {/* <span className="card-alias">{firstName[0] + lastName[0]}</span> */}
             <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
               {firstName + " " + lastName}
             </h5>

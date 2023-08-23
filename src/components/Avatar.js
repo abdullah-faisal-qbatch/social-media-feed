@@ -4,8 +4,8 @@ const Avatar = ({ initials, type }) => {
   const PROFILE = "profile";
   const avatarStyle = {
     backgroundColor: "#139df2",
-    width: type === PROFILE ? "150px" : "80px", // Adjust the width to make the avatar larger
-    height: type === PROFILE ? "150px" : "80px", // Adjust the height to make the avatar larger
+    width: type === PROFILE ? "150px" : "80px",
+    height: type === PROFILE ? "150px" : "80px",
     fontSize: type === PROFILE ? "48px" : "36px",
   };
 

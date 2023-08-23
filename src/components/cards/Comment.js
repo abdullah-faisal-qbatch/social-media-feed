@@ -1,29 +1,29 @@
 import React from "react";
-import "./../../styles/Comment.css";
+import Avatar from "../Avatar";
 
 const Comment = ({ body, user, onClick }) => {
   return (
     <div
-      className="rounded-lg border ml-10 border-gray-300 p-4 m-4 w-80 mx-auto md:w-4/5 rounded-lg shadow-sm bg-white transition duration-300 transform hover:bg-gray-100"
+      className="mt-4 rounded-xl sm:p-5 dark:bg-gray-900 dark:text-gray-100"
       onClick={onClick}
     >
-      <div className="card-header">
-        <div className="card-main">
-          <span className="card-alias">
-            {" "}
-            {user.firstname?.[0].toUpperCase() +
-              user.lastname?.[0].toUpperCase()}
-          </span>
-          <div>
-            <div className="card-name">
-              {user.firstname + " " + user.lastname}
-            </div>
-            <div>{body}</div>
-          </div>
+      <div className="flex flex-col space-y-2 md:space-y-0 md:space-x-4 md:flex-row">
+        <Avatar
+          initials={
+            user.firstname?.[0].toUpperCase() + user.lastname?.[0].toUpperCase()
+          }
+          type="user"
+          size="sm"
+        />
+        <div className="flex flex-col">
+          <h4 className="text-base mt-6 font-semibold md:text-left">
+            {user.firstname + " " + user.lastname}
+          </h4>
+          <p className="dark:text-gray-400 text-sm">{body}</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default React.memo(Comment);
+export default Comment;

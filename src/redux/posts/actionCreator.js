@@ -114,9 +114,7 @@ const deleteUserPost = (postId) => {
       const existingPosts = existingPostsJSON
         ? JSON.parse(existingPostsJSON)
         : [];
-      console.log("old posts: ", existingPosts);
       const newPosts = existingPosts.filter((post) => postId !== post.id);
-      console.log("new posts:", newPosts);
       const updatedPostsJSON = JSON.stringify(newPosts);
       localStorage.setItem("posts", updatedPostsJSON);
       dispatch(actions.deletePostSuccess(postId));
