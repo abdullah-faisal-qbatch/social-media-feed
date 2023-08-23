@@ -19,4 +19,4 @@ const Avatar = ({ initials, type }) => {
   );
 };
 
-export default Avatar;
+export default React.memo(Avatar);
