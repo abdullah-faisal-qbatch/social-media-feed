@@ -5,6 +5,7 @@ import { useState } from "react";
 import DeleteMessage from "../DeleteMessage";
 import { useNavigate } from "react-router-dom";
 import Avatar from "../Avatar";
+import { ToastContainer, toast } from "react-toastify";
 
 const User = ({ id, firstName, lastName, gender }) => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const User = ({ id, firstName, lastName, gender }) => {
   };
   const handleOnClickDelete = () => {
     dispatch(deleteAUser(id));
+    toast("Success: User deleted Successfully!");
   };
   const handleOnClickCancel = () => {
     setAlert(false);
@@ -26,6 +28,8 @@ const User = ({ id, firstName, lastName, gender }) => {
 
   return (
     <div>
+      <ToastContainer></ToastContainer>
+
       <div className="flex justify-center">
         <div className="w-full max-w-sm my-1 text-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <div className="flex flex-col items-center pb-10 pt-10">

@@ -66,6 +66,7 @@ const Post = (post) => {
   };
   const handleOnClickDelete = () => {
     dispatch(deleteUserPost(post.id));
+    toast("Success: Post Deleted Successfully");
   };
   const handleOnClickCancel = () => {
     setAlert(false);
@@ -211,11 +212,11 @@ const Post = (post) => {
                         </button>
                         <div>
                           {post.finalComments &&
-                            post.finalComments
-                              .filter((comment) => comment.postId === post.id)
-                              .map((comment) => (
-                                <Comment {...comment}></Comment>
-                              ))}
+                            post.finalComments.map((comment) => {
+                              if (comment.postId === post.id) {
+                                return <Comment {...comment}></Comment>;
+                              }
+                            })}
                         </div>
                       </div>
                     </div>
