@@ -19,7 +19,7 @@ const Comment = ({ body, user, onClick }) => {
           <h4 className="text-base mt-6 font-semibold md:text-left">
             {user.firstname + " " + user.lastname}
           </h4>
-          <p className="dark:text-gray-400 text-sm">{body}</p>
+          <p className="dark:text-gray-400 text-sm md:text-left">{body}</p>
         </div>
       </div>
     </div>

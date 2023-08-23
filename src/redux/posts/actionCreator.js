@@ -19,9 +19,6 @@ const fetchAllPosts = (userId = null) => {
         .then(
           axios.spread(
             async (postsData, commentsData, usersData, pictureData) => {
-              // console.log("image URL: ", imageURL);
-              // console.log("pictures DATA URL : ", pictureData);
-
               const existingCommentsJSON = localStorage.getItem("comments");
               const existingComments = existingCommentsJSON
                 ? JSON.parse(existingCommentsJSON)
@@ -97,7 +94,12 @@ const fetchAllPosts = (userId = null) => {
               dispatch(actions.fetchPostsSuccess(finalData));
             }
           )
-        );
+        )
+        .catch((err) => {
+          dispatch(err);
+          var raw = `{"text": "There\'s error during fetching data"}`;
+          slackError(raw);
+        });
     } catch (err) {
       dispatch(err);
       var raw = `{"text": "There\'s error during updating data"}`;

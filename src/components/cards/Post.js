@@ -73,7 +73,7 @@ const Post = (post) => {
   };
 
   return (
-    <div>
+    <div className="w-3/4 m-auto mt-10 ">
       <ToastContainer></ToastContainer>
       <main className="profile-page">
         <section className="relative block h-500-px">
