@@ -3,12 +3,14 @@ import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateUserPost,
-  fetchAllPosts,
   deleteUserPost,
 } from "../../redux/posts/actionCreator";
+import { updateUserComments } from "../../redux/user-comments/actionCreator";
 import DeleteMessage from "../DeleteMessage";
 import Avatar from "../Avatar";
 import Comment from "./Comment";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Post = (post) => {
   const [like, setLike] = useState(true);
@@ -31,25 +33,33 @@ const Post = (post) => {
   };
 
   const handleUserComment = () => {
-    const newPost = { ...post };
-    let comment = {
-      body: userCommentInput.current.value,
-      postId: newPost.id,
-      user: {
-        firstname: currentUser.firstName,
-        lastname: currentUser.lastName,
-        id: currentUser.id,
-        username: currentUser.username,
-      },
-    };
-    const existingCommentsJSON = localStorage.getItem("comments");
-    const existingComments = existingCommentsJSON
-      ? JSON.parse(existingCommentsJSON)
-      : [];
-    existingComments.push(comment);
-    const updatedCommentsJSON = JSON.stringify(existingComments);
-    localStorage.setItem("comments", updatedCommentsJSON);
-    dispatch(fetchAllPosts());
+    console.log("handle user comment: ");
+    if (userCommentInput.current.value !== "") {
+      let comment = {
+        body: userCommentInput.current.value,
+        postId: post.id,
+        user: {
+          firstname: currentUser.firstName,
+          lastname: currentUser.lastName,
+          id: currentUser.id,
+          username: currentUser.username,
+        },
+      };
+      const newComments = [...post.comments, comment];
+      const newPost = { ...post, comments: newComments };
+      const existingCommentsJSON = localStorage.getItem("comments");
+      const existingComments = existingCommentsJSON
+        ? JSON.parse(existingCommentsJSON)
+        : [];
+      existingComments.push(comment);
+      const updatedCommentsJSON = JSON.stringify(existingComments);
+      localStorage.setItem("comments", updatedCommentsJSON);
+      dispatch(updateUserPost(newPost));
+      dispatch(updateUserComments(newComments));
+      userCommentInput.current.value = "";
+    } else {
+      toast("Alert: Please enter comment");
+    }
   };
   const deletePost = () => {
     setAlert(true);
@@ -63,6 +73,7 @@ const Post = (post) => {
 
   return (
     <div>
+      <ToastContainer></ToastContainer>
       <main className="profile-page">
         <section className="relative block h-500-px">
           <div

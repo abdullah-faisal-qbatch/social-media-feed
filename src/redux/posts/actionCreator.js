@@ -59,15 +59,15 @@ const fetchAllPosts = (userId = null) => {
                     return comment;
                   });
                 }
-                const imageURL = async () => {
-                  const imageData = await axios.get(
-                    "https://image.dummyjson.com/750x200/008080/ffffff?text=Random+Post!&fontSize=20"
-                  );
-                  return imageData;
-                };
-                // const imageURL = async () =>
-                console.log("image URL: ");
-                console.log("Picture Data : ", pictureData);
+                // const imageURL = async () => {
+                //   const imageData = await axios.get(
+                //     "https://image.dummyjson.com/750x200/008080/ffffff?text=Random+Post!&fontSize=20"
+                //   );
+                //   return imageData;
+                // };
+                // // const imageURL = async () =>
+                // console.log("image URL: ");
+                // console.log("Picture Data : ", pictureData);
                 if (
                   (!userId && postIdsComments[post.id]) ||
                   post.userId == userId

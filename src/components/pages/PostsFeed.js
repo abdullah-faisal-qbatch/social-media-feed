@@ -7,6 +7,8 @@ import { fetchAllUsers } from "../../redux/users/actionCreator";
 import { updateUserComments } from "../../redux/user-comments/actionCreator";
 import { useLocation } from "react-router-dom";
 import Post from "../cards/Post";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PostsFeed = (props) => {
   const dispatch = useDispatch();
@@ -37,6 +39,9 @@ const PostsFeed = (props) => {
       return post.id === postId;
     });
     const finalComments = [...post.comments];
+    if (finalComments.length === 0) {
+      toast("Alert: No comments exists");
+    }
     dispatch(updateUserComments(finalComments));
   };
 
@@ -58,6 +63,7 @@ const PostsFeed = (props) => {
             />
           ))
       )}
+      <ToastContainer />
     </div>
   );
 };

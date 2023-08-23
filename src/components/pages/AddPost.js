@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../Alert";
 import { fetchAllPosts } from "../../redux/posts/actionCreator";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddPost = (props) => {
   const dispatch = useDispatch();
@@ -9,46 +11,43 @@ const AddPost = (props) => {
   const bodyRef = useRef(null);
   const usersData = useSelector((state) => state.Users);
   const posts = useSelector((state) => state.Posts);
-  const [postAdded, setPostAdded] = useState(false);
   const { currentUser } = usersData;
 
   useEffect(() => {
     dispatch(fetchAllPosts());
   }, []);
 
+  console.log("once");
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const existingPostsJSON = localStorage.getItem("posts");
-    const existingPosts = existingPostsJSON
-      ? JSON.parse(existingPostsJSON)
-      : [];
-    const newPost = {
-      id: posts.posts.length + existingPosts.length + 4,
-      title: titleRef.current.value,
-      body: bodyRef.current.value,
-      userId: currentUser.id,
-      comments: [],
-      finalComments: [],
-      reactions: 0,
-      tags: [],
-    };
-    console.log("Your new post: ", newPost);
-    existingPosts.push(newPost);
-    const updatedPostsJSON = JSON.stringify(existingPosts);
-    localStorage.setItem("posts", updatedPostsJSON);
-    setPostAdded(true);
-    titleRef.current.value = "";
-    bodyRef.current.value = "";
+    if (titleRef.current.value !== "" && bodyRef.current.value !== "") {
+      const existingPostsJSON = localStorage.getItem("posts");
+      const existingPosts = existingPostsJSON
+        ? JSON.parse(existingPostsJSON)
+        : [];
+      const newPost = {
+        id: posts.posts.length + existingPosts.length + 4,
+        title: titleRef.current.value,
+        body: bodyRef.current.value,
+        userId: currentUser.id,
+        comments: [],
+        finalComments: [],
+        reactions: 0,
+        tags: [],
+      };
+      console.log("Your new post: ", newPost);
+      existingPosts.push(newPost);
+      const updatedPostsJSON = JSON.stringify(existingPosts);
+      localStorage.setItem("posts", updatedPostsJSON);
+      toast("Success: Post Added Successfully");
+      titleRef.current.value = "";
+      bodyRef.current.value = "";
+    } else {
+      toast("Error: Please enter both title and post");
+    }
   };
   return (
     <div>
-      {postAdded && (
-        <Alert
-          title="Success: "
-          message="Post added successfully!"
-          onClickTitle={() => setPostAdded(!alert)}
-        ></Alert>
-      )}
       <div className="flex justify-center items-center mt-28">
         <div className="w-full max-w-xs">
           <form
@@ -98,6 +97,7 @@ const AddPost = (props) => {
               >
                 {props.value === "edit" ? <>Update Post</> : <>Add Post</>}
               </button>
+              <ToastContainer></ToastContainer>
             </div>
           </form>
         </div>
