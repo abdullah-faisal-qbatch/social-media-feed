@@ -30,7 +30,7 @@ const User = ({ id, firstName, lastName, gender }) => {
     <div>
       <ToastContainer></ToastContainer>
       <div className="flex justify-center">
-        <div className="w-full bg-white-400 max-w-sm my-1 text-center border-[1px] shadow-lg border-gray-50 rounded-lg bg-gray-200 ">
+        <div className="w-full bg-white-400 max-w-sm my-1 text-center border-[1px] shadow-lg border-black rounded-lg bg-gray-200 ">
           <div className="flex flex-col items-center py-10 ">
             <Avatar
               initials={firstName[0] + lastName[0]}
@@ -45,7 +45,7 @@ const User = ({ id, firstName, lastName, gender }) => {
             </span>
             <div className="flex mt-4 space-x-3 md:mt-6">
               <button
-                className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-20"
+                className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blueProfessional dark:focus:ring-blueProfessional font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-20"
                 type="button"
                 onClick={deleteUser}
               >
@@ -66,7 +66,7 @@ const User = ({ id, firstName, lastName, gender }) => {
                 Delete
               </button>
               <button
-                className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
+                className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-500 dark:focus:ring-blue-500 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
                 onClick={handleNavigate}
               >
                 <svg

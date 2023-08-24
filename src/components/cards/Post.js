@@ -31,6 +31,7 @@ const Post = (post) => {
   };
 
   const handleUserComment = (e) => {
+    e.preventDefault();
     if (userCommentInput.current.value !== "") {
       let comment = {
         body: userCommentInput.current.value,
@@ -120,7 +121,6 @@ const Post = (post) => {
                     <div className="flex flex-row py-6 px-3 sm:mt-0 ml-24 h-10 mb-14">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        // className="h-7 w-5 mr-2"
                         className="mr-4"
                         fill="none"
                         scale=""
@@ -193,54 +193,61 @@ const Post = (post) => {
                         {post.body}
                       </p>
                       <div className="text-center">
-                        <input
-                          className="shadow appearance-none border mr-4 rounded w-2/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          type="text"
-                          ref={userCommentInput}
-                          required
-                          placeholder="Enter your comment"
-                          // onKeyPress={handleKeypress}
-                        />
-                        <button
-                          className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
-                          onClick={handleUserComment}
-                          type="submit"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 mr-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            {" "}
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />{" "}
-                          </svg>
-                          Add Comment
-                        </button>
-                        <button
-                          className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
-                          onClick={post.onClick}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 mr-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                            />
-                          </svg>
-                          View Comments{" "}
-                        </button>
+                        <div className="flex flex-row">
+                          <div className="w-9/12 mb-1">
+                            <form onSubmit={handleUserComment}>
+                              <input
+                                className="shadow appearance-none border rounded w-3/5 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                type="text"
+                                ref={userCommentInput}
+                                required
+                                placeholder="Enter your comment"
+                              />
+                              <button
+                                className="mt-0 inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-500 dark:focus:ring-blue-500 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center ml-16 "
+                                onClick={handleUserComment}
+                                type="submit"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-5 w-5 mr-2"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  {" "}
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                  />{" "}
+                                </svg>
+                                Add Comment
+                              </button>
+                            </form>
+                          </div>
+                          <div>
+                            <button
+                              className="mt-auto mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-500 dark:focus:ring-blue-500 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center"
+                              onClick={post.onClick}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5 mr-2"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                />
+                              </svg>
+                              View Comments{" "}
+                            </button>
+                          </div>
+                        </div>
                         <div>
                           {post.finalComments &&
                             post.finalComments.map((comment, id) => {

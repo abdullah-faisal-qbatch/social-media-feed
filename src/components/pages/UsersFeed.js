@@ -49,15 +49,13 @@ const UsersFeed = () => {
       </div>
       <div className="grid grid-cols-4 gap-4 ml-4 mr-4 mt-3">
         {users &&
-          users
-            // .slice(0, 10)
-            .map((user) => (
-              <User
-                key={user.id}
-                {...user}
-                onClick={() => handleOnClick(user.id)}
-              />
-            ))}
+          users.map((user) => (
+            <User
+              key={user.id}
+              {...user}
+              onClick={() => handleOnClick(user.id)}
+            />
+          ))}
         {!users.length && <Alert title="Alert: " message="No users exist!" />}
       </div>
     </>

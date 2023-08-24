@@ -24,8 +24,14 @@ const AddPost = (props) => {
       const existingPosts = existingPostsJSON
         ? JSON.parse(existingPostsJSON)
         : [];
+
+      const maxId = posts.posts.reduce(
+        (acc, { id }) => (id > acc ? id : acc),
+        0
+      );
+
       const newPost = {
-        id: posts.posts.length + existingPosts.length + 100,
+        id: maxId + existingPosts.length + 1,
         title: titleRef.current.value,
         body: bodyRef.current.value,
         userId: currentUser.id,
@@ -60,7 +66,7 @@ const AddPost = (props) => {
             )}
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
-                Title
+                Title:
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -73,7 +79,7 @@ const AddPost = (props) => {
             </div>
             <div className="mb-6">
               <label className="block text-gray-700 text-sm font-bold mb-2">
-                Post
+                Post:
               </label>
               <input
                 id="body"
@@ -86,7 +92,7 @@ const AddPost = (props) => {
             </div>
             <div className="flex items-center justify-between text-center">
               <button
-                className=" mt-auto ml-20 mb-auto px-3 inline-flex text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
+                className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-500 dark:focus:ring-blue-500 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20 ml-20"
                 type="submit"
                 onClick={handleSubmit}
               >
@@ -106,7 +112,6 @@ const AddPost = (props) => {
                 </svg>
                 {props.value === "edit" ? <>Update Post</> : <>Add Post</>}
               </button>
-
               <ToastContainer></ToastContainer>
             </div>
           </form>

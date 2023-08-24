@@ -8,7 +8,6 @@ function App() {
   return (
     <Provider store={store}>
       <SocialMedia></SocialMedia>
-      {/* <HeartComponent></HeartComponent> */}
     </Provider>
   );
 }

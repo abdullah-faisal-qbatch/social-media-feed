@@ -20,6 +20,16 @@ module.exports = {
         veryLightGray: "hsl(0, 0%, 98%)",
         grayColour: "hsl(214, 24%, 89%)",
         mintGreen: "hsl(240, 11%, 93%)",
+        blueProfessional: "hsl(230, 74%, 62%)",
+        indigoProfessional: "hsl(247, 41%, 49%)",
+        purpleProfessional: "hsl(261, 51%, 51%)",
+        pinkProfessional: "hsl(332, 79%, 58%)",
+        redProfessional: "hsl(0, 86%, 69%)",
+        orangeProfessional: "hsl(13, 85%, 63%)",
+        yellowProfessional: "hsl(38, 85%, 62%)",
+        greenProfessional: "hsl(158, 58%, 48%)",
+        tealProfessional: "hsl(0, 0%, 2%)",
+        cyanProfessional: "hsl(208, 85%, 63%)",
       },
       gridTemplateRows: {
         // Simple 8 row grid
