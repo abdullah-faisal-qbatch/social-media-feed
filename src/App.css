@@ -3,6 +3,5 @@ a:hover {
 }
 
 .active {
-  color: #ff8c00; /* Highlight active link */
+  color: rgb(156 163 175); /* Highlight active link */
 }
-

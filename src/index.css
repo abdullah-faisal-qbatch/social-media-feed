@@ -14,11 +14,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-a:hover {
-  color: #ec4899; /* Change color on hover */
-}
-
-.active {
-  color: #ff8c00; /* Highlight active link */
-}

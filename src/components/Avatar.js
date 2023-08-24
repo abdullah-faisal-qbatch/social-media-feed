@@ -3,7 +3,7 @@ import React from "react";
 const Avatar = ({ initials, type }) => {
   const PROFILE = "profile";
   const avatarStyle = {
-    backgroundColor: "#139df2",
+    backgroundColor: "#ec4899",
     width: type === PROFILE ? "150px" : "80px",
     height: type === PROFILE ? "150px" : "80px",
     fontSize: type === PROFILE ? "48px" : "36px",

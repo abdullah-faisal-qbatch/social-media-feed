@@ -10,9 +10,7 @@ import DeleteMessage from "../DeleteMessage";
 import Avatar from "../Avatar";
 import Comment from "./Comment";
 import { ToastContainer, toast } from "react-toastify";
-import Heart from "react-animated-heart";
-import FontAwesomeIcon from "react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Heart from "react-heart";
 
 const Post = (post) => {
   const [like, setLike] = useState(false);
@@ -32,7 +30,7 @@ const Post = (post) => {
     dispatch(updateUserPost(newPost));
   };
 
-  const handleUserComment = () => {
+  const handleUserComment = (e) => {
     if (userCommentInput.current.value !== "") {
       let comment = {
         body: userCommentInput.current.value,
@@ -119,37 +117,33 @@ const Post = (post) => {
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-                    <div
-                      className="flex flex-row py-6 px-3 sm:mt-0 ml-10"
-                      style={{
-                        marginTop: "-30px",
-                      }}
-                    >
-                      <button
-                        className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-20"
-                        type="button"
+                    <div className="flex flex-row py-6 px-3 sm:mt-0 ml-24 h-10 mb-14">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        // className="h-7 w-5 mr-2"
+                        className="mr-4"
+                        fill="none"
+                        scale=""
+                        width="50"
+                        height="40"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
                         onClick={deletePost}
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 mr-2"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                        Delete
-                      </button>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        />
+                      </svg>
                       <div>
-                        <Heart isClick={like} onClick={handlePostLike} />
+                        <Heart
+                          className="w-8 ml-3 mt-1"
+                          isActive={like}
+                          onClick={handlePostLike}
+                        />
                       </div>
-                      <FontAwesomeIcon icon={faTrash} />
                     </div>
                   </div>
                   {alert && (
@@ -205,10 +199,12 @@ const Post = (post) => {
                           ref={userCommentInput}
                           required
                           placeholder="Enter your comment"
+                          // onKeyPress={handleKeypress}
                         />
                         <button
-                          className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
+                          className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
                           onClick={handleUserComment}
+                          type="submit"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -227,7 +223,7 @@ const Post = (post) => {
                           Add Comment
                         </button>
                         <button
-                          className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
+                          className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
                           onClick={post.onClick}
                         >
                           <svg

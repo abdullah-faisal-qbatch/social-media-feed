@@ -41,7 +41,7 @@ const UsersFeed = () => {
         <input
           type="search"
           id="default-search"
-          className="block w-1/4 p-4 text-center pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="block w-1/4 p-4 text-center pl-10 text-sm text-black border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-black dark:text-black dark:focus:ring-gray-500 dark:focus:border-gray-500"
           placeholder="Search Users"
           ref={searchRef}
           onChange={(event) => updateDebounceText(event.target.value)}
@@ -58,7 +58,7 @@ const UsersFeed = () => {
                 onClick={() => handleOnClick(user.id)}
               />
             ))}
-        {!users.length && <Alert title="Alert: " message="No users exist" />}
+        {!users.length && <Alert title="Alert: " message="No users exist!" />}
       </div>
     </>
   );

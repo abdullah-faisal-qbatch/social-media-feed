@@ -44,6 +44,12 @@ const AddPost = (props) => {
       toast("Error: Please enter both title and post");
     }
   };
+  // const handleKeyPress = (e) => {
+  //   e.preventDefault();
+  //   if (e.keyCode === 13) {
+  //     handleSubmit();
+  //   }
+  // };
   return (
     <div>
       <div className="flex justify-center items-center mt-28">
@@ -85,17 +91,33 @@ const AddPost = (props) => {
                 ref={bodyRef}
                 required
                 className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200"
+                // onKeyPress={handleKeyPress}
                 placeholder="Enter new Post"
               />
             </div>
             <div className="flex items-center justify-between text-center">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="button"
+                className=" mt-auto mb-auto px-3 inline-flex text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
+                type="submit"
                 onClick={handleSubmit}
               >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {" "}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />{" "}
+                </svg>
                 {props.value === "edit" ? <>Update Post</> : <>Add Post</>}
               </button>
+
               <ToastContainer></ToastContainer>
             </div>
           </form>

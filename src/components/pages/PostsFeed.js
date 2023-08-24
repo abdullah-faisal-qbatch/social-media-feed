@@ -63,7 +63,7 @@ const PostsFeed = (props) => {
       )}
       <ToastContainer />
       {!posts.posts.length && (
-        <Alert title="Alert: " message="No posts found" />
+        <Alert title="Alert: " message="No posts found!" />
       )}
     </div>
   );
