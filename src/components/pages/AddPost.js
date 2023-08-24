@@ -17,14 +17,15 @@ const AddPost = (props) => {
     dispatch(fetchAllPosts());
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     if (titleRef.current.value !== "" && bodyRef.current.value !== "") {
+      e.preventDefault();
       const existingPostsJSON = localStorage.getItem("posts");
       const existingPosts = existingPostsJSON
         ? JSON.parse(existingPostsJSON)
         : [];
       const newPost = {
-        id: posts.posts.length + existingPosts.length + 4,
+        id: posts.posts.length + existingPosts.length + 100,
         title: titleRef.current.value,
         body: bodyRef.current.value,
         userId: currentUser.id,
@@ -44,12 +45,6 @@ const AddPost = (props) => {
       toast("Error: Please enter both title and post");
     }
   };
-  // const handleKeyPress = (e) => {
-  //   e.preventDefault();
-  //   if (e.keyCode === 13) {
-  //     handleSubmit();
-  //   }
-  // };
   return (
     <div>
       <div className="flex justify-center items-center mt-28">
@@ -64,10 +59,7 @@ const AddPost = (props) => {
               <h1 className="text-2xl font-bold mb-4">Create Post:</h1>
             )}
             <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="username"
-              >
+              <label className="block text-gray-700 text-sm font-bold mb-2">
                 Title
               </label>
               <input
@@ -80,24 +72,21 @@ const AddPost = (props) => {
               />
             </div>
             <div className="mb-6">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="password"
-              >
-                Body
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Post
               </label>
-              <textarea
+              <input
                 id="body"
+                type="text"
                 ref={bodyRef}
                 required
                 className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200"
-                // onKeyPress={handleKeyPress}
                 placeholder="Enter new Post"
               />
             </div>
             <div className="flex items-center justify-between text-center">
               <button
-                className=" mt-auto mb-auto px-3 inline-flex text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
+                className=" mt-auto ml-20 mb-auto px-3 inline-flex text-white bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
                 type="submit"
                 onClick={handleSubmit}
               >
