@@ -22,7 +22,7 @@ const UsersFeed = () => {
   const { users } = usersData;
   useEffect(() => {
     dispatch(fetchAllUsers());
-  }, []);
+  }, [dispatch]);
 
   const handleOnClick = (userId) => {
     //update posts according to user Id

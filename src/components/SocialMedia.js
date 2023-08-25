@@ -14,7 +14,7 @@ const SocialMedia = () => {
     <div>
       <BrowserRouter>
         <Provider store={store}>
-          <Suspense fallback={<Spinner></Spinner>}>
+          <Suspense fallback={<Spinner />}>
             <Routes>
               <Route path="/" element={<Header />}>
                 <Route index path="/" element={<PostsFeed />} />

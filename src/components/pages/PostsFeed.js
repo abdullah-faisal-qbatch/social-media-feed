@@ -7,11 +7,13 @@ import { fetchAllUsers } from "../../redux/users/actionCreator";
 import { updateUserComments } from "../../redux/user-comments/actionCreator";
 import { useLocation } from "react-router-dom";
 import Post from "../cards/Post";
-import { ToastContainer, toast } from "react-toastify";
+import { useContext } from "react";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContext } from "../../contexts/ToastContext";
 import Alert from "../Alert";
 
 const PostsFeed = (props) => {
+  const toast = useContext(ToastContext);
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.Posts);
   const usersData = useSelector((state) => state.Users);
@@ -31,7 +33,7 @@ const PostsFeed = (props) => {
     } else {
       dispatch(fetchAllPosts(userId));
     }
-  }, [location]);
+  }, [location, dispatch, props.value, userId, currentUser.id]);
 
   const handlePostClick = (postId) => {
     //getAllComments
@@ -58,7 +60,6 @@ const PostsFeed = (props) => {
           />
         ))
       )}
-      <ToastContainer />
       {!posts.posts.length && (
         <Alert title="Alert: " message="No posts found!" />
       )}

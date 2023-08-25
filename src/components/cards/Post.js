@@ -9,10 +9,13 @@ import { updateUserComments } from "../../redux/user-comments/actionCreator";
 import DeleteMessage from "../DeleteMessage";
 import Avatar from "../Avatar";
 import Comment from "./Comment";
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
 import Heart from "react-heart";
+import { ToastContext } from "../../contexts/ToastContext";
+import { useContext } from "react";
 
 const Post = (post) => {
+  const toast = useContext(ToastContext);
   const [like, setLike] = useState(false);
   const userCommentInput = useRef();
   const usersData = useSelector((state) => state.Users);
@@ -56,6 +59,7 @@ const Post = (post) => {
       dispatch(updateUserPost(newPost));
       dispatch(updateUserComments(newComments));
       userCommentInput.current.value = "";
+      toast.success("Success: Comment added successfully!");
     } else {
       toast.error("Alert: Please enter comment");
     }
@@ -74,7 +78,7 @@ const Post = (post) => {
 
   return (
     <div className="w-3/4 m-auto mt-10 ">
-      <ToastContainer></ToastContainer>
+      {/* <ToastContainer></ToastContainer> */}
       <main className="profile-page">
         <section className="relative block h-500-px">
           <div
@@ -251,13 +255,12 @@ const Post = (post) => {
                         </div>
                         <div>
                           {post.finalComments &&
-                            post.finalComments.map((comment, id) => {
-                              if (comment.postId === post.id) {
-                                return (
+                            post.finalComments.map(
+                              (comment, id) =>
+                                comment.postId === post.id && (
                                   <Comment {...comment} key={id}></Comment>
-                                );
-                              }
-                            })}
+                                )
+                            )}
                         </div>
                       </div>
                     </div>

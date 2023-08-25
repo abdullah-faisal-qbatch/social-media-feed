@@ -49,7 +49,7 @@ const fetchAllPosts = (userId = null) => {
               }
               if (
                 (!userId && postIdsComments[post.id]) ||
-                post.userId == userId
+                post.userId === Number(userId)
               ) {
                 const postInfo = {
                   id: post.id,

@@ -5,9 +5,12 @@ import { useState } from "react";
 import DeleteMessage from "../DeleteMessage";
 import { useNavigate } from "react-router-dom";
 import Avatar from "../Avatar";
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
+import { ToastContext } from "../../contexts/ToastContext";
+import { useContext } from "react";
 
 const User = ({ id, firstName, lastName, gender }) => {
+  const toast = useContext(ToastContext);
   const navigate = useNavigate();
   const [alert, setAlert] = useState(false);
   const dispatch = useDispatch();
@@ -28,7 +31,6 @@ const User = ({ id, firstName, lastName, gender }) => {
 
   return (
     <div>
-      <ToastContainer></ToastContainer>
       <div className="flex justify-center">
         <div className="w-full bg-white-400 max-w-sm my-1 text-center border-[1px] shadow-lg border-white rounded-lg bg-gray-200 ">
           <div className="flex flex-col items-center py-10 ">
