@@ -51,19 +51,6 @@ const Post = (post) => {
         ? JSON.parse(existingCommentsJSON)
         : [];
       existingComments.push(comment);
-
-      // const existingPostsJSON = localStorage.getItem("posts");
-      // const existingPosts = existingPostsJSON
-      //   ? JSON.parse(existingPostsJSON)
-      //   : [];
-      // const currentPost = existingPosts.find(
-      //   (currentPost) => currentPost.id === post.id
-      // );
-      // currentPost.comments.push()
-      // existingPosts.comments();
-
-      // finalData.push(...existingPosts);
-
       const updatedCommentsJSON = JSON.stringify(existingComments);
       localStorage.setItem("comments", updatedCommentsJSON);
       dispatch(updateUserPost(newPost));
@@ -96,7 +83,6 @@ const Post = (post) => {
               backgroundImage: `url('${post.imageURL}')`,
             }}
           >
-            {console.log(post.imageURL)}
             <span
               id="blackOverlay"
               className="w-full h-full absolute opacity-50 bg-black"
@@ -219,7 +205,7 @@ const Post = (post) => {
                                 placeholder="Enter your comment"
                               />
                               <button
-                                className="mt-0 inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-500 dark:focus:ring-blue-500 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center ml-16 "
+                                className="mt-0 inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center ml-16 "
                                 onClick={handleUserComment}
                                 type="submit"
                               >
@@ -243,7 +229,7 @@ const Post = (post) => {
                           </div>
                           <div>
                             <button
-                              className="mt-auto mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-500 dark:focus:ring-blue-500 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center"
+                              className="mt-auto mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center"
                               onClick={post.onClick}
                             >
                               <svg

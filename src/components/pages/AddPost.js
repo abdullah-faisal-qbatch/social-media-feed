@@ -9,9 +9,9 @@ import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const validationSchema = Yup.object({
-  title: Yup.string().required("Title is required"),
-  post: Yup.string().required("Post content is required"),
-  image: Yup.string().required("Image is required"),
+  title: Yup.string().required("*Title is required"),
+  post: Yup.string().required("*Post content is required"),
+  image: Yup.string().required("*Image is required"),
 });
 
 const AddPost = (props) => {
@@ -118,7 +118,6 @@ const AddPost = (props) => {
                       if (file) {
                         const imageUrl = URL.createObjectURL(file);
                         setFieldValue("image", imageUrl);
-                        console.log("image URL: ", imageUrl);
                       } else {
                         setFieldValue("image", null);
                       }
@@ -131,7 +130,7 @@ const AddPost = (props) => {
                   />
                 </div>
                 <div className="flex items-center justify-between text-center">
-                  <button className=" mt-5 mb-auto inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-500 dark:focus:ring-blue-500 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20 ml-20">
+                  <button className="mt-5 mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center ml-20">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-5 w-5 mr-2"

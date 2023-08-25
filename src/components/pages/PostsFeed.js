@@ -35,7 +35,6 @@ const PostsFeed = (props) => {
 
   const handlePostClick = (postId) => {
     //getAllComments
-    console.log("Post Id", postId);
     const post = posts.posts.find((post) => {
       return post.id === postId;
     });

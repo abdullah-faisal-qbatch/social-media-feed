@@ -4,86 +4,80 @@ import _ from "lodash";
 
 const fetchAllPosts = (userId = null) => {
   return async (dispatch) => {
-    try {
-      dispatch(actions.fetchPostsBegin());
-      axios
-        .all([
-          axios.get("https://dummyjson.com/posts", { params: { limit: 0 } }),
-          axios.get("https://dummyjson.com/comments", { params: { limit: 0 } }),
-          axios.get("https://dummyjson.com/users", { params: { limit: 0 } }),
-          axios.get(
-            "https://image.dummyjson.com/750x200/008080/ffffff?text=Random+Post!&fontSize=20"
-          ),
-        ])
-        .then(
-          axios.spread(
-            async (postsData, commentsData, usersData, pictureData) => {
-              //getting data from browser
-              const existingCommentsJSON = localStorage.getItem("comments");
-              const existingComments = existingCommentsJSON
-                ? JSON.parse(existingCommentsJSON)
-                : [];
-              commentsData.data.comments.push(...existingComments);
-              const postIdsComments = _.groupBy(
-                commentsData.data.comments,
-                "postId"
-              );
-              const currentUsers = usersData.data.users.reduce((acc, user) => {
-                acc[user.id] = user;
-                return acc;
-              }, {});
-              const existingPostsJSON = localStorage.getItem("posts");
-              const existingPosts = existingPostsJSON
-                ? JSON.parse(existingPostsJSON)
-                : [];
-              postsData.data.posts.push(...existingPosts);
-              const finalData = postsData.data.posts.reduce((acc, post) => {
-                let finalComments = [];
-                if (postIdsComments[post.id]) {
-                  finalComments = postIdsComments[post.id]?.map((comment) => {
-                    comment.user["firstname"] =
-                      currentUsers[comment.user.id].firstName;
-                    comment.user["lastname"] =
-                      currentUsers[comment.user.id].lastName;
-                    return comment;
-                  });
-                }
-                if (
-                  (!userId && postIdsComments[post.id]) ||
-                  post.userId == userId
-                ) {
-                  console.log("Displaying posts: ");
-                  console.log(post);
-                  const postInfo = {
-                    id: post.id,
-                    title: post.title,
-                    body: post.body,
-                    reactions: post.reactions,
-                    imageURL: post.imageURL || pictureData.request.responseURL,
-                    comments: finalComments,
-                    email: currentUsers[post.userId].email,
-                    alias:
-                      currentUsers[post.userId].firstName[0].toUpperCase() +
-                      currentUsers[post.userId].lastName[0].toUpperCase(),
-                    name:
-                      currentUsers[post.userId].firstName +
-                      " " +
-                      (currentUsers[post.userId].lastName || ""),
-                  };
-                  acc.push(postInfo);
-                }
-                return acc;
-              }, []);
-              dispatch(actions.fetchPostsSuccess(finalData));
-            }
-          )
+    dispatch(actions.fetchPostsBegin());
+    axios
+      .all([
+        axios.get("https://dummyjson.com/posts", { params: { limit: 0 } }),
+        axios.get("https://dummyjson.com/comments", { params: { limit: 0 } }),
+        axios.get("https://dummyjson.com/users", { params: { limit: 0 } }),
+        axios.get(
+          "https://image.dummyjson.com/750x200/008080/ffffff?text=Random+Post!&fontSize=20"
+        ),
+      ])
+      .then(
+        axios.spread(
+          async (postsData, commentsData, usersData, pictureData) => {
+            //getting data from browser
+            const existingCommentsJSON = localStorage.getItem("comments");
+            const existingComments = existingCommentsJSON
+              ? JSON.parse(existingCommentsJSON)
+              : [];
+            commentsData.data.comments.push(...existingComments);
+            const postIdsComments = _.groupBy(
+              commentsData.data.comments,
+              "postId"
+            );
+            const currentUsers = usersData.data.users.reduce((acc, user) => {
+              acc[user.id] = user;
+              return acc;
+            }, {});
+            const existingPostsJSON = localStorage.getItem("posts");
+            const existingPosts = existingPostsJSON
+              ? JSON.parse(existingPostsJSON)
+              : [];
+            postsData.data.posts.push(...existingPosts);
+            const finalData = postsData.data.posts.reduce((acc, post) => {
+              let finalComments = [];
+              if (postIdsComments[post.id]) {
+                finalComments = postIdsComments[post.id]?.map((comment) => {
+                  comment.user["firstname"] =
+                    currentUsers[comment.user.id].firstName;
+                  comment.user["lastname"] =
+                    currentUsers[comment.user.id].lastName;
+                  return comment;
+                });
+              }
+              if (
+                (!userId && postIdsComments[post.id]) ||
+                post.userId == userId
+              ) {
+                const postInfo = {
+                  id: post.id,
+                  title: post.title,
+                  body: post.body,
+                  reactions: post.reactions,
+                  imageURL: post.imageURL || pictureData.request.responseURL,
+                  comments: finalComments,
+                  email: currentUsers[post.userId].email,
+                  alias:
+                    currentUsers[post.userId].firstName[0].toUpperCase() +
+                    currentUsers[post.userId].lastName[0].toUpperCase(),
+                  name:
+                    currentUsers[post.userId].firstName +
+                    " " +
+                    (currentUsers[post.userId].lastName || ""),
+                };
+                acc.push(postInfo);
+              }
+              return acc;
+            }, []);
+            dispatch(actions.fetchPostsSuccess(finalData));
+          }
         )
-        .catch((err) => {
-          dispatch(err);
-        });
-    } catch (err) {
-      dispatch(err);
-    }
+      )
+      .catch((err) => {
+        dispatch(err);
+      });
   };
 };
 

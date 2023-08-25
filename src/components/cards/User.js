@@ -30,7 +30,7 @@ const User = ({ id, firstName, lastName, gender }) => {
     <div>
       <ToastContainer></ToastContainer>
       <div className="flex justify-center">
-        <div className="w-full bg-white-400 max-w-sm my-1 text-center border-[1px] shadow-lg border-black rounded-lg bg-gray-200 ">
+        <div className="w-full bg-white-400 max-w-sm my-1 text-center border-[1px] shadow-lg border-white rounded-lg bg-gray-200 ">
           <div className="flex flex-col items-center py-10 ">
             <Avatar
               initials={firstName[0] + lastName[0]}
