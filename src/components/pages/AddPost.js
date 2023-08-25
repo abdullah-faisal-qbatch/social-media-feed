@@ -4,6 +4,7 @@ import { fetchAllPosts } from "../../redux/posts/actionCreator";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import slackError from "../../utils/SlackError";
+import { useNavigate } from "react-router-dom";
 
 const AddPost = (props) => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const AddPost = (props) => {
   const usersData = useSelector((state) => state.Users);
   const posts = useSelector((state) => state.Posts);
   const { currentUser } = usersData;
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchAllPosts());
@@ -43,6 +45,7 @@ const AddPost = (props) => {
       const updatedPostsJSON = JSON.stringify(existingPosts);
       localStorage.setItem("posts", updatedPostsJSON);
       toast("Success: Post Added Successfully");
+      navigate("/my-posts");
       var raw = `{"text": "New Post have been added"}`;
       slackError(raw);
       titleRef.current.value = "";
