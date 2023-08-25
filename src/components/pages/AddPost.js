@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPosts } from "../../redux/posts/actionCreator";
-// import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import slackError from "../../utils/SlackError";
 import { useNavigate } from "react-router-dom";
@@ -52,7 +51,6 @@ const AddPost = (props) => {
     existingPosts.push(newPost);
     const updatedPostsJSON = JSON.stringify(existingPosts);
     localStorage.setItem("posts", updatedPostsJSON);
-    console.log("Success: Post Added Successfully");
     toast.success("Success: Post Added Successfully");
     navigate("/my-posts");
     var raw = `{"text": "New Post have been added"}`;
@@ -162,5 +160,4 @@ const AddPost = (props) => {
     </div>
   );
 };
-
 export default React.memo(AddPost);

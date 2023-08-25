@@ -36,8 +36,6 @@ const Posts = (state = initialState, action) => {
     case UPDATE_POST_BEGIN:
       return { ...state, loading: true };
     case UPDATE_POST_SUCCESS:
-      console.log("update post success: ");
-      console.log(data);
       return {
         ...state,
         loading: false,
