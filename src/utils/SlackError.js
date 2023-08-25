@@ -3,7 +3,7 @@ import axios from "axios";
 const slackError = async (error) => {
   let config = {
     method: "post",
-    url: "https://hooks.slack.com/services/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",
+    url: "https://hooks.slack.com/services/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",
     headers: {
       "Content-Type": "text/plain",
     },
