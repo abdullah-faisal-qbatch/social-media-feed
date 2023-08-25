@@ -30,7 +30,6 @@ const AddPost = (props) => {
     const existingPosts = existingPostsJSON
       ? JSON.parse(existingPostsJSON)
       : [];
-
     const maxId = posts.posts.reduce((acc, { id }) => (id > acc ? id : acc), 0);
     const newPost = {
       id: maxId + existingPosts.length + 1,
@@ -50,7 +49,7 @@ const AddPost = (props) => {
     existingPosts.push(newPost);
     const updatedPostsJSON = JSON.stringify(existingPosts);
     localStorage.setItem("posts", updatedPostsJSON);
-    toast("Success: Post Added Successfully");
+    toast.success("Success: Post Added Successfully");
     navigate("/my-posts");
     var raw = `{"text": "New Post have been added"}`;
     slackError(raw);

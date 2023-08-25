@@ -39,18 +39,15 @@ const PostsFeed = (props) => {
       return post.id === postId;
     });
     const finalComments = [...post.comments];
-    if (finalComments.length === 0) {
-      toast("Alert: No comments exists");
-    }
-    dispatch(updateUserComments(finalComments));
+    !finalComments.length
+      ? toast.error("Alert: No comments exists")
+      : dispatch(updateUserComments(finalComments));
   };
 
   return (
     <div className="flex flex-col m-auto">
       {posts.loading ? (
-        <div className="">
-          <Spinner />
-        </div>
+        <Spinner />
       ) : (
         posts.posts.map((post) => (
           <Post

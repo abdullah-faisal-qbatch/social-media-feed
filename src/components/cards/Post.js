@@ -31,8 +31,8 @@ const Post = (post) => {
   };
 
   const handleUserComment = (e) => {
-    e.preventDefault();
     if (userCommentInput.current.value !== "") {
+      e.preventDefault();
       let comment = {
         body: userCommentInput.current.value,
         postId: post.id,
@@ -57,7 +57,7 @@ const Post = (post) => {
       dispatch(updateUserComments(newComments));
       userCommentInput.current.value = "";
     } else {
-      toast("Alert: Please enter comment");
+      toast.error("Alert: Please enter comment");
     }
   };
   const deletePost = () => {
@@ -65,7 +65,7 @@ const Post = (post) => {
   };
   const handleOnClickDelete = () => {
     dispatch(deleteUserPost(post.id));
-    toast("Success: Post Deleted Successfully");
+    toast.success("Success: Post Deleted Successfully");
   };
 
   const handleOnClickCancel = () => {

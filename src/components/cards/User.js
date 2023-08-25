@@ -16,7 +16,7 @@ const User = ({ id, firstName, lastName, gender }) => {
   };
   const handleOnClickDelete = () => {
     dispatch(deleteAUser(id));
-    toast("Success: User deleted Successfully!");
+    toast.success("Success: User deleted Successfully!");
   };
   const handleOnClickCancel = () => {
     setAlert(false);
