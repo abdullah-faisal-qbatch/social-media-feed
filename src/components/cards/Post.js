@@ -45,11 +45,25 @@ const Post = (post) => {
       };
       const newComments = [comment, ...post.comments];
       const newPost = { ...post, comments: newComments };
+
       const existingCommentsJSON = localStorage.getItem("comments");
       const existingComments = existingCommentsJSON
         ? JSON.parse(existingCommentsJSON)
         : [];
       existingComments.push(comment);
+
+      // const existingPostsJSON = localStorage.getItem("posts");
+      // const existingPosts = existingPostsJSON
+      //   ? JSON.parse(existingPostsJSON)
+      //   : [];
+      // const currentPost = existingPosts.find(
+      //   (currentPost) => currentPost.id === post.id
+      // );
+      // currentPost.comments.push()
+      // existingPosts.comments();
+
+      // finalData.push(...existingPosts);
+
       const updatedCommentsJSON = JSON.stringify(existingComments);
       localStorage.setItem("comments", updatedCommentsJSON);
       dispatch(updateUserPost(newPost));
@@ -82,6 +96,7 @@ const Post = (post) => {
               backgroundImage: `url('${post.imageURL}')`,
             }}
           >
+            {console.log(post.imageURL)}
             <span
               id="blackOverlay"
               className="w-full h-full absolute opacity-50 bg-black"

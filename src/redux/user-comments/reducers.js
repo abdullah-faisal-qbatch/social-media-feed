@@ -1,4 +1,4 @@
-import actions from "./actions"; // Import your action types
+import actions from "./actions";
 
 const initialState = {
   comments: [],

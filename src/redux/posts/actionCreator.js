@@ -32,7 +32,6 @@ const fetchAllPosts = (userId = null) => {
                 acc[user.id] = user;
                 return acc;
               }, {});
-
               const existingPostsJSON = localStorage.getItem("posts");
               const existingPosts = existingPostsJSON
                 ? JSON.parse(existingPostsJSON)
@@ -53,12 +52,14 @@ const fetchAllPosts = (userId = null) => {
                   (!userId && postIdsComments[post.id]) ||
                   post.userId == userId
                 ) {
+                  console.log("Displaying posts: ");
+                  console.log(post);
                   const postInfo = {
                     id: post.id,
                     title: post.title,
                     body: post.body,
                     reactions: post.reactions,
-                    imageURL: pictureData.request.responseURL,
+                    imageURL: post.imageURL || pictureData.request.responseURL,
                     comments: finalComments,
                     email: currentUsers[post.userId].email,
                     alias:
