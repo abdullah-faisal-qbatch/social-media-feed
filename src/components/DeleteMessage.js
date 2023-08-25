@@ -12,7 +12,7 @@ const DeleteConfirmation = ({ onClickDelete, onClickCancel }) => {
           <div className="ml-20">
             <button
               onClick={onClickDelete}
-              className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blueProfessional dark:focus:ring-blueProfessional font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-20"
+              className="mt-auto mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-4 py-2.5 text-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@ const DeleteConfirmation = ({ onClickDelete, onClickCancel }) => {
           <div>
             <button
               onClick={onClickCancel}
-              className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blueProfessional dark:focus:ring-blueProfessional font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-20"
+              className="mt-auto mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-4 py-2.5 text-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

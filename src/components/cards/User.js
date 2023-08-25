@@ -46,7 +46,7 @@ const User = ({ id, firstName, lastName, gender }) => {
             </span>
             <div className="flex mt-4 space-x-3 md:mt-6">
               <button
-                className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blueProfessional dark:focus:ring-blueProfessional font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-20"
+                className="mt-auto mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 type="button"
                 onClick={deleteUser}
               >
@@ -67,7 +67,7 @@ const User = ({ id, firstName, lastName, gender }) => {
                 Delete
               </button>
               <button
-                className=" mt-auto mb-auto inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-500 dark:focus:ring-blue-500 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center mr-2 mb-20"
+                className="mt-auto mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-4 py-2.5 text-center"
                 onClick={handleNavigate}
               >
                 <svg
