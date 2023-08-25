@@ -1,6 +1,6 @@
 import React from "react";
 
-const Alert = ({ title, message, onClickTitle }) => {
+const Alert = ({ title, message }) => {
   return (
     <div
       style={{

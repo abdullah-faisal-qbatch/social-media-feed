@@ -1,20 +1,18 @@
 import React from "react";
 import _ from "lodash";
 
+const PROFILE = "profile";
+const colors = [
+  "bg-indigoProfessional",
+  "bg-purpleProfessional",
+  "bg-pinkProfessional",
+  "bg-redProfessional",
+  "bg-orangeProfessional",
+  "bg-yellowProfessional",
+  "bg-greenProfessional",
+  "bg-cyanProfessional",
+];
 const Avatar = ({ initials, type }) => {
-  const PROFILE = "profile";
-  const colors = [
-    "bg-blueProfessional",
-    "bg-indigoProfessional",
-    "bg-purpleProfessional",
-    "bg-pinkProfessional",
-    "bg-redProfessional",
-    "bg-orangeProfessional",
-    "bg-yellowProfessional",
-    "bg-greenProfessional",
-    // "bg-tealProfessional",
-    "bg-cyanProfessional",
-  ];
   const avatarStyle = {
     width: type === PROFILE ? "150px" : "80px",
     height: type === PROFILE ? "150px" : "80px",
