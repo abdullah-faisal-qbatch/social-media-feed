@@ -5,7 +5,6 @@ import { useState } from "react";
 import DeleteMessage from "../DeleteMessage";
 import { useNavigate } from "react-router-dom";
 import Avatar from "../Avatar";
-// import { ToastContainer, toast } from "react-toastify";
 import { ToastContext } from "../../contexts/ToastContext";
 import { useContext } from "react";
 

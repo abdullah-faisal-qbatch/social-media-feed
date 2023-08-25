@@ -9,7 +9,6 @@ import { updateUserComments } from "../../redux/user-comments/actionCreator";
 import DeleteMessage from "../DeleteMessage";
 import Avatar from "../Avatar";
 import Comment from "./Comment";
-// import { ToastContainer, toast } from "react-toastify";
 import Heart from "react-heart";
 import { ToastContext } from "../../contexts/ToastContext";
 import { useContext } from "react";
@@ -78,7 +77,6 @@ const Post = (post) => {
 
   return (
     <div className="w-3/4 m-auto mt-10 ">
-      {/* <ToastContainer></ToastContainer> */}
       <main className="profile-page">
         <section className="relative block h-500-px">
           <div
