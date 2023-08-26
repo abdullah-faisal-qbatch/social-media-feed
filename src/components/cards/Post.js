@@ -196,8 +196,8 @@ const Post = (post) => {
                         {post.body}
                       </p>
                       <div className="text-center">
-                        <div className="flex flex-row">
-                          <div className="w-9/12 mb-1">
+                        <div className="flex xl:flex-row flex-col">
+                          <div className="xl:w-9/12 xl:mx-1 xl:my-0 mb-1">
                             <form onSubmit={handleUserComment}>
                               <input
                                 className="shadow appearance-none border rounded w-3/5 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -207,7 +207,7 @@ const Post = (post) => {
                                 placeholder="Enter your comment"
                               />
                               <button
-                                className="mt-0 inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center ml-16 "
+                                className="xl:mt-0 mt-2 inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center xl:ml-16 ml-0"
                                 onClick={handleUserComment}
                                 type="submit"
                               >
@@ -231,7 +231,7 @@ const Post = (post) => {
                           </div>
                           <div>
                             <button
-                              className="mt-auto mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center"
+                              className="mt-auto xl:ml-0 ml-4 mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center "
                               onClick={post.onClick}
                             >
                               <svg

@@ -29,7 +29,7 @@ const User = ({ id, firstName, lastName, gender }) => {
   };
 
   return (
-    <div>
+    <>
       <div className="flex justify-center">
         <div className="w-full bg-white-400 max-w-sm my-1 text-center border-[1px] shadow-lg border-white rounded-lg bg-gray-200 ">
           <div className="flex flex-col items-center py-10 ">
@@ -72,7 +72,7 @@ const User = ({ id, firstName, lastName, gender }) => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-2"
+                  className="h-5 w-5 mr-2 "
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -95,7 +95,7 @@ const User = ({ id, firstName, lastName, gender }) => {
           onClickCancel={handleOnClickCancel}
         ></DeleteMessage>
       )}
-    </div>
+    </>
   );
 };
 

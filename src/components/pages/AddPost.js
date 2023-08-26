@@ -58,104 +58,101 @@ const AddPost = (props) => {
     setSubmitting(false);
   };
   return (
-    <div>
-      <div className="flex justify-center items-center mt-28">
-        <div className="w-full max-w-xs ">
-          <Formik
-            initialValues={{ title: "", post: "", image: null }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            {({ setFieldValue }) => (
-              <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                <div className="block text-gray-700 text-2xl font-bold mb-2">
-                  Create Post:
-                </div>
-                <div>
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Upload Image:
-                  </label>
-                  <input
-                    className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200"
-                    type="file"
-                    id="file"
-                    name="image"
-                    accept="image/*"
-                    onChange={(event) => {
-                      const file = event.currentTarget.files[0];
-                      if (file) {
-                        const imageUrl = URL.createObjectURL(file);
-                        setFieldValue("image", imageUrl);
-                      } else {
-                        setFieldValue("image", null);
-                      }
-                    }}
-                  />
-                  <ErrorMessage
-                    name="image"
-                    component="div"
-                    className="text-red-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Title:
-                  </label>
-                  <Field
-                    type="text"
-                    id="title"
-                    name="title"
-                    className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200"
-                  />
-                  <ErrorMessage
-                    name="title"
-                    component="div"
-                    className="text-red-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Post:
-                  </label>
-                  <Field
-                    type="text"
-                    id="post"
-                    name="post"
-                    className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200"
-                  />
-                  <ErrorMessage
-                    name="post"
-                    component="div"
-                    className="text-red-500"
-                  />
-                </div>
-                <div className="flex items-center justify-between text-center">
-                  <button
-                    className="mt-5 mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center ml-20"
-                    type="submit"
+    <div className="flex justify-center items-center mt-28 w-screen">
+      <div className="w-full flex justify-center items-center ">
+        <Formik
+          initialValues={{ title: "", post: "", image: null }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ setFieldValue }) => (
+            <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+              <div className="block text-gray-700 text-2xl font-bold mb-2">
+                Create Post:
+              </div>
+              <div>
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  Upload Image:
+                </label>
+                <input
+                  className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200"
+                  type="file"
+                  id="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={(event) => {
+                    const file = event.currentTarget.files[0];
+                    if (file) {
+                      const imageUrl = URL.createObjectURL(file);
+                      setFieldValue("image", imageUrl);
+                    } else {
+                      setFieldValue("image", null);
+                    }
+                  }}
+                />
+                <ErrorMessage
+                  name="image"
+                  component="div"
+                  className="text-red-500"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  Title:
+                </label>
+                <Field
+                  type="text"
+                  id="title"
+                  name="title"
+                  className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200"
+                />
+                <ErrorMessage
+                  name="title"
+                  component="div"
+                  className="text-red-500"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  Post:
+                </label>
+                <Field
+                  type="text"
+                  id="post"
+                  name="post"
+                  className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-200"
+                />
+                <ErrorMessage
+                  name="post"
+                  component="div"
+                  className="text-red-500"
+                />
+              </div>
+              <div className="flex items-center justify-between text-center">
+                <button
+                  className="mt-5 mb-auto inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center ml-32"
+                  type="submit"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 mr-2"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      {" "}
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />{" "}
-                    </svg>
-                    {props.value === "edit" ? <>Update Post</> : <>Add Post</>}
-                  </button>
-                </div>
-              </Form>
-            )}
-          </Formik>
-        </div>
+                    {" "}
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />{" "}
+                  </svg>
+                  {props.value === "edit" ? <>Update Post</> : <>Add Post</>}
+                </button>
+              </div>
+            </Form>
+          )}
+        </Formik>
       </div>
     </div>
   );
