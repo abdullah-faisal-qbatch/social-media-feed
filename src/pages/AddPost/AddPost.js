@@ -1,12 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllPosts } from "../../redux/posts/actionCreator";
 import "react-toastify/dist/ReactToastify.css";
-import slackError from "../../utils/SlackError";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+
+import slackError from "../../utils/SlackError";
+
 import { ToastContext } from "../../contexts/ToastContext";
+import { fetchAllPosts } from "../../redux/posts/actionCreator";
 
 const validationSchema = Yup.object({
   title: Yup.string().required("*Title is required"),
@@ -14,7 +16,7 @@ const validationSchema = Yup.object({
   image: Yup.string().required("*Image is required"),
 });
 
-const AddPost = (props) => {
+const AddPost = ({ value }) => {
   const toast = useContext(ToastContext);
   const dispatch = useDispatch();
   const usersData = useSelector((state) => state.Users);
@@ -148,7 +150,7 @@ const AddPost = (props) => {
                       d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
                     />{" "}
                   </svg>
-                  {props.value === "edit" ? <>Update Post</> : <>Add Post</>}
+                  {value === "edit" ? <>Update Post</> : <>Add Post</>}
                 </button>
               </div>
             </Form>

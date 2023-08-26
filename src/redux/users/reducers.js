@@ -1,4 +1,4 @@
-import actions from "./actions"; // Import your action types
+import actions from "./actions";
 
 const initialState = {
   users: [],
@@ -87,15 +87,7 @@ const Users = (state = initialState, action) => {
     case SEARCH_USER_BEGIN:
       return { ...state, loading: true };
     case SEARCH_USER_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        users: state.users.filter(
-          (user) =>
-            user.firstName.toUpperCase().includes(data.toUpperCase()) ||
-            user.lastName.toUpperCase().includes(data.toUpperCase())
-        ),
-      };
+      return { ...state, loading: false, users: data };
     case DELETE_USER_BEGIN:
       return { ...state, loading: true };
     case DELETE_USER_SUCCESS:

@@ -1,5 +1,6 @@
 import React from "react";
-import Avatar from "../Avatar";
+
+import Avatar from "../Avatar/Avatar";
 
 const Comment = ({ body, user, onClick }) => {
   return (
@@ -16,7 +17,7 @@ const Comment = ({ body, user, onClick }) => {
           <h4 className="text-base mt-6 font-semibold md:text-left">
             {user.firstname + " " + user.lastname}
           </h4>
-          <p className="dark:text-gray-400 text-sm md:text-left">{body}</p>
+          <p className="text-sm md:text-left">{body}</p>
         </div>
       </div>
     </div>

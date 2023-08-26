@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import User from "../../components/cards/User";
+import Alert from "../../components/Alert/Alert";
+import Pagination from "../../components/Pagination/Pagination";
+
 import { fetchAllUsers, searchAllUsers } from "../../redux/users/actionCreator";
 import { fetchAllPosts } from "../../redux/posts/actionCreator";
-import User from "../cards/User";
-import Alert from "../Alert";
-import { useRef } from "react";
+
 const debounce = (cb, delay = 1000) => {
   let timeout;
   return (...args) => {
@@ -20,9 +23,10 @@ const UsersFeed = () => {
   const usersData = useSelector((state) => state.Users);
   const searchRef = useRef();
   const { users } = usersData;
+  const [page, onPageChange] = useState(1);
   useEffect(() => {
-    dispatch(fetchAllUsers());
-  }, [dispatch]);
+    dispatch(fetchAllUsers(10, page * 10 - 10));
+  }, [dispatch, page]);
 
   const handleOnClick = (userId) => {
     //update posts according to user Id
@@ -32,7 +36,7 @@ const UsersFeed = () => {
     searchRef.current.value = text;
     dispatch(searchAllUsers(text));
     if (text === "") {
-      dispatch(fetchAllUsers());
+      dispatch(fetchAllUsers(10, page * 10 - 10));
     }
   });
   return (
@@ -57,6 +61,13 @@ const UsersFeed = () => {
             />
           ))}
         {!users.length && <Alert title="Alert: " message="No users exist!" />}
+      </div>
+      <div>
+        <Pagination
+          currentPage={page}
+          onPageChange={onPageChange}
+          totalPages={10}
+        />
       </div>
     </>
   );

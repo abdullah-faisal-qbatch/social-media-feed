@@ -1,18 +1,20 @@
 import React from "react";
 import { useEffect } from "react";
-import Spinner from "../Spinner";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { useContext } from "react";
+import "react-toastify/dist/ReactToastify.css";
+
+import Alert from "../../components/Alert/Alert";
+import Spinner from "../../components/Spinner/Spinner";
+import Post from "../../components/cards/Post";
+
 import { fetchAllPosts } from "../../redux/posts/actionCreator";
 import { fetchAllUsers } from "../../redux/users/actionCreator";
 import { updateUserComments } from "../../redux/user-comments/actionCreator";
-import { useLocation } from "react-router-dom";
-import Post from "../cards/Post";
-import { useContext } from "react";
-import "react-toastify/dist/ReactToastify.css";
 import { ToastContext } from "../../contexts/ToastContext";
-import Alert from "../Alert";
 
-const PostsFeed = (props) => {
+const PostsFeed = ({ value }) => {
   const toast = useContext(ToastContext);
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.Posts);
@@ -25,15 +27,15 @@ const PostsFeed = (props) => {
   let { comments } = useSelector((state) => state.Comments);
 
   useEffect(() => {
-    if (props.value === "my-posts") {
+    if (value === "my-posts") {
       dispatch(fetchAllPosts(currentUser.id));
-    } else if (props.value !== "user") {
+    } else if (value !== "user") {
       dispatch(fetchAllPosts());
       dispatch(fetchAllUsers());
     } else {
       dispatch(fetchAllPosts(userId));
     }
-  }, [location, dispatch, props.value, userId, currentUser.id]);
+  }, [location, dispatch, value, userId, currentUser.id]);
 
   const handlePostClick = (postId) => {
     //getAllComments

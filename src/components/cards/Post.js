@@ -1,23 +1,25 @@
 import React from "react";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useContext } from "react";
+import Heart from "react-heart";
+
+import DeleteMessage from "../DeleteMessage/DeleteMessage";
+import Comment from "./Comment";
+import Avatar from "../Avatar/Avatar";
+
+import { ToastContext } from "../../contexts/ToastContext";
+import { updateUserComments } from "../../redux/user-comments/actionCreator";
 import {
   updateUserPost,
   deleteUserPost,
 } from "../../redux/posts/actionCreator";
-import { updateUserComments } from "../../redux/user-comments/actionCreator";
-import DeleteMessage from "../DeleteMessage";
-import Avatar from "../Avatar";
-import Comment from "./Comment";
-import Heart from "react-heart";
-import { ToastContext } from "../../contexts/ToastContext";
-import { useContext } from "react";
 
 const Post = (post) => {
   const toast = useContext(ToastContext);
-  const [like, setLike] = useState(false);
   const userCommentInput = useRef();
   const usersData = useSelector((state) => state.Users);
+  const [like, setLike] = useState(false);
   const { currentUser } = usersData;
   const [alert, setAlert] = useState(false);
   const dispatch = useDispatch();

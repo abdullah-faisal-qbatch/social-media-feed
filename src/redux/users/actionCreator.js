@@ -5,11 +5,13 @@ const isSuccess = (response) => {
   return response.status >= 200 && response.status < 300;
 };
 
-const fetchAllUsers = () => {
+const fetchAllUsers = (limit = 0, skip = 0) => {
   return async (dispatch) => {
     try {
       dispatch(actions.fetchUsersBegin());
-      const response = await axios.get("https://dummyjson.com/users");
+      const response = await axios.get(
+        `https://dummyjson.com/users?limit=${limit}&skip=${skip}`
+      );
       if (isSuccess(response)) {
         dispatch(actions.fetchUsersSuccess(response.data.users));
       }
@@ -23,7 +25,10 @@ const searchAllUsers = (data) => {
   return async (dispatch) => {
     try {
       dispatch(actions.searchUserBegin());
-      dispatch(actions.searchUserSuccess(data));
+      const response = await axios.get(
+        `https://dummyjson.com/users/search?q=${data}`
+      );
+      dispatch(actions.searchUserSuccess(response.data.users));
     } catch (err) {
       dispatch(err);
     }

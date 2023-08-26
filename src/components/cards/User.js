@@ -1,12 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteAUser } from "../../redux/users/actionCreator";
 import { useState } from "react";
-import DeleteMessage from "../DeleteMessage";
-import { useNavigate } from "react-router-dom";
-import Avatar from "../Avatar";
 import { ToastContext } from "../../contexts/ToastContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
+import DeleteMessage from "../DeleteMessage/DeleteMessage";
+import Avatar from "../Avatar/Avatar";
+
+import { deleteAUser } from "../../redux/users/actionCreator";
 
 const User = ({ id, firstName, lastName, gender }) => {
   const toast = useContext(ToastContext);

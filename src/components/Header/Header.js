@@ -1,9 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import "./../App.css";
-import Footer from "./Footer";
-const Navbar = () => {
+
+import Footer from "../Footer/Footer";
+
+import "./Header.css";
+
+const Header = () => {
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-[#e5e7eb]">
@@ -91,4 +94,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Header;
