@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { ReactComponent as AddLogo } from "../../assets/svgs/add-logo.svg";
 
 import slackError from "../../utils/SlackError";
 
@@ -136,20 +137,7 @@ const AddPost = ({ value }) => {
                   className="mt-5 mb-auto inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center sm:ml-32"
                   type="submit"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 mr-2"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    {" "}
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />{" "}
-                  </svg>
+                  <AddLogo className="h-5 w-5 mr-2" />
                   {value === "edit" ? <>Update Post</> : <>Add Post</>}
                 </button>
               </div>
