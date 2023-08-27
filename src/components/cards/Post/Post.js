@@ -185,7 +185,7 @@ const Post = (post) => {
                               onSubmit={handleUserComment}
                               className="flex flex-row"
                             >
-                              <div className="flex-initial w-72 xl:w-96">
+                              <div className="ml-10 xl:w-96">
                                 <input
                                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                   type="text"
@@ -205,7 +205,7 @@ const Post = (post) => {
                               </div>
                             </form>
                           </div>
-                          <div className="w-1/2 xl:ml-4">
+                          <div className="w-1/2 mr-7 ml-0">
                             <Button onClick={post.onClick}>
                               <ViewIcon />
                               View Comments

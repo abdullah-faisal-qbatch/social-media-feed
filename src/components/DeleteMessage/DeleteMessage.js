@@ -20,7 +20,7 @@ const DeleteConfirmation = ({ onClickDelete, onClickCancel }) => {
               Delete
             </Button>
           </div>
-          <div>
+          <div className="ml-4">
             <Button onClick={onClickCancel}>
               <CancelIcon />
               Cancel
