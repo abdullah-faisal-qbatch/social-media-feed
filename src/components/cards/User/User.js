@@ -54,7 +54,7 @@ const User = ({ id, firstName, lastName, gender }) => {
                 type="button"
                 onClick={deleteUser}
               >
-                <DeleteIcon />
+                <DeleteIcon className="h-5 w-5 mr-2" />
                 Delete
               </button>
               <button
