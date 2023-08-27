@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 import DeleteMessage from "../../DeleteMessage/DeleteMessage";
 import Avatar from "../../Avatar/Avatar";
+import Button from "../../Button/Button";
 
 import { deleteAUser } from "../../../redux/users/actionCreator";
 import { ReactComponent as DeleteIcon } from "./../../../assets/svgs/delete-icon.svg";
@@ -49,21 +50,14 @@ const User = ({ id, firstName, lastName, gender }) => {
               {gender.toUpperCase()}
             </span>
             <div className="flex mt-4 space-x-3 md:mt-6">
-              <button
-                className="mt-auto mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                type="button"
-                onClick={deleteUser}
-              >
+              <Button type="button" onClick={deleteUser}>
                 <DeleteIcon className="h-5 w-5 mr-2" />
                 Delete
-              </button>
-              <button
-                className="mt-auto mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-4 py-2.5 text-center"
-                onClick={handleNavigate}
-              >
+              </Button>
+              <Button onClick={handleNavigate}>
                 <ViewIcon />
-                View Posts{" "}
-              </button>
+                View Posts
+              </Button>
             </div>
           </div>
         </div>

@@ -7,6 +7,7 @@ import Heart from "react-heart";
 import DeleteMessage from "../../DeleteMessage/DeleteMessage";
 import Comment from "../Comment/Comment";
 import Avatar from "../../Avatar/Avatar";
+import Button from "../../Button/Button";
 
 import { ToastContext } from "../../../contexts/ToastContext";
 import { updateUserComments } from "../../../redux/user-comments/actionCreator";
@@ -114,15 +115,13 @@ const Post = (post) => {
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-                    <div
-                      className="flex flex-row py-6 px-3 sm:mt-0 ml-24 h-10 mb-14"
-                      onClick={deletePost}
-                    >
+                    <div className="flex flex-row py-6 px-3 sm:mt-0 ml-24 h-10 mb-14">
                       <DeleteIcon
                         height="40"
                         width="50"
                         strokeWidth="1.5"
                         className="mr-4 cursor-pointer"
+                        onClick={deletePost}
                       />
                       <div>
                         <Heart
@@ -182,32 +181,35 @@ const Post = (post) => {
                       <div className="text-center">
                         <div className="flex xl:flex-row flex-col">
                           <div className="xl:w-9/12 xl:mx-1 xl:my-0 mb-1">
-                            <form onSubmit={handleUserComment}>
-                              <input
-                                className="shadow appearance-none border rounded w-3/5 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                type="text"
-                                ref={userCommentInput}
-                                required
-                                placeholder="Enter your comment"
-                              />
-                              <button
-                                className="xl:mt-0 mt-2 inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center xl:ml-16 ml-0"
-                                onClick={handleUserComment}
-                                type="submit"
-                              >
-                                <AddIcon className="h-5 w-5 mr-2" />
-                                Add Comment
-                              </button>
+                            <form
+                              onSubmit={handleUserComment}
+                              className="flex flex-row"
+                            >
+                              <div className="flex-initial w-72 xl:w-96">
+                                <input
+                                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                  type="text"
+                                  ref={userCommentInput}
+                                  required
+                                  placeholder="Enter your comment"
+                                />
+                              </div>
+                              <div className="w-1/2 xl:ml-4">
+                                <Button
+                                  onClick={handleUserComment}
+                                  type="submit"
+                                >
+                                  <AddIcon className="h-5 w-5 mr-2" />
+                                  Add Comment
+                                </Button>
+                              </div>
                             </form>
                           </div>
-                          <div>
-                            <button
-                              className="mt-auto xl:ml-0 ml-4 mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center "
-                              onClick={post.onClick}
-                            >
+                          <div className="w-1/2 xl:ml-4">
+                            <Button onClick={post.onClick}>
                               <ViewIcon />
-                              View Comments{" "}
-                            </button>
+                              View Comments
+                            </Button>
                           </div>
                         </div>
                         <div>

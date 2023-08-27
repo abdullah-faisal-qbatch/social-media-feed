@@ -7,6 +7,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { ReactComponent as AddIcon } from "../../assets/svgs/add-icon.svg";
 
 import slackError from "../../utils/SlackError";
+import Button from "../../components/Button/Button";
 
 import { ToastContext } from "../../contexts/ToastContext";
 import { fetchAllPosts } from "../../redux/posts/actionCreator";
@@ -132,14 +133,11 @@ const AddPost = ({ value }) => {
                   className="text-red-500"
                 />
               </div>
-              <div className="flex">
-                <button
-                  className="mt-5 mb-auto inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center sm:ml-32"
-                  type="submit"
-                >
+              <div className="flex ml-24 mt-3">
+                <Button type="submit">
                   <AddIcon className="h-5 w-5 mr-2" />
                   {value === "edit" ? <>Update Post</> : <>Add Post</>}
-                </button>
+                </Button>
               </div>
             </Form>
           )}
