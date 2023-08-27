@@ -1,14 +1,16 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { ToastContext } from "../../contexts/ToastContext";
+import { ToastContext } from "../../../contexts/ToastContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import DeleteMessage from "../DeleteMessage/DeleteMessage";
-import Avatar from "../Avatar/Avatar";
+import DeleteMessage from "../../DeleteMessage/DeleteMessage";
+import Avatar from "../../Avatar/Avatar";
 
-import { deleteAUser } from "../../redux/users/actionCreator";
+import { deleteAUser } from "../../../redux/users/actionCreator";
+import { ReactComponent as DeleteIcon } from "./../../../assets/svgs/delete-icon.svg";
+import { ReactComponent as ViewIcon } from "./../../../assets/svgs/view-icon.svg";
 
 const User = ({ id, firstName, lastName, gender }) => {
   const toast = useContext(ToastContext);
@@ -52,39 +54,14 @@ const User = ({ id, firstName, lastName, gender }) => {
                 type="button"
                 onClick={deleteUser}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                  />
-                </svg>
+                <DeleteIcon />
                 Delete
               </button>
               <button
                 className="mt-auto mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-4 py-2.5 text-center"
                 onClick={handleNavigate}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-2 "
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
+                <ViewIcon />
                 View Posts{" "}
               </button>
             </div>

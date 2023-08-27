@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Alert from "../../components/Alert/Alert";
 import Spinner from "../../components/Spinner/Spinner";
-import Post from "../../components/cards/Post";
+import Post from "../../components/cards/Post/Post";
 
 import { fetchAllPosts } from "../../redux/posts/actionCreator";
 import { fetchAllUsers } from "../../redux/users/actionCreator";

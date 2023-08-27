@@ -1,6 +1,6 @@
 import React from "react";
 
-import Avatar from "../Avatar/Avatar";
+import Avatar from "../../Avatar/Avatar";
 
 const Comment = ({ body, user, onClick }) => {
   return (

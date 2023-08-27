@@ -11,14 +11,6 @@ const Alert = ({ title, message }) => {
       >
         <strong className="font-bold">{title}</strong>
         <span className="block sm:inline">{message}</span>
-        <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
-          <svg
-            className="fill-current h-6 w-6 text-yellow-700"
-            role="button"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-          ></svg>
-        </span>
       </section>
     </div>
   );

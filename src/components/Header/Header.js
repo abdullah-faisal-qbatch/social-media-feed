@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "../Footer/Footer";
 
 import "./Header.css";
+import { ReactComponent as MenuIcon } from "./../../assets/svgs/menu-icon.svg";
 
 const Header = () => {
   return (
@@ -31,21 +32,7 @@ const Header = () => {
             aria-expanded="false"
           >
             <span className="sr-only">Open main menu</span>
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
+            <MenuIcon />
           </button>
           <div
             className="hidden w-full md:block md:w-auto"

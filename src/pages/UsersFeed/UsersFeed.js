@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import User from "../../components/cards/User";
+import User from "../../components/cards/User/User";
 import Alert from "../../components/Alert/Alert";
 import Pagination from "../../components/Pagination/Pagination";
 

@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useContext } from "react";
 import Heart from "react-heart";
 
-import DeleteMessage from "../DeleteMessage/DeleteMessage";
-import Comment from "./Comment";
-import Avatar from "../Avatar/Avatar";
+import DeleteMessage from "../../DeleteMessage/DeleteMessage";
+import Comment from "../Comment/Comment";
+import Avatar from "../../Avatar/Avatar";
 
-import { ToastContext } from "../../contexts/ToastContext";
-import { updateUserComments } from "../../redux/user-comments/actionCreator";
+import { ToastContext } from "../../../contexts/ToastContext";
+import { updateUserComments } from "../../../redux/user-comments/actionCreator";
 import {
   updateUserPost,
   deleteUserPost,
-} from "../../redux/posts/actionCreator";
+} from "../../../redux/posts/actionCreator";
 
 const Post = (post) => {
   const toast = useContext(ToastContext);
