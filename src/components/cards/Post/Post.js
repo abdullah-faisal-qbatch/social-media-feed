@@ -1,7 +1,6 @@
 import React from "react";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useContext } from "react";
 import Heart from "react-heart";
 import _ from "lodash";
 

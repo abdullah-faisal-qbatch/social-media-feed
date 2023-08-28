@@ -50,7 +50,7 @@ const Header = () => {
               <li>
                 <NavLink
                   className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#4E67E4] md:p-0 dark:text-black md:dark:hover:text-[#4E67E4] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                  to="/users-feed"
+                  to="/users-feed?page=1"
                 >
                   Users Feed
                 </NavLink>
