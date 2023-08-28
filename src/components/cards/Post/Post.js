@@ -26,7 +26,6 @@ const Post = (post) => {
   const toast = useContext(ToastContext);
   const userCommentInput = useRef();
   const usersData = useSelector((state) => state.Users);
-  // const { success } = useSelector((state) => state.Posts);
   const [like, setLike] = useState(false);
   const { currentUser } = usersData;
   const [alert, setAlert] = useState(false);

@@ -10,11 +10,7 @@ import { ReactComponent as AddIcon } from "../../assets/svgs/add-icon.svg";
 import slackError from "../../utils/SlackError";
 import Button from "../../components/Button/Button";
 
-import {
-  fetchPosts,
-  addUserPost,
-  reInitialize,
-} from "../../redux/posts/actionCreator";
+import { fetchPosts, addUserPost } from "../../redux/posts/actionCreator";
 import { getDataFromLocalStorage } from "../../redux/posts/api-data";
 
 const validationSchema = Yup.object({
@@ -59,7 +55,7 @@ const AddPost = ({ value }) => {
     localStorage.setItem("posts", updatedPostsJSON);
     console.log("here");
     var raw = `{"text": "New Post have been added"}`;
-    // slackError(raw);
+    slackError(raw);
     setSubmitting(false);
     navigate("/my-posts");
   };
