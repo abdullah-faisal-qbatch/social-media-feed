@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const navigate = useNavigate();
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === totalPages;
 
@@ -8,6 +10,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     if (page >= 1 && page <= totalPages) {
       onPageChange(page);
     }
+    navigate(`/users-feed?page=${page}`);
   };
   const renderPageNumbers = () => {
     const pageNumbers = [];

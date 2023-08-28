@@ -4,27 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useContext } from "react";
 import Heart from "react-heart";
 
-import DeleteMessage from "../../DeleteMessage/DeleteMessage";
-import Comment from "../Comment/Comment";
-import Avatar from "../../Avatar/Avatar";
-import Button from "../../Button/Button";
+import DeleteMessage from "../DeleteMessage/DeleteMessage";
+import Comment from "./Comment";
+import Avatar from "../Avatar/Avatar";
 
-import { ToastContext } from "../../../contexts/ToastContext";
-import { updateUserComments } from "../../../redux/user-comments/actionCreator";
+import { ToastContext } from "../../contexts/ToastContext";
+import { updateUserComments } from "../../redux/user-comments/actionCreator";
 import {
   updateUserPost,
   deleteUserPost,
-} from "../../../redux/posts/actionCreator";
-import { ReactComponent as AddIcon } from "./../../../assets/svgs/add-icon.svg";
-import { ReactComponent as ViewIcon } from "./../../../assets/svgs/view-icon.svg";
-import { ReactComponent as CurveIcon } from "./../../../assets/svgs/curve-icon.svg";
-import { ReactComponent as DeleteIcon } from "./../../../assets/svgs/delete-icon.svg";
+} from "../../redux/posts/actionCreator";
 
 const Post = (post) => {
   const toast = useContext(ToastContext);
   const userCommentInput = useRef();
   const usersData = useSelector((state) => state.Users);
-  const { comments } = useSelector((state) => state.Comments);
   const [like, setLike] = useState(false);
   const { currentUser } = usersData;
   const [alert, setAlert] = useState(false);
@@ -102,8 +96,21 @@ const Post = (post) => {
             className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
             style={{ transform: "translateZ(0px)" }}
           >
-            <CurveIcon />
-          </div>{" "}
+            <svg
+              className="absolute bottom-0 overflow-hidden"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+              version="1.1"
+              viewBox="0 0 2560 100"
+              x="0"
+              y="0"
+            >
+              <polygon
+                className="text-blueGray-200 fill-current"
+                points="2560 0 2560 100 0 100"
+              ></polygon>
+            </svg>
+          </div>
         </section>
         <section className="relative py-16 bg-blueGray-200">
           <div className="container mx-auto px-4">
@@ -117,13 +124,24 @@ const Post = (post) => {
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
                     <div className="flex flex-row py-6 px-3 sm:mt-0 ml-24 h-10 mb-14">
-                      <DeleteIcon
-                        height="40"
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="mr-4"
+                        fill="none"
+                        scale=""
                         width="50"
-                        strokeWidth="1.5"
-                        className="mr-4 cursor-pointer"
+                        height="40"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
                         onClick={deletePost}
-                      />
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        />
+                      </svg>
                       <div>
                         <Heart
                           className="w-8 ml-3 mt-1"
@@ -182,40 +200,62 @@ const Post = (post) => {
                       <div className="text-center">
                         <div className="flex xl:flex-row flex-col">
                           <div className="xl:w-9/12 xl:mx-1 xl:my-0 mb-1">
-                            <form
-                              onSubmit={handleUserComment}
-                              className="flex flex-row"
-                            >
-                              <div className="ml-10 xl:w-96">
-                                <input
-                                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                  type="text"
-                                  ref={userCommentInput}
-                                  required
-                                  placeholder="Enter your comment"
-                                />
-                              </div>
-                              <div className="w-1/2 xl:ml-4">
-                                <Button
-                                  onClick={handleUserComment}
-                                  type="submit"
+                            <form onSubmit={handleUserComment}>
+                              <input
+                                className="shadow appearance-none border rounded w-3/5 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                type="text"
+                                ref={userCommentInput}
+                                required
+                                placeholder="Enter your comment"
+                              />
+                              <button
+                                className="xl:mt-0 mt-2 inline-flex text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center xl:ml-16 ml-0"
+                                onClick={handleUserComment}
+                                type="submit"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-5 w-5 mr-2"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
                                 >
-                                  <AddIcon className="h-5 w-5 mr-2" />
-                                  Add Comment
-                                </Button>
-                              </div>
+                                  {" "}
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                  />{" "}
+                                </svg>
+                                Add Comment
+                              </button>
                             </form>
                           </div>
                           <div>
-                            <Button onClick={post.onClick}>
-                              <ViewIcon />
-                              View Comments
-                            </Button>
+                            <button
+                              className="mt-auto xl:ml-0 ml-4 mb-auto inline-flex mr-4 text-white bg-gradient-to-r from-[#3C57E2] via-[#4E67E4] to-blueProfessional hover:bg-gradient-to-br font-medium rounded-lg text-sm px-2.5 py-2.5 text-center "
+                              onClick={post.onClick}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5 mr-2"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                />
+                              </svg>
+                              View Comments{" "}
+                            </button>
                           </div>
                         </div>
                         <div>
-                          {comments &&
-                            comments.map(
+                          {post.finalComments &&
+                            post.finalComments.map(
                               (comment, id) =>
                                 comment.postId === post.id && (
                                   <Comment {...comment} key={id}></Comment>

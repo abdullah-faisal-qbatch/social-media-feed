@@ -58,7 +58,6 @@ const PostsFeed = ({ value }) => {
             key={post.id}
             {...post}
             onClick={() => handlePostClick(post.id)}
-            finalComments={comments}
           />
         ))
       )}
