@@ -1,12 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import User from "../../components/cards/User/User";
 import Alert from "../../components/Alert/Alert";
 import Pagination from "../../components/Pagination/Pagination";
 
-import { fetchAllUsers, searchAllUsers } from "../../redux/users/actionCreator";
-import { fetchAllPosts } from "../../redux/posts/actionCreator";
+import {
+  fetchUsers,
+  searchAllUsers,
+  reInitializeUsers,
+} from "../../redux/users/actionCreator";
+import { fetchPosts } from "../../redux/posts/actionCreator";
 
 const debounce = (cb, delay = 1000) => {
   let timeout;
@@ -17,26 +22,40 @@ const debounce = (cb, delay = 1000) => {
     }, delay);
   };
 };
-
+const limit = 10;
 const UsersFeed = () => {
   const dispatch = useDispatch();
-  const usersData = useSelector((state) => state.Users);
   const searchRef = useRef();
-  const { users } = usersData;
+  const { users, success } = useSelector((state) => state.Users);
+  const posts = useSelector((state) => state.Posts);
   const [page, onPageChange] = useState(1);
   useEffect(() => {
-    dispatch(fetchAllUsers(10, page * 10 - 10));
+    dispatch(fetchUsers(limit, page * limit - limit));
   }, [dispatch, page]);
+
+  useEffect(() => {
+    if (success) {
+      toast.success(success);
+      dispatch(reInitializeUsers());
+    }
+  }, [success]);
+
+  useEffect(() => {
+    if (posts.success) {
+      toast.success(posts.success);
+      dispatch(reInitializeUsers());
+    }
+  }, [posts.success]);
 
   const handleOnClick = (userId) => {
     //update posts according to user Id
-    dispatch(fetchAllPosts(userId));
+    dispatch(fetchPosts(userId));
   };
   const updateDebounceText = debounce((text) => {
     searchRef.current.value = text;
     dispatch(searchAllUsers(text));
     if (text === "") {
-      dispatch(fetchAllUsers(10, page * 10 - 10));
+      dispatch(fetchUsers(limit, page * limit - limit));
     }
   });
   return (

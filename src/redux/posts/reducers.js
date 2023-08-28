@@ -1,8 +1,11 @@
 import actions from "./actions";
+import _ from "lodash";
+
 const initialState = {
   posts: [],
   loading: false,
   success: null,
+  error: null,
 };
 
 const {
@@ -16,6 +19,8 @@ const {
   FETCH_USER_POSTS_SUCCESS,
   UPDATE_POST_BEGIN,
   UPDATE_POST_SUCCESS,
+  RE_INITIALIZE,
+  API_ERROR,
 } = actions;
 
 const Posts = (state = initialState, action) => {
@@ -24,15 +29,31 @@ const Posts = (state = initialState, action) => {
     case FETCH_POSTS_BEGIN:
       return { ...state, loading: true };
     case FETCH_POSTS_SUCCESS:
-      return { ...state, loading: false, posts: data };
+      return {
+        ...state,
+        loading: false,
+        posts: data,
+        error: null,
+      };
     case FETCH_USER_POSTS_BEGIN:
       return { ...state, loading: true };
     case FETCH_USER_POSTS_SUCCESS:
-      return { ...state, loading: false, posts: [...state.posts, data.post] };
+      return {
+        ...state,
+        loading: false,
+        posts: _.concat(state.posts, data.post),
+        error: null,
+      };
     case ADD_POST_BEGIN:
-      return { ...state, loading: true };
+      return { ...state, loading: true, success: null };
     case ADD_POST_SUCCESS:
-      return { ...state, loading: false, posts: [...state.posts, data.post] };
+      return {
+        ...state,
+        loading: false,
+        posts: _.concat(state.posts, data.post),
+        error: null,
+        success: "Success: Post added successfully",
+      };
     case UPDATE_POST_BEGIN:
       return { ...state, loading: true };
     case UPDATE_POST_SUCCESS:
@@ -43,13 +64,27 @@ const Posts = (state = initialState, action) => {
       };
     case DELETE_POST_BEGIN:
       return { ...state, loading: true };
+    case RE_INITIALIZE:
+      return {
+        ...state,
+        success: null,
+        loading: false,
+        error: null,
+      };
     case DELETE_POST_SUCCESS:
       return {
         ...state,
         loading: false,
-        posts: state.posts.filter((post) => {
-          return post.id !== data.postId;
-        }),
+        posts: state.posts.filter((post) => post.id !== data.postId),
+        error: null,
+        success: "Success: Post deleted successfully",
+      };
+    case API_ERROR:
+      return {
+        ...state,
+        error: data,
+        success: false,
+        loading: false,
       };
     default:
       return state;

@@ -14,7 +14,7 @@ const fetchAllComments = () => {
         dispatch(actions.fetchCommentsSuccess(response.data));
       }
     } catch (err) {
-      dispatch(err);
+      dispatch(actions.API_ERROR(err));
     }
   };
 };
@@ -25,9 +25,31 @@ const updateUserComments = (comments) => {
       await dispatch(actions.updateUserCommentsBegin());
       dispatch(actions.updateUserCommentsSuccess(comments));
     } catch (err) {
-      dispatch(err);
+      dispatch(actions.API_ERROR(err));
     }
   };
 };
 
-export { fetchAllComments, updateUserComments };
+const updateSingleUserComments = (comments) => {
+  return async (dispatch) => {
+    try {
+      await dispatch(actions.updateSingleUserCommentsBegin());
+      dispatch(actions.updateSingleUserCommentsSuccess(comments));
+    } catch (err) {
+      dispatch(actions.API_ERROR(err));
+    }
+  };
+};
+
+const reInitializeComments = () => {
+  return async (dispatch) => {
+    dispatch(actions.reInitialize());
+  };
+};
+
+export {
+  reInitializeComments,
+  fetchAllComments,
+  updateUserComments,
+  updateSingleUserComments,
+};

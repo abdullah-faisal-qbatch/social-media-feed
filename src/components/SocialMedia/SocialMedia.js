@@ -28,11 +28,11 @@ const SocialMedia = () => {
                   <Route path="/users-feed" element={<UsersFeed />} />
                   <Route
                     path="/posts-feed/user"
-                    element={<PostsFeed value="user" />}
+                    element={<PostsFeed pageLink="user" />}
                   />
                   <Route
                     path="/my-posts"
-                    element={<PostsFeed value="my-posts" />}
+                    element={<PostsFeed pageLink="my-posts" />}
                   />
                   <Route path="/add-post" element={<AddPost />} />
                   <Route path="/edit-post" element={<AddPost value="edit" />} />

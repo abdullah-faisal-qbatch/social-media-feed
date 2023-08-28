@@ -11,6 +11,7 @@ const actions = {
   FETCH_POST_COMMENTS_SUCCESS: "FETCH_POST_COMMENTS_SUCCESS",
   FETCH_USER_POSTS_BEGIN: "FETCH_USER_POSTS_BEGIN",
   FETCH_USER_POSTS_SUCCESS: "FETCH_USER_POSTS_SUCCESS",
+  RE_INITIALIZE: "RE_INITIALIZE",
   API_ERROR: "API_ERROR",
 
   fetchPostsBegin: () => {
@@ -35,12 +36,6 @@ const actions = {
     return {
       type: actions.FETCH_POST_COMMENTS_SUCCESS,
       data: postId,
-    };
-  },
-
-  addPostBegin: () => {
-    return {
-      type: actions.ADD_POST_BEGIN,
     };
   },
 
@@ -69,6 +64,12 @@ const actions = {
     };
   },
 
+  addPostBegin: () => {
+    return {
+      type: actions.ADD_POST_BEGIN,
+    };
+  },
+
   addPostSuccess: (post) => {
     return {
       type: actions.ADD_POST_SUCCESS,
@@ -88,5 +89,19 @@ const actions = {
       data: { postId },
     };
   },
+
+  reInitialize: () => {
+    return {
+      type: actions.RE_INITIALIZE,
+    };
+  },
+
+  apiError: (data) => {
+    return {
+      type: actions.API_ERROR,
+      data,
+    };
+  },
 };
+
 export default actions;

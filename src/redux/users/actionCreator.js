@@ -5,7 +5,7 @@ const isSuccess = (response) => {
   return response.status >= 200 && response.status < 300;
 };
 
-const fetchAllUsers = (limit = 0, skip = 0) => {
+const fetchUsers = (limit = 0, skip = 0) => {
   return async (dispatch) => {
     try {
       dispatch(actions.fetchUsersBegin());
@@ -16,7 +16,7 @@ const fetchAllUsers = (limit = 0, skip = 0) => {
         dispatch(actions.fetchUsersSuccess(response.data.users));
       }
     } catch (err) {
-      dispatch(err);
+      dispatch(actions.API_ERROR(err));
     }
   };
 };
@@ -30,7 +30,7 @@ const searchAllUsers = (data) => {
       );
       dispatch(actions.searchUserSuccess(response.data.users));
     } catch (err) {
-      dispatch(err);
+      dispatch(actions.API_ERROR(err));
     }
   };
 };
@@ -44,7 +44,7 @@ const fetchUser = (userId) => {
         dispatch(actions.fetchUserSuccess(response.data));
       }
     } catch (err) {
-      dispatch(err);
+      dispatch(actions.API_ERROR(err));
     }
   };
 };
@@ -55,9 +55,20 @@ const deleteAUser = (userId) => {
       dispatch(actions.deleteUserBegin());
       dispatch(actions.deleteUserSuccess(userId));
     } catch (err) {
-      dispatch(err);
+      dispatch(actions.API_ERROR(err));
     }
   };
 };
+const reInitializeUsers = () => {
+  return async (dispatch) => {
+    dispatch(actions.reInitialize());
+  };
+};
 
-export { fetchAllUsers, fetchUser, deleteAUser, searchAllUsers };
+export {
+  reInitializeUsers,
+  fetchUsers,
+  fetchUser,
+  deleteAUser,
+  searchAllUsers,
+};

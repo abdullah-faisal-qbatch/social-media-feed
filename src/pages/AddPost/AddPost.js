@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,8 +10,12 @@ import { ReactComponent as AddIcon } from "../../assets/svgs/add-icon.svg";
 import slackError from "../../utils/SlackError";
 import Button from "../../components/Button/Button";
 
-import { ToastContext } from "../../contexts/ToastContext";
-import { fetchAllPosts } from "../../redux/posts/actionCreator";
+import {
+  fetchPosts,
+  addUserPost,
+  reInitialize,
+} from "../../redux/posts/actionCreator";
+import { getDataFromLocalStorage } from "../../redux/posts/api-data";
 
 const validationSchema = Yup.object({
   title: Yup.string().required("*Title is required"),
@@ -19,24 +24,20 @@ const validationSchema = Yup.object({
 });
 
 const AddPost = ({ value }) => {
-  const toast = useContext(ToastContext);
   const dispatch = useDispatch();
   const usersData = useSelector((state) => state.Users);
-  const posts = useSelector((state) => state.Posts);
+  const { posts, success } = useSelector((state) => state.Posts);
   const { currentUser } = usersData;
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchAllPosts());
+    dispatch(fetchPosts());
   }, [dispatch]);
 
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
-    const existingPostsJSON = localStorage.getItem("posts");
-    const existingPosts = existingPostsJSON
-      ? JSON.parse(existingPostsJSON)
-      : [];
-    const maxId = posts.posts.reduce((acc, { id }) => (id > acc ? id : acc), 0);
+    const existingPosts = getDataFromLocalStorage("posts");
+    const maxId = posts.reduce((acc, { id }) => (id > acc ? id : acc), 0);
     const newPost = {
       id: maxId + existingPosts.length + 1,
       title: values.title,
@@ -52,14 +53,15 @@ const AddPost = ({ value }) => {
       reactions: 0,
       tags: [],
     };
+    dispatch(addUserPost(newPost));
     existingPosts.push(newPost);
     const updatedPostsJSON = JSON.stringify(existingPosts);
     localStorage.setItem("posts", updatedPostsJSON);
-    toast.success("Success: Post Added Successfully");
-    navigate("/my-posts");
+    console.log("here");
     var raw = `{"text": "New Post have been added"}`;
-    slackError(raw);
+    // slackError(raw);
     setSubmitting(false);
+    navigate("/my-posts");
   };
   return (
     <div className="flex justify-center items-center mt-28 w-screen">

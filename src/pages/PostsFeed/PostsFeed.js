@@ -2,58 +2,70 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { useContext } from "react";
 import "react-toastify/dist/ReactToastify.css";
 
 import Alert from "../../components/Alert/Alert";
 import Spinner from "../../components/Spinner/Spinner";
 import Post from "../../components/cards/Post/Post";
 
-import { fetchAllPosts } from "../../redux/posts/actionCreator";
-import { fetchAllUsers } from "../../redux/users/actionCreator";
-import { updateUserComments } from "../../redux/user-comments/actionCreator";
-import { ToastContext } from "../../contexts/ToastContext";
+import { fetchPosts, reInitializePosts } from "../../redux/posts/actionCreator";
+import { reInitializeComments } from "../../redux/user-comments/actionCreator";
+import { fetchUsers } from "../../redux/users/actionCreator";
+import { updateSingleUserComments } from "../../redux/user-comments/actionCreator";
+import { toast } from "react-toastify";
 
-const PostsFeed = ({ value }) => {
-  const toast = useContext(ToastContext);
+const PostsFeed = ({ pageLink }) => {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.Posts);
+  const { posts, loading, success } = useSelector((state) => state.Posts);
   const usersData = useSelector((state) => state.Users);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const userId = searchParams.get("userid");
-
   const { currentUser } = usersData;
-  let { comments } = useSelector((state) => state.Comments);
+  const comments = useSelector((state) => state.Comments);
 
   useEffect(() => {
-    if (value === "my-posts") {
-      dispatch(fetchAllPosts(currentUser.id));
-    } else if (value !== "user") {
-      dispatch(fetchAllPosts());
-      dispatch(fetchAllUsers());
+    if (pageLink === "my-posts") {
+      dispatch(fetchPosts(currentUser.id));
+    } else if (pageLink !== "user") {
+      dispatch(fetchPosts());
+      dispatch(fetchUsers());
     } else {
-      dispatch(fetchAllPosts(userId));
+      dispatch(fetchPosts(userId));
     }
-  }, [location, dispatch, value, userId, currentUser.id]);
+  }, [location, dispatch, pageLink, userId, currentUser.id]);
+
+  useEffect(() => {
+    if (comments.success) {
+      toast.success(comments.success);
+      dispatch(reInitializeComments());
+    }
+  }, [comments.success]);
+
+  useEffect(() => {
+    if (success) {
+      toast.success(success);
+      dispatch(reInitializePosts());
+    }
+  }, [success]);
 
   const handlePostClick = (postId) => {
     //getAllComments
-    const post = posts.posts.find((post) => {
+    const post = posts.find((post) => {
       return post.id === postId;
     });
     const finalComments = [...post.comments];
     !finalComments.length
       ? toast.error("Alert: No comments exists")
-      : dispatch(updateUserComments(finalComments));
+      : dispatch(updateSingleUserComments(finalComments));
   };
 
   return (
     <div className="flex flex-col m-auto">
-      {posts.loading ? (
+      {loading ? (
         <Spinner />
       ) : (
-        posts.posts.map((post) => (
+        posts.map((post) => (
           <Post
             key={post.id}
             {...post}
@@ -61,9 +73,7 @@ const PostsFeed = ({ value }) => {
           />
         ))
       )}
-      {!posts.posts.length && (
-        <Alert title="Alert: " message="No posts found!" />
-      )}
+      {!posts.length && <Alert title="Alert: " message="No posts found!" />}
     </div>
   );
 };

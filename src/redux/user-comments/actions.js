@@ -9,6 +9,9 @@ const actions = {
   FETCH_USER_COMMENTS_SUCCESS: "FETCH_USER_COMMENT_SUCCESS",
   UPDATE_USER_COMMENTS_BEGIN: "UPDATE_USER_COMMENTS_BEGIN",
   UPDATE_USER_COMMENTS_SUCCESS: "UPDATE_USER_COMMENTS_SUCCESS",
+  UPDATE_SINGLE_USER_COMMENTS_BEGIN: "UPDATE_SINGLE_USER_COMMENTS_BEGIN",
+  UPDATE_SINGLE_USER_COMMENTS_SUCCESS: "UPDATE_SINGLE_USER_COMMENTS_SUCCESS",
+  RE_INITIALIZE: "RE_INITIALIZE",
 
   API_ERROR: "API_ERROR",
 
@@ -69,10 +72,35 @@ const actions = {
     };
   },
 
+  updateSingleUserCommentsBegin: () => {
+    return {
+      type: actions.UPDATE_SINGLE_USER_COMMENTS_BEGIN,
+    };
+  },
+  updateSingleUserCommentsSuccess: (data) => {
+    return {
+      type: actions.UPDATE_SINGLE_USER_COMMENTS_SUCCESS,
+      data,
+    };
+  },
+
   deleteCommentSuccess: (commentId) => {
     return {
       type: actions.DELETE_COMMENT_SUCCESS,
       data: { commentId },
+    };
+  },
+
+  reInitialize: () => {
+    return {
+      type: actions.RE_INITIALIZE,
+    };
+  },
+
+  apiError: (data) => {
+    return {
+      type: actions.API_ERROR,
+      data,
     };
   },
 };

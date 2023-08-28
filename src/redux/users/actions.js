@@ -7,6 +7,7 @@ const actions = {
   SEARCH_USER_SUCCESS: "SEARCH_USER_SUCCESS",
   DELETE_USER_BEGIN: "DELETE_USER_BEGIN",
   DELETE_USER_SUCCESS: "DELETE_USER_SUCCESS",
+  RE_INITIALIZE: "RE_INITIALIZE",
   API_ERROR: "API_ERROR",
 
   fetchUsersBegin: () => {
@@ -57,6 +58,19 @@ const actions = {
   fetchUserSuccess: (data) => {
     return {
       type: actions.FETCH_USER_SUCCESS,
+      data,
+    };
+  },
+
+  reInitialize: () => {
+    return {
+      type: actions.RE_INITIALIZE,
+    };
+  },
+
+  apiError: (data) => {
+    return {
+      type: actions.API_ERROR,
       data,
     };
   },

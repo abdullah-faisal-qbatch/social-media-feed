@@ -1,8 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { ToastContext } from "../../../contexts/ToastContext";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import DeleteMessage from "../../DeleteMessage/DeleteMessage";
@@ -14,7 +12,6 @@ import { ReactComponent as DeleteIcon } from "./../../../assets/svgs/delete-icon
 import { ReactComponent as ViewIcon } from "./../../../assets/svgs/view-icon.svg";
 
 const User = ({ id, firstName, lastName, gender }) => {
-  const toast = useContext(ToastContext);
   const navigate = useNavigate();
   const [alert, setAlert] = useState(false);
   const dispatch = useDispatch();
@@ -23,7 +20,6 @@ const User = ({ id, firstName, lastName, gender }) => {
   };
   const handleOnClickDelete = () => {
     dispatch(deleteAUser(id));
-    toast.success("Success: User deleted Successfully!");
   };
   const handleOnClickCancel = () => {
     setAlert(false);

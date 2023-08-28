@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useContext } from "react";
 import Heart from "react-heart";
+import _ from "lodash";
 
 import DeleteMessage from "../../DeleteMessage/DeleteMessage";
 import Comment from "../Comment/Comment";
@@ -19,16 +20,19 @@ import { ReactComponent as AddIcon } from "./../../../assets/svgs/add-icon.svg";
 import { ReactComponent as ViewIcon } from "./../../../assets/svgs/view-icon.svg";
 import { ReactComponent as CurveIcon } from "./../../../assets/svgs/curve-icon.svg";
 import { ReactComponent as DeleteIcon } from "./../../../assets/svgs/delete-icon.svg";
+import { getDataFromLocalStorage } from "../../../redux/posts/api-data";
 
 const Post = (post) => {
   const toast = useContext(ToastContext);
   const userCommentInput = useRef();
   const usersData = useSelector((state) => state.Users);
-  const { comments } = useSelector((state) => state.Comments);
+  // const { success } = useSelector((state) => state.Posts);
   const [like, setLike] = useState(false);
   const { currentUser } = usersData;
   const [alert, setAlert] = useState(false);
+  const { comments } = useSelector((state) => state.Comments);
   const dispatch = useDispatch();
+
   const handlePostLike = () => {
     setLike(!like);
     const newPost = { ...post };
@@ -39,7 +43,6 @@ const Post = (post) => {
     }
     dispatch(updateUserPost(newPost));
   };
-
   const handleUserComment = (e) => {
     if (userCommentInput.current.value !== "") {
       e.preventDefault();
@@ -53,20 +56,15 @@ const Post = (post) => {
           username: currentUser.username,
         },
       };
-      const newComments = [comment, ...post.comments];
-      const newPost = { ...post, comments: newComments };
-
-      const existingCommentsJSON = localStorage.getItem("comments");
-      const existingComments = existingCommentsJSON
-        ? JSON.parse(existingCommentsJSON)
-        : [];
+      const newComments = _.concat(comment, post.comments);
+      const newPost = { ...post, comments: [comment, ...post.comments] };
+      const existingComments = getDataFromLocalStorage("comments");
       existingComments.push(comment);
       const updatedCommentsJSON = JSON.stringify(existingComments);
       localStorage.setItem("comments", updatedCommentsJSON);
       dispatch(updateUserPost(newPost));
       dispatch(updateUserComments(newComments));
       userCommentInput.current.value = "";
-      toast.success("Success: Comment added successfully!");
     } else {
       toast.error("Alert: Please enter comment");
     }
@@ -76,7 +74,6 @@ const Post = (post) => {
   };
   const handleOnClickDelete = () => {
     dispatch(deleteUserPost(post.id));
-    toast.success("Success: Post Deleted Successfully");
   };
 
   const handleOnClickCancel = () => {
@@ -206,7 +203,7 @@ const Post = (post) => {
                               </div>
                             </form>
                           </div>
-                          <div>
+                          <div className="w-1/2">
                             <Button onClick={post.onClick}>
                               <ViewIcon />
                               View Comments

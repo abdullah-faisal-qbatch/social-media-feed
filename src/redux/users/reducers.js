@@ -66,6 +66,7 @@ const initialState = {
   },
   loading: false,
   success: null,
+  error: null,
 };
 
 const {
@@ -75,6 +76,8 @@ const {
   DELETE_USER_SUCCESS,
   SEARCH_USER_BEGIN,
   SEARCH_USER_SUCCESS,
+  RE_INITIALIZE,
+  API_ERROR,
 } = actions;
 
 const Users = (state = initialState, action) => {
@@ -83,20 +86,48 @@ const Users = (state = initialState, action) => {
     case FETCH_USERS_BEGIN:
       return { ...state, loading: true };
     case FETCH_USERS_SUCCESS:
-      return { ...state, loading: false, users: data };
+      return {
+        ...state,
+        loading: false,
+        users: data,
+        error: null,
+      };
     case SEARCH_USER_BEGIN:
-      return { ...state, loading: true };
+      return {
+        ...state,
+        loading: true,
+      };
     case SEARCH_USER_SUCCESS:
-      return { ...state, loading: false, users: data };
+      return {
+        ...state,
+        loading: false,
+        users: data,
+        success: "Success: User found successfully",
+        error: null,
+      };
     case DELETE_USER_BEGIN:
       return { ...state, loading: true };
     case DELETE_USER_SUCCESS:
       return {
         ...state,
         loading: false,
-        users: state.users.filter((user) => {
-          return user.id !== data.userId;
-        }),
+        users: state.users.filter((user) => user.id !== data.userId),
+        success: "Success: User deleted successfully",
+        error: null,
+      };
+    case API_ERROR:
+      return {
+        ...state,
+        error: data,
+        success: false,
+        loading: false,
+      };
+    case RE_INITIALIZE:
+      return {
+        ...state,
+        success: null,
+        loading: false,
+        error: null,
       };
     default:
       return state;
