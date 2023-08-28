@@ -35,19 +35,19 @@ const searchAllUsers = (data) => {
   };
 };
 
-const fetchUser = (userId) => {
-  return async (dispatch) => {
-    try {
-      dispatch(actions.fetchUserBegin());
-      const response = await axios.get(`https://dummyjson.com/users/${userId}`);
-      if (isSuccess(response)) {
-        dispatch(actions.fetchUserSuccess(response.data));
-      }
-    } catch (err) {
-      dispatch(actions.API_ERROR(err));
-    }
-  };
-};
+// const fetchUser = (userId) => {
+//   return async (dispatch) => {
+//     try {
+//       dispatch(actions.fetchUserBegin());
+//       const response = await axios.get(`https://dummyjson.com/users/${userId}`);
+//       if (isSuccess(response)) {
+//         dispatch(actions.fetchUserSuccess(response.data));
+//       }
+//     } catch (err) {
+//       dispatch(actions.API_ERROR(err));
+//     }
+//   };
+// };
 
 const deleteAUser = (userId) => {
   return async (dispatch) => {
@@ -68,7 +68,7 @@ const reInitializeUsers = () => {
 export {
   reInitializeUsers,
   fetchUsers,
-  fetchUser,
+  // fetchUser,
   deleteAUser,
   searchAllUsers,
 };

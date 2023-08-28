@@ -15,8 +15,8 @@ const {
   ADD_POST_SUCCESS,
   DELETE_POST_BEGIN,
   DELETE_POST_SUCCESS,
-  FETCH_USER_POSTS_BEGIN,
-  FETCH_USER_POSTS_SUCCESS,
+  // FETCH_USER_POSTS_BEGIN,
+  // FETCH_USER_POSTS_SUCCESS,
   UPDATE_POST_BEGIN,
   UPDATE_POST_SUCCESS,
   RE_INITIALIZE,
@@ -35,15 +35,15 @@ const Posts = (state = initialState, action) => {
         posts: data,
         error: null,
       };
-    case FETCH_USER_POSTS_BEGIN:
-      return { ...state, loading: true };
-    case FETCH_USER_POSTS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        posts: _.concat(state.posts, data.post),
-        error: null,
-      };
+    // case FETCH_USER_POSTS_BEGIN:
+    //   return { ...state, loading: true };
+    // case FETCH_USER_POSTS_SUCCESS:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     posts: _.concat(state.posts, data.post),
+    //     error: null,
+    //   };
     case ADD_POST_BEGIN:
       return { ...state, loading: true, success: null };
     case ADD_POST_SUCCESS:

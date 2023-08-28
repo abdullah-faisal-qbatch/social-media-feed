@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,7 @@ const validationSchema = Yup.object({
 const AddPost = ({ value }) => {
   const dispatch = useDispatch();
   const usersData = useSelector((state) => state.Users);
-  const { posts, success } = useSelector((state) => state.Posts);
+  const { posts } = useSelector((state) => state.Posts);
   const { currentUser } = usersData;
   const navigate = useNavigate();
 

@@ -1,8 +1,8 @@
 const actions = {
   FETCH_USERS_BEGIN: "FETCH_USERS_BEGIN",
   FETCH_USERS_SUCCESS: "FETCH_USERS_SUCCESS",
-  FETCH_USER_BEGIN: "FETCH_USER_BEGIN",
-  FETCH_USER_SUCCESS: "FETCH_USER_SUCCESS",
+  // FETCH_USER_BEGIN: "FETCH_USER_BEGIN",
+  // FETCH_USER_SUCCESS: "FETCH_USER_SUCCESS",
   SEARCH_USER_BEGIN: "SEARCH_USER_BEGIN",
   SEARCH_USER_SUCCESS: "SEARCH_USER_SUCCESS",
   DELETE_USER_BEGIN: "DELETE_USER_BEGIN",
@@ -49,18 +49,18 @@ const actions = {
     };
   },
 
-  fetchUserBegin: () => {
-    return {
-      type: actions.FETCH_USER_BEGIN,
-    };
-  },
+  // fetchUserBegin: () => {
+  //   return {
+  //     type: actions.FETCH_USER_BEGIN,
+  //   };
+  // },
 
-  fetchUserSuccess: (data) => {
-    return {
-      type: actions.FETCH_USER_SUCCESS,
-      data,
-    };
-  },
+  // fetchUserSuccess: (data) => {
+  //   return {
+  //     type: actions.FETCH_USER_SUCCESS,
+  //     data,
+  //   };
+  // },
 
   reInitialize: () => {
     return {
