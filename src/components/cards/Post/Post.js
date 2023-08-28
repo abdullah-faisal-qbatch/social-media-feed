@@ -10,7 +10,7 @@ import Comment from "../Comment/Comment";
 import Avatar from "../../Avatar/Avatar";
 import Button from "../../Button/Button";
 
-import { ToastContext } from "../../../contexts/ToastContext";
+import { toast } from "react-toastify";
 import { updateUserComments } from "../../../redux/user-comments/actionCreator";
 import {
   updateUserPost,
@@ -23,11 +23,9 @@ import { ReactComponent as DeleteIcon } from "./../../../assets/svgs/delete-icon
 import { getDataFromLocalStorage } from "../../../redux/posts/api-data";
 
 const Post = (post) => {
-  const toast = useContext(ToastContext);
   const userCommentInput = useRef();
-  const usersData = useSelector((state) => state.Users);
   const [like, setLike] = useState(false);
-  const { currentUser } = usersData;
+  const { currentUser } = useSelector((state) => state.Users);
   const [alert, setAlert] = useState(false);
   const { comments } = useSelector((state) => state.Comments);
   const dispatch = useDispatch();

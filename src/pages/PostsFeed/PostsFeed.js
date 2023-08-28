@@ -16,7 +16,9 @@ import { toast } from "react-toastify";
 
 const PostsFeed = ({ pageLink }) => {
   const dispatch = useDispatch();
-  const { posts, loading, success } = useSelector((state) => state.Posts);
+  const { posts, loading, success, error } = useSelector(
+    (state) => state.Posts
+  );
   const usersData = useSelector((state) => state.Users);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -40,14 +42,22 @@ const PostsFeed = ({ pageLink }) => {
       toast.success(comments.success);
       dispatch(reInitializeComments());
     }
-  }, [comments.success]);
+    if (comments.error) {
+      toast.error(comments.error);
+      dispatch(reInitializeComments());
+    }
+  }, [comments.success, comments.error]);
 
   useEffect(() => {
     if (success) {
       toast.success(success);
       dispatch(reInitializePosts());
     }
-  }, [success]);
+    if (error) {
+      toast.error(error);
+      dispatch(reInitializePosts());
+    }
+  }, [success, error]);
 
   const handlePostClick = (postId) => {
     //getAllComments

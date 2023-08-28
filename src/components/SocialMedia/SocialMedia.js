@@ -6,7 +6,6 @@ import { ToastContainer, toast } from "react-toastify";
 
 import Spinner from "../Spinner/Spinner";
 
-import { ToastContext } from "../../contexts/ToastContext";
 import store from "../../redux/store";
 
 const Header = lazy(() => import("../Header/Header"));
@@ -20,26 +19,27 @@ const SocialMedia = () => {
       <BrowserRouter>
         <Provider store={store}>
           <ToastContainer />
-          <ToastContext.Provider value={toast}>
-            <Suspense fallback={<Spinner />}>
-              <Routes>
-                <Route path="/" element={<Header />}>
-                  <Route path="/" element={<PostsFeed />} />
-                  <Route path="/users-feed" element={<UsersFeed />} />
-                  <Route
-                    path="/posts-feed/user"
-                    element={<PostsFeed pageLink="user" />}
-                  />
-                  <Route
-                    path="/my-posts"
-                    element={<PostsFeed pageLink="my-posts" />}
-                  />
-                  <Route path="/add-post" element={<AddPost />} />
-                  <Route path="/edit-post" element={<AddPost value="edit" />} />
-                </Route>
-              </Routes>
-            </Suspense>
-          </ToastContext.Provider>
+          <Suspense fallback={<Spinner />}>
+            <Routes>
+              <Route path="/" element={<Header />}>
+                <Route path="/" element={<PostsFeed />} />
+                <Route path="/users-feed" element={<UsersFeed />} />
+                <Route
+                  path="/posts-feed/user"
+                  element={<PostsFeed pageLink="user" />}
+                />
+                <Route
+                  path="/my-posts"
+                  element={<PostsFeed pageLink="my-posts" />}
+                />
+                <Route path="/add-post" element={<AddPost />} />
+                <Route
+                  path="/edit-post"
+                  element={<AddPost pageLink="edit" />}
+                />
+              </Route>
+            </Routes>
+          </Suspense>
         </Provider>
       </BrowserRouter>
     </div>

@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const slackError = async (error) => {
+const SlackNotification = async (error) => {
   let config = {
     method: "post",
-    url: "https://hooks.slack.com/services/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",
+    url: "https://hooks.slack.com/services/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",
     headers: {
       "Content-Type": "text/plain",
     },
@@ -12,4 +12,4 @@ const slackError = async (error) => {
   axios.request(config);
 };
 
-export default slackError;
+export default SlackNotification;

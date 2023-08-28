@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { ReactComponent as AddIcon } from "../../assets/svgs/add-icon.svg";
 
-import slackError from "../../utils/SlackError";
+import slackNotification from "../../utils/SlackNotification";
 import Button from "../../components/Button/Button";
 
 import { fetchPosts, addUserPost } from "../../redux/posts/actionCreator";
@@ -19,11 +19,10 @@ const validationSchema = Yup.object({
   image: Yup.string().required("*Image is required"),
 });
 
-const AddPost = ({ value }) => {
+const AddPost = ({ pageLink }) => {
   const dispatch = useDispatch();
-  const usersData = useSelector((state) => state.Users);
   const { posts } = useSelector((state) => state.Posts);
-  const { currentUser } = usersData;
+  const { currentUser } = useSelector((state) => state.Users);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,9 +52,8 @@ const AddPost = ({ value }) => {
     existingPosts.push(newPost);
     const updatedPostsJSON = JSON.stringify(existingPosts);
     localStorage.setItem("posts", updatedPostsJSON);
-    console.log("here");
     var raw = `{"text": "New Post have been added"}`;
-    slackError(raw);
+    slackNotification(raw);
     setSubmitting(false);
     navigate("/my-posts");
   };
@@ -134,7 +132,7 @@ const AddPost = ({ value }) => {
               <div className="flex ml-24 mt-3">
                 <Button type="submit">
                   <AddIcon className="h-5 w-5 mr-2" />
-                  {value === "edit" ? <>Update Post</> : <>Add Post</>}
+                  {pageLink === "edit" ? <>Update Post</> : <>Add Post</>}
                 </Button>
               </div>
             </Form>

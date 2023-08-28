@@ -26,7 +26,7 @@ const limit = 10;
 const UsersFeed = () => {
   const dispatch = useDispatch();
   const searchRef = useRef();
-  const { users, success } = useSelector((state) => state.Users);
+  const { users, success, error } = useSelector((state) => state.Users);
   const posts = useSelector((state) => state.Posts);
   const [page, onPageChange] = useState(1);
   useEffect(() => {
@@ -38,14 +38,22 @@ const UsersFeed = () => {
       toast.success(success);
       dispatch(reInitializeUsers());
     }
-  }, [success]);
+    if (error) {
+      toast.error(error);
+      dispatch(reInitializeUsers());
+    }
+  }, [success, error]);
 
   useEffect(() => {
     if (posts.success) {
       toast.success(posts.success);
       dispatch(reInitializeUsers());
     }
-  }, [posts.success]);
+    if (posts.error) {
+      toast.error(posts.error);
+      dispatch(reInitializeUsers());
+    }
+  }, [posts.success, posts.error]);
 
   const handleOnClick = (userId) => {
     //update posts according to user Id
