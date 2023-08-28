@@ -24,6 +24,7 @@ const Post = (post) => {
   const toast = useContext(ToastContext);
   const userCommentInput = useRef();
   const usersData = useSelector((state) => state.Users);
+  const comments = useSelector((state) => state.Comments);
   const [like, setLike] = useState(false);
   const { currentUser } = usersData;
   const [alert, setAlert] = useState(false);
@@ -213,14 +214,20 @@ const Post = (post) => {
                           </div>
                         </div>
                         <div>
-                          {post.finalComments &&
-                            post.finalComments.map(
+                          {comments.comments &&
+                            comments.comments.map(
                               (comment, id) =>
                                 comment.postId === post.id && (
                                   <Comment {...comment} key={id}></Comment>
                                 )
                             )}
                         </div>
+                        {/* <div>
+                          {comments.comments &&
+                            post.finalComments.map((comment, id) => (
+                              <Comment {...comment} key={id}></Comment>
+                            ))}
+                        </div> */}
                       </div>
                     </div>
                   </div>

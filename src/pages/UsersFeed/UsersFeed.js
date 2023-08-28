@@ -33,10 +33,11 @@ const UsersFeed = () => {
     dispatch(fetchAllPosts(userId));
   };
   const updateDebounceText = debounce((text) => {
+    const limit = 10;
     searchRef.current.value = text;
     dispatch(searchAllUsers(text));
     if (text === "") {
-      dispatch(fetchAllUsers(10, page * 10 - 10));
+      dispatch(fetchAllUsers(limit, page * limit - limit));
     }
   });
   return (

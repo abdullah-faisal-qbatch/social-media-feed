@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -25,6 +25,7 @@ const PostsFeed = ({ value }) => {
 
   const { currentUser } = usersData;
   let { comments } = useSelector((state) => state.Comments);
+  const [userComments, setUserComments] = useState([]);
 
   useEffect(() => {
     if (value === "my-posts") {
@@ -43,6 +44,8 @@ const PostsFeed = ({ value }) => {
       return post.id === postId;
     });
     const finalComments = [...post.comments];
+    !finalComments.length && toast.error("Alert: No comments exists");
+    setUserComments(finalComments);
     !finalComments.length
       ? toast.error("Alert: No comments exists")
       : dispatch(updateUserComments(finalComments));
@@ -58,7 +61,7 @@ const PostsFeed = ({ value }) => {
             key={post.id}
             {...post}
             onClick={() => handlePostClick(post.id)}
-            finalComments={comments}
+            // finalComments={userComments}
           />
         ))
       )}
