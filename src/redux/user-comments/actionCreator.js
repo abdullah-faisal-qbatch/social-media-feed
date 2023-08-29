@@ -1,9 +1,6 @@
 import actions from "./actions";
 import axios from "axios";
-
-const isSuccess = (response) => {
-  return response.status >= 200 && response.status < 300;
-};
+import { isSuccess } from "../common-functions";
 
 const fetchAllComments = () => {
   return async (dispatch) => {

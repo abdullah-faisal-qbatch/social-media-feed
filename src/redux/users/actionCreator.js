@@ -1,9 +1,6 @@
 import actions from "./actions";
 import axios from "axios";
-
-const isSuccess = (response) => {
-  return response.status >= 200 && response.status < 300;
-};
+import { isSuccess } from "../common-functions";
 
 const fetchUsers = (limit = 0, skip = 0) => {
   return async (dispatch) => {
@@ -28,7 +25,9 @@ const searchAllUsers = (data) => {
       const response = await axios.get(
         `https://dummyjson.com/users/search?q=${data}`
       );
-      dispatch(actions.searchUserSuccess(response.data.users));
+      if (isSuccess(response)) {
+        dispatch(actions.searchUserSuccess(response.data.users));
+      }
     } catch (err) {
       dispatch(actions.API_ERROR(err));
     }
