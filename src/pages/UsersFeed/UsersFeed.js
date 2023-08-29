@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
 import User from "../../components/cards/User/User";
 import Alert from "../../components/Alert/Alert";
@@ -26,9 +27,11 @@ const limit = 10;
 const UsersFeed = () => {
   const dispatch = useDispatch();
   const searchRef = useRef();
-  const { users, success, error } = useSelector((state) => state.Users);
+  const { users, success, error, total } = useSelector((state) => state.Users);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
   const posts = useSelector((state) => state.Posts);
-  const [page, onPageChange] = useState(1);
+  const [page, onPageChange] = useState(Number(searchParams.get("page")));
   useEffect(() => {
     dispatch(fetchUsers(limit, page * limit - limit));
   }, [dispatch, page]);
@@ -93,7 +96,7 @@ const UsersFeed = () => {
         <Pagination
           currentPage={page}
           onPageChange={onPageChange}
-          totalPages={10}
+          totalPages={total / limit}
         />
       </div>
     </>

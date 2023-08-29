@@ -1,4 +1,5 @@
 import actions from "./actions";
+import { getDataFromLocalStorage } from "./api-data";
 import _ from "lodash";
 
 const initialState = {
@@ -15,8 +16,6 @@ const {
   ADD_POST_SUCCESS,
   DELETE_POST_BEGIN,
   DELETE_POST_SUCCESS,
-  // FETCH_USER_POSTS_BEGIN,
-  // FETCH_USER_POSTS_SUCCESS,
   UPDATE_POST_BEGIN,
   UPDATE_POST_SUCCESS,
   RE_INITIALIZE,
@@ -35,15 +34,6 @@ const Posts = (state = initialState, action) => {
         posts: data,
         error: null,
       };
-    // case FETCH_USER_POSTS_BEGIN:
-    //   return { ...state, loading: true };
-    // case FETCH_USER_POSTS_SUCCESS:
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     posts: _.concat(state.posts, data.post),
-    //     error: null,
-    //   };
     case ADD_POST_BEGIN:
       return { ...state, loading: true, success: null };
     case ADD_POST_SUCCESS:
@@ -72,6 +62,10 @@ const Posts = (state = initialState, action) => {
         error: null,
       };
     case DELETE_POST_SUCCESS:
+      const newPosts = getDataFromLocalStorage("posts").filter(
+        (post) => data.postId !== post.id
+      );
+      localStorage.setItem("posts", JSON.stringify(newPosts));
       return {
         ...state,
         loading: false,

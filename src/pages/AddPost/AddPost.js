@@ -31,27 +31,26 @@ const AddPost = ({ pageLink }) => {
 
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
+    const { id, firstName, email, lastName } = currentUser;
+    const { title, post, image } = values;
     const existingPosts = getDataFromLocalStorage("posts");
     const maxId = posts.reduce((acc, { id }) => (id > acc ? id : acc), 0);
     const newPost = {
       id: maxId + existingPosts.length + 1,
-      title: values.title,
-      body: values.post,
-      userId: currentUser.id,
-      imageURL: values.image,
-      alias:
-        currentUser.firstName[0].toUpperCase() +
-        currentUser.lastName[0].toUpperCase(),
-      email: currentUser.email,
-      name: currentUser.firstName + " " + currentUser.lastName,
+      title: title,
+      body: post,
+      userId: id,
+      imageURL: image,
+      alias: firstName[0].toUpperCase() + lastName[0].toUpperCase(),
+      email: email,
+      name: firstName + " " + lastName,
       comments: [],
       reactions: 0,
       tags: [],
     };
     dispatch(addUserPost(newPost));
     existingPosts.push(newPost);
-    const updatedPostsJSON = JSON.stringify(existingPosts);
-    localStorage.setItem("posts", updatedPostsJSON);
+    localStorage.setItem("posts", JSON.stringify(existingPosts));
     var raw = `{"text": "New Post have been added"}`;
     slackNotification(raw);
     setSubmitting(false);

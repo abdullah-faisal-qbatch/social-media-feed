@@ -7,7 +7,6 @@ const getDataFromLocalStorage = (data) =>
 
 const makePosts = (postsData, commentsData, usersData, pictureData, userId) => {
   //getting data from browser
-  //please use merge
   const postIdsComments = _.groupBy(
     _.concat(commentsData.data.comments, getDataFromLocalStorage("comments")),
     "postId"
@@ -32,12 +31,13 @@ const makePosts = (postsData, commentsData, usersData, pictureData, userId) => {
       (!userId && postIdsComments[post.id]) ||
       post.userId === Number(userId)
     ) {
+      const { id, title, body, reactions, imageURL } = post;
       const postInfo = {
-        id: post.id,
-        title: post.title,
-        body: post.body,
-        reactions: post.reactions,
-        imageURL: post.imageURL || pictureData.request.responseURL,
+        id: id,
+        title: title,
+        body: body,
+        reactions: reactions,
+        imageURL: imageURL || pictureData.request.responseURL,
         comments: finalComments,
         email: currentUsers[post.userId].email,
         alias:

@@ -13,7 +13,7 @@ const fetchUsers = (limit = 0, skip = 0) => {
         `https://dummyjson.com/users?limit=${limit}&skip=${skip}`
       );
       if (isSuccess(response)) {
-        dispatch(actions.fetchUsersSuccess(response.data.users));
+        dispatch(actions.fetchUsersSuccess(response.data));
       }
     } catch (err) {
       dispatch(actions.API_ERROR(err));
@@ -35,20 +35,6 @@ const searchAllUsers = (data) => {
   };
 };
 
-// const fetchUser = (userId) => {
-//   return async (dispatch) => {
-//     try {
-//       dispatch(actions.fetchUserBegin());
-//       const response = await axios.get(`https://dummyjson.com/users/${userId}`);
-//       if (isSuccess(response)) {
-//         dispatch(actions.fetchUserSuccess(response.data));
-//       }
-//     } catch (err) {
-//       dispatch(actions.API_ERROR(err));
-//     }
-//   };
-// };
-
 const deleteAUser = (userId) => {
   return async (dispatch) => {
     try {
@@ -65,10 +51,4 @@ const reInitializeUsers = () => {
   };
 };
 
-export {
-  reInitializeUsers,
-  fetchUsers,
-  // fetchUser,
-  deleteAUser,
-  searchAllUsers,
-};
+export { reInitializeUsers, fetchUsers, deleteAUser, searchAllUsers };

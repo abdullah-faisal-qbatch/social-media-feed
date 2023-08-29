@@ -41,13 +41,6 @@ const deleteUserPost = (postId) => {
   return async (dispatch) => {
     try {
       dispatch(actions.deletePostBegin());
-      const existingPostsJSON = localStorage.getItem("posts");
-      const existingPosts = existingPostsJSON
-        ? JSON.parse(existingPostsJSON)
-        : [];
-      const newPosts = existingPosts.filter((post) => postId !== post.id);
-      const updatedPostsJSON = JSON.stringify(newPosts);
-      localStorage.setItem("posts", updatedPostsJSON);
       dispatch(actions.deletePostSuccess(postId));
     } catch (err) {
       dispatch(actions.API_ERROR(err));

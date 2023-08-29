@@ -64,6 +64,7 @@ const initialState = {
     userAgent:
       "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/12.0.702.0 Safari/534.24",
   },
+  total: 0,
   loading: false,
   success: null,
   error: null,
@@ -89,7 +90,8 @@ const Users = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        users: data,
+        users: data.users,
+        total: data.total,
         error: null,
       };
     case SEARCH_USER_BEGIN:
@@ -102,7 +104,6 @@ const Users = (state = initialState, action) => {
         ...state,
         loading: false,
         users: data,
-        success: "Success: User found successfully",
         error: null,
       };
     case DELETE_USER_BEGIN:

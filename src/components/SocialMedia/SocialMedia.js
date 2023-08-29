@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Provider } from "react-redux";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 import Spinner from "../Spinner/Spinner";
 
